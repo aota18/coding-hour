@@ -4,23 +4,26 @@ import React, { Component } from 'react'
 
     
     state = {
- 
         str: " "
     }
     componentDidMount(){
         
         this.callApi().then(res => {
             console.log(res);
+
             this.setState({
             str: res.username
             })
-    }).catch(err=> console.log(err));
+
+        }).catch(err => console.log(err));
     }
 
-    callApi = async ()=> {
+    callApi = async () => {
        
         const response = await fetch('/api');
         const body = await response.json();
+        console.log(response);
+
         return body;
     }
     render() {

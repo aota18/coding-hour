@@ -27,6 +27,9 @@ docker push ${docker_account}/${pj_client}
 cd ../../
 
 # Server connection establishment
+
+
+# docker image build
 serv_addr="13.209.70.185"
 ssh -i .secret/amzSeoul.pem ubuntu@13.209.70.185 "$( cat <<'EOT'
 echo "SSH Connected to server"
