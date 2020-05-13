@@ -11,13 +11,17 @@
 >   * Server Environment
 >   * Deploy
 
-<center><img src="./src/image-20200513172900256.png" alt="image-20200513172900256" style="zoom:10%;" /></center>
+<center>
+  <img src="./src/image-20200513172900256.png" alt="image-20200513172900256" width = 50% />
+</center>
 
 ## Development Environment
 
 
 
-<center><img src="./src/image-20200513155854797.png" alt="image-20200513155854797" style="zoom:80%;" /></center>
+<center>
+  <img src="./src/image-20200513155854797.png" alt="image-20200513155854797" style="zoom:80%;" />
+</center>
 
 ### Front-end: React
 
