@@ -5,10 +5,35 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
+const fs = require('fs');
+const bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
 
+
+//Connect to MongoDB
+
+let dbCredential;
+try { 
+    dbCredential = JSON.parse(fs.readFileSync(".secret/.db.secret", "utf8"));
+}
+catch (error) {
+    console.error(error);
+}
+
+const db=`mongodb+srv://${dbCredential.db_access}:${dbCredential.db_password}@coding-hour-hl5gw.mongodb.net/${dbCredential.db_name}`;
+
+mongoose.connect(db, {
+  useNewUrlParser:true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('✅ Connected to Mongodb ');
+}).catch(err => {
+  console.error('🚫 Error : ' + err);
+})
 // view engine setup
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
@@ -22,26 +47,21 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', (req, res) => {
+app.use('/test', (req, res) => {
   return res.json({username: 'Daniel'})
 });
 
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+var port = normalizePort(process.env.PORT || '3001');
+app.set('port', port);
+
+
+app.listen(port, "0.0.0.0", () => console.log(`✅ Server listening on ${port}`));
+
+module.exports = app;
+
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -58,11 +78,3 @@ function normalizePort(val) {
 
   return false;
 }
-
-var port = normalizePort(process.env.PORT || '3001');
-app.set('port', port);
-
-
-app.listen(port, "0.0.0.0");
-
-module.exports = app;

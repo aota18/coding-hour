@@ -18,6 +18,7 @@ import React, { Component } from 'react'
     callApi = async () => {
         const addr = process.env.NODE_ENV == 'production' ? 'http://13.209.70.185' : 'http://localhost'
         let port='3001';
+        
         const response = await fetch(`${addr}:${port}/api`);
         const body = await response.json();
         return body;
