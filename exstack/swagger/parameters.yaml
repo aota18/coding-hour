@@ -1,0 +1,39 @@
+
+paths:
+    /register:
+        post:
+            summary: Register New User
+            tags: [Register]
+            parameters:
+            -   in: "body"
+                name: "body"
+                descriptions: "User object that needs to be added to DB"
+                required: true
+                schema:
+                    $ref: "#/definitions/User"
+            responses:
+                "200":
+                    description: Register Succeed
+definitions:                   
+    User:
+        type: "object"
+        properties:
+            username:
+                type: "string"
+            email:
+                type: "string"
+            password:
+                type: "string"
+        xml:
+            name: "User"
+
+ApiResponse:
+    type: "object"
+    properties:
+        code:
+            type: "integer"
+            format: "int32"
+        type:
+            type: "string"
+        message:
+            type: "string"
