@@ -47,7 +47,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/test', (req, res) => {
+app.use('/api', (req, res) => {
   return res.json({username: 'Daniel'})
 });
 
