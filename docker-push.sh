@@ -3,10 +3,10 @@
 
 docker_account="aota18"
 pj_server="chapi"
-pj_server_version="1.0"
+pj_server_version="1.1"
 
 pj_client="chweb"
-pj_client_version="1.0"
+pj_client_version="1.1"
 
 
 cd ./exstack

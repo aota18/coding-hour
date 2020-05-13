@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "set PORT=3001&&nodemon ./bin/www"
+    "start": "set PORT=3001&&nodemon app.js"
   },
   "dependencies": {
     "clean-css": "^4.1.11",
