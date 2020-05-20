@@ -99,7 +99,7 @@ exports.localLogin = async (ctx) => {
         ctx.throw(500, e);
     }
 
-    ctx.cookies.set('access_token', token, { httpOnly: true, sameSite: 'none', secure:true,  maxAge: 1000*60*60*24*7})
+    ctx.cookies.set('access_token', token, { httpOnly: true, sameSite: 'none', maxAge: 1000*60*60*24*7})
     ctx.body = account.profile;
 }
 
