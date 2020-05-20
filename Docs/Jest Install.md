@@ -65,7 +65,7 @@
   ```bash
   ./node_modules/.bin/jest --coverage
   ```
-
+  
 ### 예시
 
 <center><img src="/Users/jeonsang-gyu/Desktop/Coding-Hour/Docs/src/Screen Shot 2020-05-20 at 2.56.35 PM.png" alt="Screen Shot 2020-05-20 at 2.56.35 PM" style="zoom:50%;" /></center>
