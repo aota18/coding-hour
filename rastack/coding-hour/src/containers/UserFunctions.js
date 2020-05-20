@@ -1,42 +1,47 @@
-import axios from 'axios'
+// import axios from 'axios'
 
-export const register = newUser => {
-    return axios
-    .post('user/register', {
-        username: newUser.username,
-        email: newUser.email,
-        password: newUser.password
-    })
-    .then(response => {
-        console.log('Registered')
-    })
-}
+// import './Auth/Register/node_modules/react-toastify/dist/ReactToastify.css';
 
-export const login = user => {
-    return axios
-    .post('user/login', {
-        email: user.email,
-        password: user.password
-    })
-    .then(response => {
-        localStorage.setItem('usertoken', response.data)
-        return response.data
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+// const addr = process.env.NODE_ENV == 'production' ? 'http://13.209.70.185' : 'http://localhost'
 
-export const getProfile = user => {
-    return axios
-    .get('user/profile', {
-        headers: { Authroization: '${this.getToken()}' }
-    })
-    .then(response => {
-        console.log(response)
-        return response.data
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+// let port='3001';
+
+// export const register = newUser => {
+//     return axios
+//     .post(`${addr}:${port}/api/auth/register`, {
+//         username: newUser.username,
+//         email: newUser.email,
+//         password: newUser.password
+//     })
+//     .then(response => {
+//         console.log(response);
+//         console.log('Registered')
+//     })
+// }
+
+// export const login = user => {
+//     return axios
+//     .post(`${addr}:${port}/api/auth/login`, {
+//         email: user.email,
+//         password: user.password
+//     })
+//     .then(response => {
+//         localStorage.setItem('usertoken', response.data.token)
+//         return response.data
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }
+
+// export const getProfile = id => {
+//     return axios
+//     .get(`${addr}:${port}/api/user/profile/${id}`)
+//     .then(response => {
+//         console.log(response)
+//         return response.data
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }

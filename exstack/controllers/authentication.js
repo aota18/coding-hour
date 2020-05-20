@@ -8,20 +8,22 @@ var passport = require('passport');
 
 module.exports.register= function(req, res, next){
 
+  console.log(req);
+
     var user = new User();
 
     
       user.email = req.body.email,
-      user.username =  req.body.name,
+      user.username =  req.body.username,
       user.password =  user.setPassword(req.body.password),
       user.creation_dt =  Date.now();
 
       user.save(function(err){
-            var token;
-            token = user.generateJwt();
+            // var token;
+            // token = user.generateJwt();
             res.status(200);
             res.json({
-                "token": token
+                "success": true
             });
         });
 
@@ -33,7 +35,6 @@ module.exports.login = function(req, res, next){
 
     passport.authenticate('local', function(err, user, info) {
 
-        console.log(user);
         var token;
 
         if (err) {
@@ -48,7 +49,10 @@ module.exports.login = function(req, res, next){
           if (err) { 
               return res.status(501).json(err); 
         }
-          return res.status(200).json({"token": token});
+          return res.status(200).json({
+            "success": true,
+            "token": token
+          });
         });
       })(req, res, next);
     

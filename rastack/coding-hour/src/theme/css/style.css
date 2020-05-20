@@ -306,7 +306,7 @@ ol {
 	position: relative;
 }
 
-.nav-menu .mainmenu ul li .dropdown {
+ ul li .dropdown {
 	position: absolute;
 	width: 180px;
 	background: #ffffff;

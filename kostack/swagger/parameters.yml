@@ -1,0 +1,53 @@
+
+paths:
+    /auth/register/local:
+        post:
+            summary: Register New User
+            tags: [Register]
+            parameters:
+            -   in: "body"
+                name: "body"
+                descriptions: "User object that needs to be added to DB"
+                required: true
+                schema:
+                    $ref: "#/definitions/User"
+            responses:
+                "200":
+                    description: Register Succeed
+    /auth/login/local:
+        post:
+            summary: User Login
+            tags: [Login]
+            parameters:
+            -   in: "body"
+                name: "body"
+                descriptions: "Email and Password"
+                required: true
+                schema:
+                    $ref: "#/definitions/User"
+            responses:
+                "200":
+                    description: Login Succeed
+definitions:                   
+    User:
+        type: "object"
+        properties:
+            username:
+                type: "string"
+            email:
+                type: "string"
+            password:
+                type: "string"
+        xml:
+            name: "User"
+
+ApiResponse:
+    type: "object"
+    properties:
+        code:
+            type: "integer"
+            format: "int32"
+        type:
+            type: "string"
+        message:
+            type: "string"

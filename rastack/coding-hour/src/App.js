@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 
 
@@ -12,34 +12,62 @@ import './theme/css/slicknav.min.css'
 import './theme/css/font.css'
 import './theme/css/style.css'
 
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import Login from './containers/Login/Login'
-import Home from './containers/Home/home'
-import Register from './containers/Register/Register'
-import Profile from './containers/Profile/Profile'
+import HeaderContainer from './containers/HeaderContainer/HeaderContainer'
 
+import Home from './containers/Home/home'
+
+import Auth from './pages/Auth'
+import storage from './lib/storage';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as userActions from './redux/modules/user';
 
 /* JS IMPORT */
 
 
 class App extends Component{
+
+
+  // Check if user has logged in
+  initializeUserInfo = async () => {
+    const loggedInfo = storage.get('loggedInfo');
+    if(!loggedInfo) return;
+
+    const { UserActions } = this.props;
+    UserActions.setLoggedInfo(loggedInfo);
+    try{
+      await UserActions.checkStatus();
+    } catch (e) {
+      console.log(e);
+      storage.remove('loggedInfo');
+      window.location.href = '/auth/login?expired';
+    }
+  }
+
+
+  componentDidMount(){
+    this.initializeUserInfo();
+  }
+ 
+
   render(){
     return (
-      <Router>
+   
         <div className="App">
-          <Header />
+          <HeaderContainer/>
           <div className="container fluid">
-            <Route path="/home" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/profile" component={Profile} />
+            <Route path="/auth" component = {Auth} />
+            {/* <Route path="/" component={Home} /> */}
           </div>
-          <Footer />
         </div>
-      </Router>
+
     )
   }
 }
 
-export default App
+export default connect (
+  null, 
+  (dispatch) => ({
+    UserActions: bindActionCreators(userActions, dispatch)
+  })
+) (App);

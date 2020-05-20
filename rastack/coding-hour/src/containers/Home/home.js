@@ -2,10 +2,18 @@ import React, { Component } from 'react'
 
 
 export class home extends Component {
+
+    constructor(props){
+        super(props);
+
+        
+    }
+
+   
     render() {
         return (
             <div>
-                Hi, This is Home!
+               <h1>Home</h1>
             </div>
         )
     }
