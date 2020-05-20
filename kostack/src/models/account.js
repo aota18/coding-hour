@@ -3,6 +3,7 @@ const { Schema } = mongoose ;
 const crypto = require('crypto');
 const { generateToken } = require('lib/token');
 
+const 
 // Function for Hashing Password
 function hash(password) {
     return crypto.createHmac('sha256', process.env.SECRET_KEY).update(password).digest('hex');
@@ -20,6 +21,7 @@ const Account = new Schema({
             accessToken: String
         }
     },
+
     password: String, 
     thoughtCount: { type: Number, default: 0 }, // Increase 1 When user post something
     createdAt: { type: Date, default: Date.now }

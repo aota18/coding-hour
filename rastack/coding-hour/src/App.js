@@ -31,17 +31,22 @@ class App extends Component{
   // Check if user has logged in
   initializeUserInfo = async () => {
     const loggedInfo = storage.get('loggedInfo');
+
     if(!loggedInfo) return;
 
     const { UserActions } = this.props;
     UserActions.setLoggedInfo(loggedInfo);
-    try{
-      await UserActions.checkStatus();
-    } catch (e) {
-      console.log(e);
-      storage.remove('loggedInfo');
+
+    if(!loggedInfo){
       window.location.href = '/auth/login?expired';
     }
+    // try{
+    //   await UserActions.checkStatus();
+    // } catch (e) {
+    //   console.log(e);
+    //   // storage.remove('loggedInfo');
+      
+    // }
   }
 
 
