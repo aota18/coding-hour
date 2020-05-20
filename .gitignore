@@ -1,2 +1,3 @@
 .sercret
 node_modules
+coverage/*
