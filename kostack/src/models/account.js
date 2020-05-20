@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose ;
 const crypto = require('crypto');
 const { generateToken } = require('lib/token');
+const {Post} = require('./Post');
 
 // Function for Hashing Password
 function hash(password) {
@@ -21,6 +22,9 @@ const Account = new Schema({
         }
     },
     password: String, 
+    mobile: String,
+    posts: [Post],
+    role: String,
     thoughtCount: { type: Number, default: 0 }, // Increase 1 When user post something
     createdAt: { type: Date, default: Date.now }
 });
