@@ -44,13 +44,21 @@
 
 
 
-## Documentation Policy
+## Method
+
+### Overview
 
 
 
-> * [Testing Tool](https://blog.logrocket.com/the-best-unit-testing-frameworks-for-node-js/)
+<img src="./src/image-20200520132645287.png" alt="image-20200520132645287" style="zoom:50%;" />
+
+### Details
+
+<img src="./src/image-20200520132854862.png" alt="image-20200520132854862" style="zoom:50%;" />
 
 ## Test Tool
+
+[Testing Tool](https://blog.logrocket.com/the-best-unit-testing-frameworks-for-node-js/)
 
 ### :star:[Jest](https://jestjs.io/) 
 
@@ -82,7 +90,7 @@
 
 ## Notification
 
-### Telegram API Bot
+### Telegram API Botcc
 
 ### Github Push
 
