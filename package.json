@@ -4,5 +4,10 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "testPathIgnorePatterns" : [
+      "./rastack/coding-hour/src/App.test.js"
+    ]
   }
 }
