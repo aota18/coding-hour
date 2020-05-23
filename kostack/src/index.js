@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001;
 const mongoose = require('mongoose');
 const bodyParser = require('koa-bodyparser');
 
-const swagger = require('swagger-koa');
+;
 
 
 const { jwtMiddleware } = require('lib/token');
@@ -43,19 +43,6 @@ app.use(bodyParser()); // It should be above Rotuer code.
 app.use(jwtMiddleware);
 router.use('/api', api.routes());
 app.use(router.routes()).use(router.allowedMethods());
-
-app.use(swagger.init({
-  apiVersion: '1.0',
-  swaggerVersion: '1.0',
-  swaggerURL: '/api-docs',
-  swaggerUI: '/api-docs',
-  basePath: 'http://localhost:3001/',
-  info: {
-    title: 'Coding hour API Docs',
-    description: ''
-  },
-  apis: ['./swagger/parameters.yml']
-}));
 
 app.listen(port, () => {
     console.log(`✅ Coding Hour API Server is listening to port ${port}`);

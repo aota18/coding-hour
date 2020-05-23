@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom'
 
 
 /* CSS IMPORT */
@@ -21,6 +21,7 @@ import storage from './lib/storage';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from './redux/modules/user';
+
 
 /* JS IMPORT */
 
