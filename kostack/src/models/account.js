@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose ;
 const crypto = require('crypto');
 const { generateToken } = require('lib/token');
-const {Post} = require('./Post');
 
 
 // Function for Hashing Password
@@ -25,10 +24,14 @@ const Account = new Schema({
 
     password: String, 
     mobile: String,
-    //posts: [Post],
-    role: String,
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],          // list of post ids
+    likes: [{ type: Schema.Types.ObjectId, ref: 'Like' }],          // list of like ids
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],    // list of comments ids
+    classes: [{ classId: { type: Schema.Types.ObjectId, ref: 'Class'}, role: { auth: String, name: String } }], // list of comments ids
     thoughtCount: { type: Number, default: 0 }, // Increase 1 When user post something
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false }
 });
 
 Account.statics.findByUsername = function(username) {
@@ -75,4 +78,13 @@ Account.methods.generateToken = function() {
 
     return generateToken(payload, 'account');
 }
+
+Account.statics.joinClass = function({userId, classId, auth, rolename}){
+    const user = await this.findOne({'_id' : userId}).exec();
+
+    user.classes.push({classId: classId, role: {auth: auth, name:rolename}});
+
+    return user.save();
+}
+
 module.exports = mongoose.model('Account', Account);
