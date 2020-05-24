@@ -9,7 +9,7 @@ pj_client="chweb"
 pj_client_version="1.1"
 
 
-cd ./exstack
+cd ./kostack
 echo "Docker Build ${docker_account}/${pj_server}:${pj_server_version}..."
 docker build -t ${docker_account}/${pj_server} .
 
