@@ -23,4 +23,12 @@ Class.statics.register = function({userId, classname}){
     return clazz.save();
 };
 
+Class.statics.joinUser = function({userId, classId}){
+    const clazz = await this.findOne({'_id' : classId}).exec();
+
+    clazz.participants.push(userId);
+
+    return clazz.save();
+}
+
 module.exports = mongoose.model('Class', Class);
