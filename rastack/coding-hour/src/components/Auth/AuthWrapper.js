@@ -20,6 +20,7 @@ const Positioner = styled.div`
 
 const AuthWrapper = ({children}) => (
     <div>
+
            {children}
 
     </div>

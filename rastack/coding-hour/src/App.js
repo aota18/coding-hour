@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom'
 
 
 /* CSS IMPORT */
@@ -14,13 +14,13 @@ import './theme/css/style.css'
 
 import HeaderContainer from './containers/HeaderContainer/HeaderContainer'
 
-import Home from './containers/Home/home'
-
+import Home from './pages/Home'
 import Auth from './pages/Auth'
 import storage from './lib/storage';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as userActions from './redux/modules/user';
+
 
 /* JS IMPORT */
 
@@ -31,17 +31,22 @@ class App extends Component{
   // Check if user has logged in
   initializeUserInfo = async () => {
     const loggedInfo = storage.get('loggedInfo');
+
     if(!loggedInfo) return;
 
     const { UserActions } = this.props;
     UserActions.setLoggedInfo(loggedInfo);
-    try{
-      await UserActions.checkStatus();
-    } catch (e) {
-      console.log(e);
-      storage.remove('loggedInfo');
+
+    if(!loggedInfo){
       window.location.href = '/auth/login?expired';
     }
+    // try{
+    //   await UserActions.checkStatus();
+    // } catch (e) {
+    //   console.log(e);
+    //   // storage.remove('loggedInfo');
+      
+    // }
   }
 
 
@@ -56,6 +61,7 @@ class App extends Component{
         <div className="App">
           <HeaderContainer/>
           <div className="container fluid">
+            <Route path="/home" component ={Home} />
             <Route path="/auth" component = {Auth} />
             {/* <Route path="/" component={Home} /> */}
           </div>
