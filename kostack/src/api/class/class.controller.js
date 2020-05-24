@@ -14,11 +14,12 @@ exports.register = async (ctx) => {
 
         await Account.joinClass(joinClassInfo);
     }catch(e){
-        ctx.throw(500, e);
+        ctx.status = 403;
+        return;
     }
 
     ctx.body = {
-        Success: Boolean,
+        Success: true,
         data: {}
     }
 };
@@ -33,12 +34,16 @@ exports.join = async (ctx) => {
         };
 
         await Account.joinClass(joinClassInfo);
+        
+        await Class.joinUser(joinClassInfo);
+
     }catch(e){
-        ctx.throw(500, e);
+        ctx.status = 403;
+        return;
     }
 
     ctx.body = {
-        Success: Boolean,
+        Success: true,
         data: {}
     }
 }

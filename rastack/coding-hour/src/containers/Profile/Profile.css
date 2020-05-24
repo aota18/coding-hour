@@ -1,0 +1,34 @@
+.profileInfo{
+    display:flex;
+    text-align:center;
+    margin: 24px;
+    height:100%;
+
+}
+
+.thumbnail{
+    display:block;
+    width:80px;
+    height:80px;
+    
+}
+
+.thumbnail img{
+    border-radius: 20px !important;
+}
+
+
+.userInfo{
+    display:block;
+    width:70%;
+}
+
+.username{
+    display:block;
+    margin-bottom:1rem;
+}
+
+.email{
+    display:block;
+    margin-bottom:1rem;
+}
