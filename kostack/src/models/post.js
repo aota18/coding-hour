@@ -10,13 +10,22 @@ const Post = new Schema({
     class: { type: Schema.Types.ObjectId, ref: 'Class' },           // id of class
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],    // list of comments ids
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date }
+    updatedAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false }
 });
 
-Post.statics.writePost(function(user, title, text){
-    const post = new this(user, title, text);
+Post.statics.writePost = function({user, title, text}){
+    const post = new this({
+            user: user, 
+            files: null,
+            title: title,
+            text: text,
+            likes: [],     // likes
+            class: [],     // class
+            comments: []      // comment
+    });
 
     return post.save();
-});
+};
 
 module.exports = mongoose.model('Post', Post);
