@@ -14,7 +14,7 @@ function Sidebar() {
                     <Link className="listItem" to="/home/class/info"> Class Info</Link>
                     <Link className="listItem" to="/home/post/view"> View Post</Link>
                     <Link className="listItem" to="/home/post/create"> Create Post</Link>
-                    <Link className="listItem"> Profile</Link>
+                    <Link className="listItem" to="/home/profile"> Profile</Link>
 
                 </ul>
             </div>

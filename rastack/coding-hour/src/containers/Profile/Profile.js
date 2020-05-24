@@ -1,52 +1,48 @@
 import React, { Component } from 'react'
+import './Profile.css'
+import profImg from '../../assets/img/faces/marc.jpg';
 import {getProfile} from '../UserFunctions'
 import jwt_decode from 'jwt-decode'
 
-class Profile extends Component {
+export class Profile extends Component {
     constructor(props) {
         super(props)
 
-        console.log(this.props)
-        this.state = {
-            userId: this.props.userId,
-            user: {}
-        }
+        // console.log(this.props)
+        // this.state = {
+        //     userId: this.props.userId,
+        //     user: {}
+        // }
     }
 
     componentDidMount() {
         
-        console.log(this.state.userId)
-        getProfile(this.state.userId).then(res => {
-            if(res.success === true){
-                this.setState({
-                    user: res.user
-                })
-            }else{
-                alert('Error')
-            }
+        // console.log(this.state.userId)
+        // getProfile(this.state.userId).then(res => {
+        //     if(res.success === true){
+        //         this.setState({
+        //             user: res.user
+        //         })
+        //     }else{
+        //         alert('Error')
+        //     }
             
-        })
+        // })
     }
 
     render() {
         return (
             <div className="container">
-                <div className="jumbotron mt-5">
-                    <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">PROFILE</h1>
+                <h2>Profile</h2>
+                <div className="profileInfo">
+                    <div className="thumbnail">
+                        <img src={profImg} alt="Thumbnail"/>
                     </div>
-                    <table className="table col-md-6 mx-auto">
-                        <tbody>
-                            <tr>
-                                <td>User Name</td>
-                                <td>{this.state.username}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>{this.state.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="userInfo">
+                        <div className="username">SEO SANGWON</div>
+                        <div className="email">abc@gmail.com</div>
+                    </div>
+                    
                 </div>
             </div>
         )
@@ -54,3 +50,4 @@ class Profile extends Component {
 }
 
 export default Profile
+
