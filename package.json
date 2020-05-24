@@ -6,7 +6,7 @@
     "test": "jest"
   },
   "jest": {
-    "testPathIgnorePatterns" : [
+    "testPathIgnorePatterns": [
       "./rastack/coding-hour/src/App.test.js"
     ]
   }
