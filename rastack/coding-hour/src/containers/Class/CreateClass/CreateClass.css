@@ -1,0 +1,44 @@
+.btn-done{
+    display:inline-block;
+    vertical-align: middle;
+    margin:1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 40px;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #ee8425 0%, #f9488b 100%), linear-gradient(to right, #ee8425 0%, #f9488b 100%);
+}
+
+.create__class__body{
+    margin:1rem;
+    padding:1rem;
+}
+
+.create-name{
+    font-weight: bold;
+    margin: 2rem 1rem;
+    text-align: left;
+}
+
+.create-name label{
+    width: 10rem;
+    margin-right: 1rem;
+}
+
+.create-name input{
+    background-color: rgb(240, 240, 240);
+    border-radius:10px;
+
+}
+
+.create-role label{
+    width: 10rem;
+    margin-right: 1rem;
+}
+
+.create-role{
+    font-weight: bold;
+    margin: 2rem 1rem;
+    text-align: left;
+}

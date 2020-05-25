@@ -1,0 +1,22 @@
+.btn-done{
+    display:inline-block;
+    vertical-align: middle;
+    margin:1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 40px;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #ee8425 0%, #f9488b 100%), linear-gradient(to right, #ee8425 0%, #f9488b 100%);
+}
+
+
+.join__class__body{
+    margin: 5rem 0;
+}
+
+.join__class__body input{
+    height: 3rem;
+    width:70%;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}

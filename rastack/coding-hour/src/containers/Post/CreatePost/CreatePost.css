@@ -1,0 +1,51 @@
+.create__post__header{
+    height:15%;
+    padding:1rem;
+ 
+}
+
+.header_back{
+    text-align:left;
+    cursor:pointer;
+    margin-top:1rem;
+}
+
+textarea{
+    width:100%;
+    height:100%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: rgb(230, 230, 230);
+
+}
+.header_title{
+    text-align:center;
+    display:inline;
+}
+
+.create__post__body{
+    height:70%;
+    padding:1rem;
+    
+    border-bottom: 0.5px solid rgb(221, 221, 221);
+}
+
+.create__post__footer{
+    display: flex;
+    flex-direction: row-reverse;
+    height:15%;
+    padding:1rem;
+
+}
+
+.post_submit{
+    display:inline-block;
+    vertical-align: middle;
+    margin:1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 0.5rem 40px;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #ee8425 0%, #f9488b 100%), linear-gradient(to right, #ee8425 0%, #f9488b 100%);
+}

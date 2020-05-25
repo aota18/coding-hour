@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import ClassSettings from './ClassSettings/ClassSettings';
-import RoleSettings from './RoleSettings/RoleSettings';
-import DetailSettings from './DetailSettings/DetailSettings';
-
-
+import './CreateClass.css'
 export class CreateClass extends Component {
 
     constructor(){
@@ -14,19 +10,29 @@ export class CreateClass extends Component {
         }
     }
 
-    classSet = <ClassSettings />;
-    roleSet = <RoleSettings />;
-    detailSet = <DetailSettings />;
 
     render() {
         return (
             <div className="container">
-                {this.classSet}
-                {this.roleSet}
-                {this.detailSet}
-                <br/>
-                <button>Back</button>
-                <button>Next</button>
+                <h3>Create Class</h3>
+                <div className="create__class__body">
+                    <div className="create-name">
+                        <label htmlFor="">Class Name</label>
+                        <input type="text" placeholder="class name"/>
+                    </div>
+
+                    <div className="create-role">
+                        <label htmlFor="">Role</label>
+                        <select name="" id="">
+                            <option value="Professor">Professor</option>
+                            <option value="TA">TA</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div className="create__class__footer">
+                <button className="btn-done">Create Class</button>
+                </div>
                 
             </div>
         )

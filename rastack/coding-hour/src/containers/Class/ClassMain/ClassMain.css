@@ -1,0 +1,107 @@
+.class__header{
+
+    height:30%;
+}
+
+.class__header__info{
+    margin: auto;
+    height:70%;
+
+}
+
+.class__title{
+    display:block;
+    margin-top:1rem;
+    font-size:150%;
+    font-weight:bold;
+}
+
+.class__members{
+    display:block;
+    margin-top:1rem;
+    font-size: 80%;
+    color: #888;
+}
+
+.class__semester{
+    
+    display:block;
+    margin-top:1rem;
+}
+
+.class__header__navbar{
+    display:flex;
+    height:30%;
+    
+}
+
+
+.class__nav__list{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    text-align:center;
+}
+
+.class__nav__item{
+    text-decoration: none;
+    display: block;
+    float:left;
+    margin: 1rem 1rem;
+    cursor: pointer;
+}
+
+.class__nav__item:hover{
+    border-bottom: 0.5px solid black;
+}
+
+
+.class__post{
+    margin: 1rem;
+    height:100%;
+}
+
+
+.class__post-item{
+    border-radius: 10px;
+    border: 0.5px solid rgb(214, 214, 214);
+    padding:1rem 3rem;
+    box-shadow: 3px 3px 10px #999;
+}
+
+.post-tag{
+    display:block;
+    font-size:120%;
+    font-weight:bolder;
+    margin-bottom: 1rem;
+    text-align:left;
+}
+
+.post-body{
+    display: block;
+    text-align:left;
+    margin-bottom: 1rem;
+}
+
+.post-detail{
+    display: flex;
+    width:100%;
+}
+
+
+.post-detail-writer{
+    color: rgb(150, 150, 150);
+    font-size: 90%;
+    margin-right: 0.5rem;
+}
+
+.post-detail-time {
+    color: rgb(150, 150, 150);
+    font-size: 90%;
+}
+
+.post-detail-comments{
+    color: rgb(150, 150, 150);
+    margin-left:auto;
+}
