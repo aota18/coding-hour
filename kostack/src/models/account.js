@@ -34,19 +34,31 @@ const Account = new Schema({
     deleted: { type: Boolean, default: false }
 });
 
+Account.statics.findByUserId = function(userId) {
+    return this.findOne({
+        _id: userId,
+        deleted: false
+    }).exec();
+}
+
 Account.statics.findByUsername = function(username) {
-    return this.findOne({'profile.username' : username}).exec();
+    return this.findOne({'profile.username' : username, deleted: false}).exec();
 }
 
 Account.statics.findByEmail = function(email) {
-    return this.findOne({email}).exec();
+    return this.findOne({email, deleted: false}).exec();
 }
 
 Account.statics.findByEmailOrUsername = function({username, email}){
     return this.findOne({
-        $or: [
-            { 'profile.username': username},
-            { email }
+        $and: [
+            {
+                $or: [
+                    { 'profile.username': username},
+                    { email }
+                ]
+            },
+            { deleted: false }
         ]
     }).exec();
 }
