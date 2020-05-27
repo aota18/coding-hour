@@ -34,19 +34,31 @@ const Account = new Schema({
     deleted: { type: Boolean, default: false }
 });
 
+Account.statics.findByUserId = function(userId) {
+    return this.findOne({
+        _id: userId,
+        deleted: false
+    }).exec();
+}
+
 Account.statics.findByUsername = function(username) {
-    return this.findOne({'profile.username' : username}).exec();
+    return this.findOne({'profile.username' : username, deleted: false}).exec();
 }
 
 Account.statics.findByEmail = function(email) {
-    return this.findOne({email}).exec();
+    return this.findOne({email, deleted: false}).exec();
 }
 
 Account.statics.findByEmailOrUsername = function({username, email}){
     return this.findOne({
-        $or: [
-            { 'profile.username': username},
-            { email }
+        $and: [
+            {
+                $or: [
+                    { 'profile.username': username},
+                    { email }
+                ]
+            },
+            { deleted: false }
         ]
     }).exec();
 }
@@ -73,18 +85,26 @@ Account.methods.generateToken = function() {
 
     const payload = {
         _id: this._id,
-        profile: this.profile
+        profile: this.profile,
+        email: this.email
     };
 
     return generateToken(payload, 'account');
 }
 
-Account.statics.joinClass = function({userId, classId, auth, rolename}){
-    const user = await this.findOne({'_id' : userId}).exec();
+Account.methods.joinClass = function({classId, auth, rolename}){
+    const clazz = {
+        classId: classId,
+        role: {
+            auth: auth,
+            name: rolename
+        }
+    };
 
-    user.classes.push({classId: classId, role: {auth: auth, name:rolename}});
-
-    return user.save();
+    if(this.classes.find(e => { return e.classId == clazz.classId }) == undefined)
+        this.classes.push(clazz);
+    
+    return this.save();
 }
 
 module.exports = mongoose.model('Account', Account);

@@ -3,6 +3,8 @@ const { Schema } = mongoose ;
 
 const Class = new Schema({
     name: String,
+    year: Number,
+    semester: Number,
     participants: [{ type: Schema.Types.ObjectId, ref: 'Account' }],   // list of user ids
     sessions: [{ type: Schema.Types.ObjectId, ref: 'Session' }],    // list of session ids
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],          // list of post ids
@@ -11,24 +13,45 @@ const Class = new Schema({
     deleted: { type: Boolean, default: false }
 });
 
+Class.statics.findByClassId = function(classId){
+    return this.findOne({
+        _id: classId,
+        deleted: false
+    }).exec();
+}
 
-Class.statics.register = function({userId, classname}){
+Class.statics.findByYearAndSemester = function({year, semester}){
+    return this.find({
+        year: year,
+        semester: semester,
+        deleted: false
+    }).exec();
+}
+
+Class.statics.findByClassName = function(name){
+    return this.find({
+        name: { $regex: '.*' + name + '.*' }
+    }).exec();
+}
+
+Class.statics.register = function({userId, classname, year, semester}){
     const clazz = new this({
         name: classname,
-        participants: [userId]   // participants
-        // sessions: [],         // sessions
-        // posts: [],         // posts
+        participants: [userId],   // participants
+        year: year,
+        semester: semester
     });
 
     return clazz.save();
 };
 
-Class.statics.joinUser = function({userId, classId}){
-    const clazz = await this.findOne({'_id' : classId}).exec();
+Class.methods.joinUser = function({userId}){
+    const user = this.participants.find(e => {return e == userId});
 
-    clazz.participants.push(userId);
+    if(user == undefined)
+        this.participants.push(userId);
 
-    return clazz.save();
+    return this.save();
 }
 
 module.exports = mongoose.model('Class', Class);
