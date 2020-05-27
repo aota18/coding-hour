@@ -105,3 +105,53 @@ exports.findByClassName = async (ctx) => {
         }
     }
 }
+
+exports.edit = async (ctx) => {
+    let { classId } = ctx.params;
+
+    const clazz = await Class.findByClassId(classId);
+
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            message: "Class Undefined"
+        }
+        return;
+    }
+
+    const editedClass = {
+        name: ctx.request.body.name == undefined ? clazz.name : ctx.request.body.name,
+        year: ctx.request.body.year == undefined ? clazz.year : ctx.request.body.year,
+        semester: ctx.request.body.semester == undefined ? clazz.semester : ctx.request.body.semester,
+    };
+
+    await clazz.edit(editedClass);
+
+    ctx.body = {
+        Success: true,
+        data: {}
+    }
+}
+
+exports.delete = async (ctx) => {
+    let { classId } = ctx.params;
+
+    const clazz = await Class.findByClassId(classId);
+
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            message: "Class Undefined"
+        }
+        return;
+    }
+
+    await clazz.delete();
+
+    ctx.body = {
+        Success: true,
+        data: {}
+    }
+}
