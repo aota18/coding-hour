@@ -11,7 +11,7 @@ exports.register = async (ctx) => {
         rolename: ctx.request.body.role
     };
 
-    const user = await Account.findOne({_id: ctx.request.body.userId});
+    const user = await Account.findByUserId(ctx.request.body.userId);
 
     if(user == undefined){
         ctx.status = 404;
@@ -40,7 +40,7 @@ exports.join = async (ctx) => {
         rolename: "Student"
     };
 
-    const user = await Account.findOne({_id: ctx.request.body.userId});
+    const user = await Account.findByUserId(ctx.request.body.userId);
 
     if(user == undefined){
         ctx.status = 404;
@@ -55,7 +55,7 @@ exports.join = async (ctx) => {
     await user.joinClass(joinClassInfo);
     
 
-    const clazz = await Class.findOne({_id: ctx.request.body.classId});
+    const clazz = await Class.findByClassId(ctx.request.body.classId);
 
     if(clazz == undefined){
         ctx.status = 404;

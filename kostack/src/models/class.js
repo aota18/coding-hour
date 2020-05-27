@@ -11,6 +11,12 @@ const Class = new Schema({
     deleted: { type: Boolean, default: false }
 });
 
+Class.statics.findByClassId = function(classId){
+    return this.findOne({
+        _id: classId,
+        deleted: false
+    }).exec();
+}
 
 Class.statics.register = function({userId, classname}){
     const clazz = new this({
