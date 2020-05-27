@@ -1,8 +1,8 @@
 const Router = require('koa-router');
-const auth = new Router();
+const clazz = new Router();
 const classCtrl = require('./class.controller');
 
-auth.post('/register', classCtrl.register);
-auth.post('/join', classCtrl.join);
+clazz.post('/register', classCtrl.register);
+clazz.post('/join', classCtrl.join);
 
-module.exports = auth;
+module.exports = clazz;

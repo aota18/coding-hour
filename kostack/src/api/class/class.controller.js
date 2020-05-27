@@ -20,6 +20,7 @@ exports.register = async (ctx) => {
             data: {},
             message: "User Undefined"
         }
+        return;
     }
 
     await user.joinClass(joinClassInfo);
@@ -48,6 +49,7 @@ exports.join = async (ctx) => {
             data: {},
             message: "User Undefined"
         }
+        return;
     }
 
     await user.joinClass(joinClassInfo);
@@ -62,6 +64,7 @@ exports.join = async (ctx) => {
             data: {},
             message: "Class Undefined"
         }
+        return;
     }
     
     await clazz.joinUser(joinClassInfo);
