@@ -79,12 +79,19 @@ Account.methods.generateToken = function() {
     return generateToken(payload, 'account');
 }
 
-Account.statics.joinClass = function({userId, classId, auth, rolename}){
-    const user = await this.findOne({'_id' : userId}).exec();
+Account.methods.joinClass = function({classId, auth, rolename}){
+    const clazz = {
+        classId: classId,
+        role: {
+            auth: auth,
+            name: rolename
+        }
+    };
 
-    user.classes.push({classId: classId, role: {auth: auth, name:rolename}});
-
-    return user.save();
+    if(this.classes.find(e => { return e.classId == clazz.classId }) == undefined)
+        this.classes.push(clazz);
+    
+    return this.save();
 }
 
 module.exports = mongoose.model('Account', Account);
