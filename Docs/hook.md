@@ -134,3 +134,9 @@ curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$EXE_DOCKER"
 
   
 
+### 조금더 연구해 볼 필요가 있는 부분(한계점)
+
+* source tree를 사용해서 commit하는 경우는 ``pre-commit``이 실행이 되지 않는다.
+  * terminal에서만 실행이 된다.
+* 당연히 github에서 수정하는 경우의 commit과 push는 당여힌 pre-commit이 일어나지 않는다.
+* 또한, 애초에 ``pre-commit`` 과 ``pre-push``가 없는 local에서는 다른 팀원들에게 inform 해주는 방법은 구두 방법 밖에 없다.
