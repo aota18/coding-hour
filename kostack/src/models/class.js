@@ -30,7 +30,7 @@ Class.statics.findByYearAndSemester = function({year, semester}){
 
 Class.statics.findByClassName = function(name){
     return this.find({
-        name: { $regex: '.*' + name + '.*' }
+        name: { $regex: "^"+name + '.*' }
     }).exec();
 }
 
@@ -50,6 +50,20 @@ Class.methods.joinUser = function({userId}){
 
     if(user == undefined)
         this.participants.push(userId);
+
+    return this.save();
+}
+
+Class.methods.edit = function({name, year, semester}){
+    this.name = name;
+    this.year = year;
+    this.semester = semester;
+
+    return this.save();
+}
+
+Class.methods.delete = function(){
+    this.deleted = true;
 
     return this.save();
 }
