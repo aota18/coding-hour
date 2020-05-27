@@ -74,3 +74,34 @@ exports.join = async (ctx) => {
         data: {}
     }
 }
+
+exports.findByYearAndSemester = async (ctx) => {
+    const { semester, year } = ctx.params;
+
+    const yearAndSemester = {
+        semester: semester,
+        year: year
+    };
+
+    const classes = await Class.findByYearAndSemester(yearAndSemester);
+
+    ctx.body = {
+        Success: true,
+        data: {
+            classes: classes
+        }
+    }
+}
+
+exports.findByClassName = async (ctx) => {
+    const { name } = ctx.params;
+
+    const classes = await Class.findByClassName(name);
+
+    ctx.body = {
+        Success: true,
+        data: {
+            classes: classes
+        }
+    }
+}

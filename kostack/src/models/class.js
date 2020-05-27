@@ -3,6 +3,8 @@ const { Schema } = mongoose ;
 
 const Class = new Schema({
     name: String,
+    year: Number,
+    semester: Number,
     participants: [{ type: Schema.Types.ObjectId, ref: 'Account' }],   // list of user ids
     sessions: [{ type: Schema.Types.ObjectId, ref: 'Session' }],    // list of session ids
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],          // list of post ids
@@ -18,12 +20,26 @@ Class.statics.findByClassId = function(classId){
     }).exec();
 }
 
-Class.statics.register = function({userId, classname}){
+Class.statics.findByYearAndSemester = function({year, semester}){
+    return this.find({
+        year: year,
+        semester: semester,
+        deleted: false
+    }).exec();
+}
+
+Class.statics.findByClassName = function(name){
+    return this.find({
+        name: { $regex: '.*' + name + '.*' }
+    }).exec();
+}
+
+Class.statics.register = function({userId, classname, year, semester}){
     const clazz = new this({
         name: classname,
-        participants: [userId]   // participants
-        // sessions: [],         // sessions
-        // posts: [],         // posts
+        participants: [userId],   // participants
+        year: year,
+        semester: semester
     });
 
     return clazz.save();
