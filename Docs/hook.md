@@ -66,12 +66,6 @@
 #!/bin/sh
 
 
-
-#./node_modules/.bin/jest --coverage
-# An example hook script to prepare a packed repository for use over
-# dumb transports.
-#
-
 #You can get yout chat id by interacting with telegram channel called "GetID Bot"
 CHAT_ID='-100*'
 
@@ -107,24 +101,7 @@ curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$LAST_COMMIT"
 ```sh
 #!/bin/sh
 
-# An example hook script to verify what is about to be pushed.  Called by "git
-# push" after it has checked the remote status, but before anything has been
-# pushed.  If this script exits with a non-zero status nothing will be pushed.
-#
-# This hook is called with the following parameters:
-#
-# $1 -- Name of the remote to which the push is being done
-# $2 -- URL to which the push is being done
-#
-# If pushing without using a named remote those arguments will be equal.
-#
-# Information about the commits which are being pushed is supplied as lines to
-# the standard input in the form:
-#
-#   <local ref> <local sha1> <remote ref> <remote sha1>
-#
-# This sample shows how to prevent push of commits where the log message starts
-# with "WIP" (work in progress).
+
 CHAT_ID='-100*'
 
 #BOT_TOKEN number is shown when you generated your bot in BotFather channel
