@@ -1,5 +1,14 @@
 # [Jest Install](https://jestjs.io/docs/en/getting-started)
 
+> Writer: 전상규
+>
+> Date: 2020-05-13
+>
+> * Contents
+>   * Jest Install
+>   * Create Test Javascript file
+>   * Run Test
+
 ###  Jest Install
 
 * Install Jest unsing ``yarn`` or ``npm``
