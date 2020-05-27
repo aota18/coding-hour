@@ -23,12 +23,13 @@ Class.statics.register = function({userId, classname}){
     return clazz.save();
 };
 
-Class.statics.joinUser = function({userId, classId}){
-    const clazz = await this.findOne({'_id' : classId}).exec();
+Class.methods.joinUser = function({userId}){
+    const user = this.participants.find(e => {return e == userId});
 
-    clazz.participants.push(userId);
+    if(user == undefined)
+        this.participants.push(userId);
 
-    return clazz.save();
+    return this.save();
 }
 
 module.exports = mongoose.model('Class', Class);

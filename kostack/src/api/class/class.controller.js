@@ -1,22 +1,28 @@
 const Account = require('models/Account');
 const Class = require('models/Class');
 
+// exception: user undefined
 exports.register = async (ctx) => {
-    try{
-        const clazz = await Class.register(ctx.request.body);
+    const clazz = await Class.register(ctx.request.body);
 
-        const joinClassInfo = {
-            userId: ctx.request.body.userId,
-            classId: clazz._id,
-            auth: "Admin",
-            rolename: ctx.request.body.role
-        };
+    const joinClassInfo = {
+        classId: clazz._id,
+        auth: "Admin",
+        rolename: ctx.request.body.role
+    };
 
-        await Account.joinClass(joinClassInfo);
-    }catch(e){
-        ctx.status = 403;
-        return;
+    const user = await Account.findOne({_id: ctx.request.body.userId});
+
+    if(user == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "User Undefined"
+        }
     }
+
+    await user.joinClass(joinClassInfo);
 
     ctx.body = {
         Success: true,
@@ -24,23 +30,41 @@ exports.register = async (ctx) => {
     }
 };
 
+// exception: user undefined
 exports.join = async (ctx) => {
-    try{
-        const joinClassInfo = {
-            userId: ctx.request.body.userId,
-            classId: ctx.request.body.classId,
-            auth: "Participant",
-            rolename: "Student"
-        };
+    const joinClassInfo = {
+        userId: ctx.request.body.userId,
+        classId: ctx.request.body.classId,
+        auth: "Participant",
+        rolename: "Student"
+    };
 
-        await Account.joinClass(joinClassInfo);
-        
-        await Class.joinUser(joinClassInfo);
+    const user = await Account.findOne({_id: ctx.request.body.userId});
 
-    }catch(e){
-        ctx.status = 403;
-        return;
+    if(user == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "User Undefined"
+        }
     }
+
+    await user.joinClass(joinClassInfo);
+    
+
+    const clazz = await Class.findOne({_id: ctx.request.body.classId});
+
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "Class Undefined"
+        }
+    }
+    
+    await clazz.joinUser(joinClassInfo);
 
     ctx.body = {
         Success: true,
