@@ -85,7 +85,8 @@ Account.methods.generateToken = function() {
 
     const payload = {
         _id: this._id,
-        profile: this.profile
+        profile: this.profile,
+        email: this.email
     };
 
     return generateToken(payload, 'account');
