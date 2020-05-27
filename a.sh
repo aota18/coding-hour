@@ -1,3 +1,7 @@
 #!/bin/sh
 
-echo abcd
+
+
+
+
+echo " ab\ncd"
