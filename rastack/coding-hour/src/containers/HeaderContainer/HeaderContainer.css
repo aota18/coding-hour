@@ -2,3 +2,13 @@
     height:64px;
     width:64px;
 }
+
+.btn-login{
+    font-size: 16px;
+    color: #171822;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 42px 0;
+    position: relative;
+    display: inline-block;
+}

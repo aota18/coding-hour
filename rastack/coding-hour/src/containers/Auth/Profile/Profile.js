@@ -6,7 +6,6 @@ import * as authActions from '../../../redux/modules/auth';
 import jwt_decode from 'jwt-decode';
 import queryString from 'query-string';
 
-import './Profile.css'
 
 
 class Profile extends Component {

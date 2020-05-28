@@ -38,17 +38,10 @@ export class HeaderContainer extends Component {
                     </Link>
                 </div>
                 <div className="nav-menu">
-                    <nav className="mainmenu mobile-menu">
-
-                        <ul>
-                            <li className="active"><Link to="/home">Home</Link></li>
-                        </ul>
-                        
-                    </nav>
 
                     { user.get('logged')
-                            ? (<DropdownButton className="primary-btn top-btn" id="dropdown-user-button" title={user.getIn(['loggedInfo', 'username'])}>
-                                <Dropdown.Item href="/auth/profile">Profile</Dropdown.Item>
+                            ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={user.getIn(['loggedInfo', 'username'])}>
+                                <Dropdown.Item href="/home/profile">Profile</Dropdown.Item>
                                 <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
                             </DropdownButton>)
 

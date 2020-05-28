@@ -14,7 +14,6 @@ export class Home extends Component {
                     <Route path="/home/class/create" component = {CreateClass}/>
                     <Route path="/home/class/join" component = {JoinClass}/> 
                     <Route path="/home/class/main" component = {ClassMain} />
-                    <Route path="/home/class/info" component = {ClassInfo} />
                     <Route path="/home/post/create" component = {CreatePost} />
                     <Route path="/home/post/view" component = {ViewPost} />
                     <Route path="/home/profile" component= { Profile }/>

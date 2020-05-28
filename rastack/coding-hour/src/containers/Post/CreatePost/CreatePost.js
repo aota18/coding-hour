@@ -1,12 +1,11 @@
-import React from 'react'
+import React, {Component}from 'react'
 import './CreatePost.css'
-function CreatePost() {
+export class CreatePost extends Component {
+    render(){
     return (
-        <div className="container">
+        <div className="class__post-item">
             <div className="create__post__header">
                 <div className="header_title">Notice</div>
-                <div className="header_back">Back</div>
-                
             </div>
 
             <div className="create__post__body">
@@ -19,6 +18,7 @@ function CreatePost() {
             </div>
         </div>
     )
+    }
 }
 
 export default CreatePost
