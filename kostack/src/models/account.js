@@ -123,4 +123,12 @@ Account.methods.changeRole = function({classId, auth, rolename}){
     this.save();
 }
 
+Account.methods.toDto = function(){
+    return {
+        _id: this._id,
+        profile: this.profile,
+        email: this.email
+    }
+}
+
 module.exports = mongoose.model('Account', Account);

@@ -57,7 +57,7 @@ exports.localRegister = async (ctx) => {
     }
 
     ctx.cookies.set('access_token', token, { httpOnly: true, sameSite: 'none', maxAge: 1000*60*60*24*7})
-    ctx.body = account; // Answer to Profile Info.
+    ctx.body = account.toDto(); // Answer to Profile Info.
 }
 
 // Local Login
@@ -100,7 +100,7 @@ exports.localLogin = async (ctx) => {
     }
 
     ctx.cookies.set('access_token', token, { httpOnly: true, sameSite: 'none', maxAge: 1000*60*60*24*7})
-    ctx.body = account;
+    ctx.body = account.toDto();
 }
 
 // Check email exists 
