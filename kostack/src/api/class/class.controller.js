@@ -107,7 +107,7 @@ exports.findByClassName = async (ctx) => {
 }
 
 exports.edit = async (ctx) => {
-    let { classId } = ctx.params;
+    const { classId } = ctx.params;
 
     const clazz = await Class.findByClassId(classId);
 
@@ -135,7 +135,7 @@ exports.edit = async (ctx) => {
 }
 
 exports.delete = async (ctx) => {
-    let { classId } = ctx.params;
+    const { classId } = ctx.params;
 
     const clazz = await Class.findByClassId(classId);
 
@@ -150,6 +150,63 @@ exports.delete = async (ctx) => {
 
     await clazz.delete();
 
+    ctx.body = {
+        Success: true,
+        data: {}
+    }
+}
+
+exports.changeRole = async (ctx) => {
+    const {classId, targetId} = ctx.params;
+    const userId = ctx.request.body.userId;
+    const auth = ctx.request.body.auth;
+    const rolename = ctx.request.body.rolename;
+
+    const user = await Account.findByUserId(userId);
+    if(user == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "User Undefined"
+        }
+        return;
+    }
+
+    let idx = user.classes.findIndex((e) => e.classId == classId);
+    if(idx == -1){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "Admin is not member of Class"
+        }
+        return;
+    }
+
+    if(user.classes[idx].role.auth != 'Admin'){
+        ctx.status = 401;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "Role UnAuthorized"
+        }
+        return;
+    }
+
+    const target = await Account.findByUserId(targetId);
+    idx = target.classes.findIndex((e) => e.classId == classId);
+    if(idx == -1){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            data: {},
+            message: "Target is not member of Class"
+        }
+        return;
+    }
+
+    await target.changeRole({classId, auth, rolename});
     ctx.body = {
         Success: true,
         data: {}

@@ -107,4 +107,20 @@ Account.methods.joinClass = function({classId, auth, rolename}){
     return this.save();
 }
 
+Account.methods.changeRole = function({classId, auth, rolename}){
+    const role = {
+        auth: auth,
+        name: rolename
+    }
+
+    const classes = this.classes;
+    for(let i=0;i<classes.length;i++){
+        if(classes[i].classId == classId){
+            classes[i].role = role;
+        }
+    }
+
+    this.save();
+}
+
 module.exports = mongoose.model('Account', Account);

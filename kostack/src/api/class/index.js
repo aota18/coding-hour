@@ -8,5 +8,6 @@ clazz.get('/year/:year/semester/:semester', classCtrl.findByYearAndSemester);
 clazz.get('/name/:name', classCtrl.findByClassName);
 clazz.put('/:classId', classCtrl.edit);
 clazz.delete('/:classId', classCtrl.delete);
+clazz.put('/:classId/participants/:targetId', classCtrl.changeRole);
 
 module.exports = clazz;
