@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as baseActions from '../redux/modules/base';
 import { AuthWrapper } from '../components/Auth';
 import { Route} from 'react-router-dom';
-import { Login, Register} from '../containers/Auth';
+import { Login, Register, Profile} from '../containers/Auth';
 
 export class Auth extends Component {
      //Activate when you enter this page
@@ -22,6 +22,7 @@ export class Auth extends Component {
             <AuthWrapper>
                 <Route path="/auth/login" component = {Login}/>
                 <Route path="/auth/register" component = {Register}/>
+                <Route path="/auth/profile" component = {Profile}/>
             </AuthWrapper>
         )
     }

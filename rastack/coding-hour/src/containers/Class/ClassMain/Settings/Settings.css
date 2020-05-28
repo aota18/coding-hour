@@ -1,0 +1,21 @@
+.setting__body{
+    margin:1rem;
+    padding:1rem;
+}
+
+.setting__info{
+    text-align:left;
+}
+
+.setting__info label{
+   font-weight: 500;
+   margin-right: 2rem;
+   width: 10rem;
+}
+
+.classname,
+.semester,
+.created,
+.members{
+    display: inline;   
+}

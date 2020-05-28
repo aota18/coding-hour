@@ -10,7 +10,7 @@
     background-image: linear-gradient(to right, #ee8425 0%, #f9488b 100%), linear-gradient(to right, #ee8425 0%, #f9488b 100%);
 }
 
-.create__class__body{
+.create__session__body{
     margin:1rem;
     padding:1rem;
 }
@@ -32,36 +32,35 @@
 
 }
 
-.create-role label{
+.create-date label{
     width: 10rem;
     margin-right: 1rem;
 }
 
-.create-role{
+.create-date{
     font-weight: bold;
     margin: 2rem 1rem;
     text-align: left;
 }
 
-
-.create-year label{
-    width: 10rem;
-    margin-right: 1rem;
+.datepicker {
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.create-year{
+.create-time{
     font-weight: bold;
     margin: 2rem 1rem;
     text-align: left;
 }
 
-.create-semester label{
+.create-time label{
     width: 10rem;
     margin-right: 1rem;
 }
 
-.create-semester{
+.timepicker {
+    border:none;
     font-weight: bold;
-    margin: 2rem 1rem;
-    text-align: left;
+    cursor: pointer;
 }

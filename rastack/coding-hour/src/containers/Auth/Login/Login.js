@@ -56,7 +56,7 @@ class Login extends Component {
             const loggedInfo =this.props.result.toJS();
 
             UserActions.setLoggedInfo(loggedInfo);
-            history.push('/');
+            history.push('/home');
             storage.set('loggedInfo', loggedInfo);
         }
         catch (e) {

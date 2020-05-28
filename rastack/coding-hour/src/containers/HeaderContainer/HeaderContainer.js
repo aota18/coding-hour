@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as userActions from '../../redux/modules/user';
 import { bindActionCreators } from 'redux';
 import storage from '../../lib/storage'; 
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 
 export class HeaderContainer extends Component {
 
@@ -37,20 +38,16 @@ export class HeaderContainer extends Component {
                     </Link>
                 </div>
                 <div className="nav-menu">
-                    <nav className="mainmenu mobile-menu">
 
-                        <ul>
-                            <li className="active"><Link to="/home">Home</Link></li>
-                        </ul>
-                        
-                    </nav>
                     { user.get('logged')
-                            ? (<div>
-                                {user.getIn(['loggedInfo', 'username'])} <div onClick={this.handleLogout}>Logout</div>
-                            </div>
-                                )
+                            ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={user.getIn(['loggedInfo', 'username'])}>
+                                <Dropdown.Item href="/home/profile">Profile</Dropdown.Item>
+                                <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
+                            </DropdownButton>)
+
                             : <Link to="/auth/login" className="primary-btn top-btn">SIGN IN</Link>
-                        }
+                    }
+                            
                 </div>
                 <div id="mobile-menu-wrap"></div>
             </div>
