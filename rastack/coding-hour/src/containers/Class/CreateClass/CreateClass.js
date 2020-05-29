@@ -2,32 +2,39 @@ import React, { Component } from 'react'
 import './CreateClass.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as classActions from '../../../redux/modules/class';
+import * as classActions from '../../../redux/modules/classes';
+import storage from '../../../lib/storage';
 
-export class CreateClass extends Component {
-
-    constructor(){
-        super();
-
+ class CreateClass extends Component {
+    
+    componentWillUnmount() {
+        const { ClassActions } = this.props;
+        console.log(this.props)
+        ClassActions.initializeForm('register')
     }
 
     handleChange = (e) => {
-        const { classActions } = this.props;
+        const { ClassActions } = this.props;
         const { name, value } = e.target;
         
-        classActions.changeInput({
+        ClassActions.changeInput({
             name, 
             value,
             form: 'register'
         });
     }
 
-    handleCreateClass = async() => {
-        const { form, classActions, history} = this.props;
-        const { classname, year, semester, userId, role} = form.toJS();
 
+
+    handleCreateClass = async() => {
+        const { form, ClassActions, history} = this.props;
+        const { classname, year, semester, role} = form.toJS();
+        const { loggedInfo } =this.props.user.toJS();
+        const { _id } = loggedInfo
+       
         try {
-            await classActions.createClass({classname, year, semester, userId, role});
+            await ClassActions.createClass({classname, _id, year, semester, role});
+            alert('Created Class Successfully!')
         }
         catch(e){
             alert(e);
@@ -36,8 +43,9 @@ export class CreateClass extends Component {
 
 
     render() {
+        console.log(this.props)
         const { classname, year, semester, role} = this.props.form.toJS();
-        const { handleChange } = this;
+        const { handleChange, handleCreateClass } = this;
 
         return (
             <div className="container">
@@ -45,14 +53,14 @@ export class CreateClass extends Component {
                 <div className="create__class__body">
                     <div className="create-name">
                         <label htmlFor="">Class Name</label>
-                        <input type="text" placeholder="class name" value={classname} onChange={handleChange}/>
+                        <input type="text" placeholder="class name" value={classname} onChange={handleChange} name="classname"/>
                     </div>
 
                     
 
                     <div className="create-year">
                         <label htmlFor="">Year</label>
-                        <select name="" id="" value={year} onChange={handleChange}>
+                        <select name="" id="" value={year} onChange={handleChange} name="year">
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
@@ -61,17 +69,17 @@ export class CreateClass extends Component {
 
                     <div className="create-semester">
                         <label htmlFor="">Semester</label>
-                        <select name="" id="" value={semester} onChange={handleChange}>
-                            <option value="Spring">Spring</option>
-                            <option value="Summer">Summer</option>
-                            <option value="Fall">Fall</option>
-                            <option value="Winter">Winter</option>
+                        <select name="" id="" value={semester} onChange={handleChange} name="semester">
+                            <option value="1">Spring</option>
+                            <option value="3">Summer</option>
+                            <option value="2">Fall</option>
+                            <option value="4">Winter</option>
                         </select>
                     </div>
 
                     <div className="create-role">
                         <label htmlFor="">Role</label>
-                        <select name="" id="" value={role} onChange={handleChange}>
+                        <select name="" id="" value={role} onChange={handleChange} name="role">
                             <option value="Professor">Professor</option>
                             <option value="TA">TA</option>
                         </select>
@@ -87,4 +95,15 @@ export class CreateClass extends Component {
     }
 }
 
-export default CreateClass
+
+export default connect (
+    (state) => ({
+        form: state.classes.getIn(['register', 'form']),
+        result: state.auth.get('result'),
+        user: state.user
+    }),
+    (dispatch) => ({
+        ClassActions: bindActionCreators(classActions, dispatch)
+
+    })
+)(CreateClass);

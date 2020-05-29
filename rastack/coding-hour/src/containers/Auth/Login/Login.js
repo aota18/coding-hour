@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as userActions from '../../../redux/modules/user';
 import * as authActions from '../../../redux/modules/auth';
 import './Login.css'
-import stroage from '../../../lib/storage';
 import {Link} from 'react-router-dom'
 import { AuthContent, AuthError} from '../../../components/Auth';
 import storage from '../../../lib/storage';
@@ -53,6 +52,7 @@ class Login extends Component {
 
         try {
             await AuthActions.localLogin({email, password});
+            console.log(this.props.result)
             const loggedInfo =this.props.result.toJS();
 
             UserActions.setLoggedInfo(loggedInfo);
@@ -67,6 +67,7 @@ class Login extends Component {
 
 
     render() {
+        console.log(this.props)
         const { email, password}  = this.props.form.toJS();
         const { handleChange, handleLocalLogin } = this;
         const { error } = this.props;
