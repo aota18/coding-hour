@@ -9,7 +9,6 @@ import storage from '../../../lib/storage';
     
     componentWillUnmount() {
         const { ClassActions } = this.props;
-        console.log(this.props)
         ClassActions.initializeForm('register')
     }
 
@@ -43,7 +42,7 @@ import storage from '../../../lib/storage';
 
 
     render() {
-        console.log(this.props)
+       
         const { classname, year, semester, role} = this.props.form.toJS();
         const { handleChange, handleCreateClass } = this;
 

@@ -18,7 +18,7 @@ export const createClass = createAction(CREATE_CLASS, ClassAPI.createClass);
 export const joinClass = createAction(JOIN_CLASS, ClassAPI.joinClass);
 
 export const classByName = createAction(CLASS_BY_NAME, ClassAPI.classByName);
-export const classByUser = createAction(CLASS_BY_USER, ClassAPI.classByUser);
+// export const classByUser = createAction(CLASS_BY_USER, ClassAPI.classByUser);
 
 const initialState = Map({
     register: Map({
@@ -72,9 +72,9 @@ export default handleActions({
         onSuccess: (state, action) => state.set('queryResult', Map(action.payload.data))
     }),
 
-    ...pender({
-        typs: CLASS_BY_USER,
-        onSuccess: (state, action) => state.set('userClass', Map(action.payload.data))
-    })
+    // ...pender({
+    //     typs: CLASS_BY_USER,
+    //     onSuccess: (state, action) => state.set('userClass', Map(action.payload.data))
+    // })
    
 }, initialState)
