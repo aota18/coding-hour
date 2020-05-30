@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const clazz = new Router();
 const classCtrl = require('./class.controller');
 
+clazz.get('/:classId', classCtrl.findByClassId);
 clazz.post('/register', classCtrl.register);
 clazz.post('/join', classCtrl.join);
 clazz.get('/year/:year/semester/:semester', classCtrl.findByYearAndSemester);

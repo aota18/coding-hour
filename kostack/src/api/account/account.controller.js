@@ -24,9 +24,9 @@ exports.getClass = async (ctx) => {
 }
 
 exports.getUser = async (ctx) => {
-    const { user } = ctx.params;
+    const { userId } = ctx.params;
 
-    const account = await Account.findByUserId(user);
+    const account = await Account.findByUserId(userId);
 
     ctx.body = {
         user: account
