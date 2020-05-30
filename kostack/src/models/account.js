@@ -101,8 +101,10 @@ Account.methods.joinClass = function({classId, auth, rolename}){
         }
     };
 
-    if(this.classes.find(e => { return e.classId == clazz.classId }) == undefined)
-        this.classes.push(clazz);
+    if(this.classes.find(e => { return e.classId == clazz.classId }) != undefined)
+        throw 409;
+
+    this.classes.push(clazz);
     
     return this.save();
 }
