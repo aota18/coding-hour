@@ -50,7 +50,7 @@ Class.methods.joinUser = function({userId}){
 
     if(user == undefined)
         this.participants.push(userId);
-
+  
     return this.save();
 }
 

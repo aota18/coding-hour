@@ -68,6 +68,7 @@ exports.join = async (ctx) => {
         return;
     }
     
+    
     await clazz.joinUser(joinClassInfo);
 
     ctx.body = {
@@ -215,3 +216,13 @@ exports.changeRole = async (ctx) => {
         data: {}
     }
 }
+
+
+
+
+
+
+
+
+
+

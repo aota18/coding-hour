@@ -13,6 +13,7 @@ const CHECK_STATUS = 'user/CHECK_STATUS'; // Check Current Login Status
 
 
 
+
 export const setLoggedInfo = createAction(SET_LOGGED_INFO);
 export const setValidated = createAction(SET_VALIDATED);
 export const logout = createAction(LOGOUT, AuthAPI.Logout);
