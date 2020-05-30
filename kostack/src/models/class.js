@@ -34,6 +34,12 @@ Class.statics.findByClassName = function(name){
     }).exec();
 }
 
+Class.statics.findByUserId = function(userId){
+    return this.find({
+        participants: userId
+    }).exec();
+}
+
 Class.statics.register = function({userId, classname, year, semester}){
     const clazz = new this({
         name: classname,
