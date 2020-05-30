@@ -12,7 +12,7 @@ exports.register = async (ctx) => {
         rolename: ctx.request.body.role
     };
 
-    const user = await Account.findByUserId(ctx.request.body._id);
+    const user = await Account.findByUserId(ctx.request.body.userId);
 
     if(user == undefined){
         ctx.status = 404;
@@ -35,13 +35,13 @@ exports.register = async (ctx) => {
 // exception: user undefined
 exports.join = async (ctx) => {
     const joinClassInfo = {
-        userId: ctx.request.body._id,
+        userId: ctx.request.body.userId,
         classId: ctx.request.body.classId,
         auth: "Participant",
         rolename: "Student"
     };
 
-    const user = await Account.findByUserId(ctx.request.body._id);
+    const user = await Account.findByUserId(ctx.request.body.userId);
 
     if(user == undefined){
         ctx.status = 404;
