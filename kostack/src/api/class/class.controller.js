@@ -3,6 +3,7 @@ const Class = require('models/Class');
 
 // exception: user undefined
 exports.register = async (ctx) => {
+    
     const clazz = await Class.register(ctx.request.body);
 
     const joinClassInfo = {
@@ -11,7 +12,7 @@ exports.register = async (ctx) => {
         rolename: ctx.request.body.role
     };
 
-    const user = await Account.findByUserId(ctx.request.body.userId);
+    const user = await Account.findByUserId(ctx.request.body._id);
 
     if(user == undefined){
         ctx.status = 404;
@@ -34,13 +35,13 @@ exports.register = async (ctx) => {
 // exception: user undefined
 exports.join = async (ctx) => {
     const joinClassInfo = {
-        userId: ctx.request.body.userId,
+        userId: ctx.request.body._id,
         classId: ctx.request.body.classId,
         auth: "Participant",
         rolename: "Student"
     };
 
-    const user = await Account.findByUserId(ctx.request.body.userId);
+    const user = await Account.findByUserId(ctx.request.body._id);
 
     if(user == undefined){
         ctx.status = 404;
@@ -107,10 +108,12 @@ exports.findByYearAndSemester = async (ctx) => {
 }
 
 exports.findByClassName = async (ctx) => {
+    
     const { name } = ctx.params;
 
     const classes = await Class.findByClassName(name);
 
+    console.log(classes)
     ctx.body = {
         Success: true,
         data: {

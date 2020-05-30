@@ -27,9 +27,21 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding: 1rem 1rem;
+    color: #999;
+    font-weight: 300;
 }
 
 .listItem:hover{
     cursor:pointer;
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(200, 200, 200);
 }
+
+.listItem:active{
+    color: black;
+}
+
+.listItem:focus{
+   
+    color: black;
+}
+

@@ -2,12 +2,16 @@ import { createAction, handleActions } from 'redux-actions';
 
 import { Map } from 'immutable';
 import * as AuthAPI from '../../lib/api/auth';
+
 import { pender } from 'redux-pender';
 
 const SET_LOGGED_INFO = 'user/SET_LOGGED_INFO'; // Login Info Settings
 const SET_VALIDATED = 'user/SET_VALIDATED'; // Validated Value Settings
+
 const LOGOUT = 'user/LOGOUT'; //Logout
 const CHECK_STATUS = 'user/CHECK_STATUS'; // Check Current Login Status
+
+
 
 export const setLoggedInfo = createAction(SET_LOGGED_INFO);
 export const setValidated = createAction(SET_VALIDATED);

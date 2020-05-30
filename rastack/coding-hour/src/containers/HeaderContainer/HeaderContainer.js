@@ -24,6 +24,9 @@ export class HeaderContainer extends Component {
 
     render() {
         const { visible, user} = this.props;
+        const userInfo = user.toJS();
+        const profile = userInfo.loggedInfo.profile;
+
         if(!visible) return null;
 
       
@@ -40,7 +43,7 @@ export class HeaderContainer extends Component {
                 <div className="nav-menu">
 
                     { user.get('logged')
-                            ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={user.getIn(['loggedInfo', 'username'])}>
+                            ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={profile.username}>
                                 <Dropdown.Item href="/home/profile">Profile</Dropdown.Item>
                                 <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
                             </DropdownButton>)

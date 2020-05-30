@@ -105,6 +105,7 @@ exports.localLogin = async (ctx) => {
 
 // Check email exists 
 exports.exists = async (ctx) => {
+    console.log(ctx.params)
     const { key, value} = ctx.params;
 
     let account = null;

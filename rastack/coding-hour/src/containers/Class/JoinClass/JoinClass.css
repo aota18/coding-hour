@@ -12,6 +12,7 @@
 
 
 .join__class__body{
+   
     margin: 5rem 0;
 }
 
@@ -19,4 +20,28 @@
     height: 3rem;
     width:70%;
     border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+
+
+.autoComplete{
+    padding:1rem;
+    margin-top: 0.5rem;
+    margin-left: 7rem;
+    text-align:center;
+    width:70%;
+
+    box-shadow:1px 1px 1px rgb(200, 200, 200);
+    border-radius: 10px;
+}
+
+.autoComplete ul {
+    list-style-type: none;
+    text-decoration: none;
+    text-align: left;
+}
+
+.autoComplete ul li{
+    cursor: pointer;
+    margin-top: 0.3rem;
 }
