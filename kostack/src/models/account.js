@@ -125,7 +125,7 @@ Account.methods.changeRole = function({classId, auth, rolename}){
 
 Account.methods.toDto = function(){
     return {
-        _id: this._id,
+        userId: this._id,
         profile: this.profile,
         email: this.email
     }
