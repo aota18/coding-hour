@@ -1,5 +1,6 @@
 const Account = require('models/Account');
 const Class = require('models/Class');
+const Post = require('models/Post');
 
 // exception: user undefined
 exports.register = async (ctx) => {
@@ -253,12 +254,55 @@ exports.changeRole = async (ctx) => {
     }
 }
 
+exports.findPost = async (ctx) => {
+    const { classId } = ctx.params;
 
+    const clazz = await Class.findByClassId(classId);
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            message: "Class Undefined"
+        }
+        return;
+    }
 
+    const posts = await Post.findByClassId(classId);
 
+    ctx.body = {
+        Success: true,
+        data: {
+            posts: posts
+        }
+    }
+}
 
+exports.getParticipants = async (ctx) => {
+    const { classId } = ctx.params;
+    const clazz = await Class.getParticipants(classId);
 
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            message: "Class Undefined"
+        }
+        return;
+    }
 
+    const part = [];
+    for(let i=0;i<clazz.participants.length;i++){
+        part.push({
+            userId: clazz.participants[i]._id,
+            username: clazz.participants[i].profile.username,
+            email: clazz.participants[i].email
+        });
+    }
 
-
-
+    ctx.body = {
+        Success: true,
+        data: {
+            participants: part
+        }
+    };
+}

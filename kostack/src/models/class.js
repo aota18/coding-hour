@@ -40,6 +40,15 @@ Class.statics.findByUserId = function(userId){
     }).exec();
 }
 
+Class.statics.getParticipants = function(classId){
+    return this.findOne({
+        _id: classId,
+        deleted: false
+    })
+    .populate('participants')
+    .exec();
+}
+
 Class.statics.register = function({userId, classname, year, semester}){
     const clazz = new this({
         name: classname,
@@ -72,6 +81,15 @@ Class.methods.edit = function({name, year, semester}){
 
 Class.methods.delete = function(){
     this.deleted = true;
+
+    return this.save();
+}
+
+Class.methods.addPost = function(postId){
+    const post = this.posts.find(e => {return e == postId});
+    
+    if(post == undefined)
+        this.posts.push(postId);
 
     return this.save();
 }
