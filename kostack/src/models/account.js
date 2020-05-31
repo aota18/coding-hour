@@ -125,6 +125,24 @@ Account.methods.changeRole = function({classId, auth, rolename}){
     this.save();
 }
 
+Account.methods.addPost = function(postId){
+    const post = this.posts.find(e => {return e == postId});
+    
+    if(post == undefined)
+        this.posts.push(postId);
+
+    return this.save();
+}
+
+Account.methods.addComment = function(commentId){
+    const comment = this.posts.find(e => {return e == commentId});
+    
+    if(comment == undefined)
+        this.comments.push(commentId);
+
+    return this.save();
+}
+
 Account.methods.toDto = function(){
     return {
         userId: this._id,
