@@ -1,4 +1,5 @@
 const Account = require('models/Account');
+const Class = require('models/Class');
 
 exports.getClass = async (ctx) => {
     const { userId } = ctx.params;
@@ -15,11 +16,20 @@ exports.getClass = async (ctx) => {
         return;
     }
 
+    const classes = await Class.findByUserId(userId);
+    const ret = [];
+
+    for(let i=0;i<classes.length;i++){
+        ret.push({
+            classId: classes[i]._id,
+            name: classes[i].name
+        });
+    }
     
     ctx.body = {
         Success: true,
         data:{
-            class: account.classes
+            class: ret
         }
     };
 }

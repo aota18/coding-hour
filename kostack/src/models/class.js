@@ -34,10 +34,16 @@ Class.statics.findByClassName = function(name){
     }).exec();
 }
 
-Class.statics.register = function({_id, classname, year, semester}){
+Class.statics.findByUserId = function(userId){
+    return this.find({
+        participants: userId
+    }).exec();
+}
+
+Class.statics.register = function({userId, classname, year, semester}){
     const clazz = new this({
         name: classname,
-        participants: [_id],   // participants
+        participants: [userId],   // participants
         year: year,
         semester: semester
     });
@@ -48,8 +54,10 @@ Class.statics.register = function({_id, classname, year, semester}){
 Class.methods.joinUser = function({userId}){
     const user = this.participants.find(e => {return e == userId});
 
-    if(user == undefined)
-        this.participants.push(userId);
+    if(user != undefined)
+        throw 409;
+
+    this.participants.push(userId);
   
     return this.save();
 }

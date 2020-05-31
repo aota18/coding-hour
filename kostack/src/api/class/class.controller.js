@@ -53,7 +53,19 @@ exports.join = async (ctx) => {
         return;
     }
 
-    await user.joinClass(joinClassInfo);
+    try{
+        await user.joinClass(joinClassInfo);
+    }catch(e){
+        if(e == 409){
+            ctx.status = 409;
+            ctx.body = {
+                Success: false,
+                data: {},
+                message: "User is already in the Class"
+            }
+            return;
+        }
+    }
     
 
     const clazz = await Class.findByClassId(ctx.request.body.classId);
@@ -68,8 +80,19 @@ exports.join = async (ctx) => {
         return;
     }
     
-    
-    await clazz.joinUser(joinClassInfo);
+    try{
+        await clazz.joinUser(joinClassInfo);
+    }catch(e){
+        if(e == 409){
+            ctx.status = 409;
+            ctx.body = {
+                Success: false,
+                data: {},
+                message: "User is already in the Class"
+            }
+            return;
+        }
+    }
 
     ctx.body = {
         Success: true,
