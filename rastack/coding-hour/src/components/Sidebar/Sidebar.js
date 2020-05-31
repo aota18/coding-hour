@@ -2,10 +2,16 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { BsFillPlusSquareFill } from 'react-icons/bs'
 import { BsBoxArrowInRight } from 'react-icons/bs'
+import { connect } from 'react-redux';
 import './Sidebar.css'
 export class Sidebar extends Component {
 
     render(){
+        const { classes } = this.props;
+        const { userClass} = classes.toJS();
+        
+        const classList = userClass.data.class;
+        console.log(classList)
         return (
             <div className="SideContainer">
                 <div className="listContainer">
@@ -26,4 +32,14 @@ export class Sidebar extends Component {
     }
 }
 
-export default Sidebar
+
+
+export default connect (
+    (state) => ({
+   
+        classes: state.classes
+    }),
+    (dispatch) => ({
+
+    })
+)(Sidebar);

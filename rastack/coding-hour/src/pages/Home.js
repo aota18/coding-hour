@@ -4,7 +4,7 @@ import Main from '../components/Main/Main';
 import { Route} from 'react-router-dom';
 import { CreateClass, JoinClass, ClassMain, ClassInfo} from '../containers/Class';
 import { ViewPost, CreatePost} from '../containers/Post';
-import { Profile } from '../containers/Profile/Profile';
+import { Profile } from '../containers/Profile';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

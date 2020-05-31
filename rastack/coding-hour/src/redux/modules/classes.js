@@ -72,9 +72,9 @@ export default handleActions({
         onSuccess: (state, action) => state.set('queryResult', Map(action.payload.data))
     }),
 
-    // ...pender({
-    //     typs: CLASS_BY_USER,
-    //     onSuccess: (state, action) => state.set('userClass', Map(action.payload.data))
-    // })
+    ...pender({
+        type: CLASS_BY_USER,
+        onSuccess: (state, action) => state.set('userClass', Map(action.payload.data))
+    })
    
 }, initialState)

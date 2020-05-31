@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../../../redux/modules/user';
 import * as authActions from '../../../redux/modules/auth';
+import * as classActions from '../../../redux/modules/classes';
 import './Login.css'
 import {Link} from 'react-router-dom'
 import { AuthContent, AuthError} from '../../../components/Auth';
@@ -47,13 +48,16 @@ class Login extends Component {
 
    
     handleLocalLogin = async() => {
-        const { form, AuthActions, UserActions, history } = this.props;
+        const { form, AuthActions, UserActions, ClassActions, history } = this.props;
         const { email, password } = form.toJS();
 
         try {
             await AuthActions.localLogin({email, password});
-            console.log(this.props.result)
+            // console.log(this.props.result)
             const loggedInfo =this.props.result.toJS();
+            
+           
+            await ClassActions.classByUser(loggedInfo.userId);
 
             UserActions.setLoggedInfo(loggedInfo);
             history.push('/home');
@@ -67,7 +71,7 @@ class Login extends Component {
 
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         const { email, password}  = this.props.form.toJS();
         const { handleChange, handleLocalLogin } = this;
         const { error } = this.props;
@@ -114,10 +118,11 @@ export default connect (
     (state) => ({
         form: state.auth.getIn(['login', 'form']),
         error: state.auth.getIn(['login', 'error']),
-        result: state.auth.get('result')
+        result: state.auth.get('result'),
     }),
     (dispatch) => ({
         AuthActions: bindActionCreators(authActions, dispatch),
-        UserActions: bindActionCreators(userActions, dispatch)
+        UserActions: bindActionCreators(userActions, dispatch),
+        ClassActions: bindActionCreators(classActions, dispatch)
     })
 )(Login);

@@ -2,7 +2,7 @@ const Account = require('models/Account');
 
 exports.getClass = async (ctx) => {
     const { userId } = ctx.params;
-
+    console.log(ctx.params)
     const account = await Account.findOne({_id: userId});
 
     if(account == undefined){
@@ -14,6 +14,7 @@ exports.getClass = async (ctx) => {
         }
         return;
     }
+
     
     ctx.body = {
         Success: true,
