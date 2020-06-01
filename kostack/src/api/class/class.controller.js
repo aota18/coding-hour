@@ -1,6 +1,7 @@
 const Account = require('models/Account');
 const Class = require('models/Class');
 const Post = require('models/Post');
+const Session = require('models/Session');
 
 // exception: user undefined
 exports.register = async (ctx) => {
@@ -109,7 +110,7 @@ exports.findByClassId = async (ctx) => {
     ctx.body = {
         Success: true,
         data: {
-            class: clazz
+            clazz: clazz
         }
     }
 }
@@ -305,4 +306,8 @@ exports.getParticipants = async (ctx) => {
             participants: part
         }
     };
+}
+
+exports.getSessions = (ctx) => {
+    throw "Need to Implement!";
 }
