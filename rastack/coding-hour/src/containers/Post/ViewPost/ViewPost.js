@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import * as postActions from '../../../redux/modules/post';
+import * as commentActions from '../../../redux/modules/comment';
+
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -17,7 +19,24 @@ export class ViewPost extends Component {
     }
 
     componentWillMount(){
+        console.log(this.props)
         this.getPost();
+    }
+
+
+    handleChange = (e) => {
+        const { CommentActions } = this.props;
+        const { name, value } = e.target;
+
+        CommentActions.changeInput({
+            name,
+            value,
+            form: 'write'
+        })
+    }
+
+    handleChangeWriteComment = async() => {
+
     }
 
     getPost = async() => {
@@ -70,7 +89,8 @@ export class ViewPost extends Component {
     }
 
     render(){
-        
+        const { text }  = this.props.form.toJS();
+        const { handleChange, handleChangeWriteComment} = this;
         
         return (
             <div className="container">
@@ -117,8 +137,8 @@ export class ViewPost extends Component {
                         </div>
 
                         <div className="post__reply-write">
-                            <input type="text" placeholder="Write a reply..."/>
-                            <button className="btn-reply">write</button>
+                            <input type="text" placeholder="Write a reply..." name="text" value={text} onChange={handleChange}/>
+                            <button className="btn-reply" onClick={handleChangeWriteComment}>write</button>
                         </div>
                     </div>
 
@@ -133,9 +153,13 @@ export default connect(
     (state) => ({
         classes: state.classes,
         post: state.post,
-        user: state.user
+        user: state.user,
+        form: state.comment.getIn(['write', 'form']),
     }),
     (dispatch) => ({
-        PostActions: bindActionCreators(postActions, dispatch)
+        PostActions: bindActionCreators(postActions, dispatch),
+        CommentActions: bindActionCreators(commentActions, dispatch)
     })
 )(ViewPost)
+
+

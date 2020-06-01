@@ -23,8 +23,13 @@ export class ClassMain extends Component {
         this.changeMenu = this.changeMenu.bind(this);
       }
 
+      componentWillReceiveProps(){
+        // this.getClass();
+
+      }
 
       componentWillMount(){
+          
          this.getClass();
       }
 
