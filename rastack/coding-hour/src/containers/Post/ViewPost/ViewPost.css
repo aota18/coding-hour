@@ -85,14 +85,69 @@
 .post__reply{
     flex: 1;
     height:80vh;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(218, 218, 218);
     border-radius:20px;
 }
 
 .post__reply-body{
     height:90%;
     padding:1rem;
+    
 }
+
+.post__reply-area{
+    display:flex;
+    flex-direction: column-reverse;
+    height:100%;
+    padding:1rem;
+
+}
+
+.reply-body-other{
+    display:flex;
+    
+    width:100%;
+}
+
+
+
+.reply-thumbnail img{
+    width:40px;
+    border-radius:10px;
+}
+
+.reply-usernameText{
+    margin-left: 1rem;
+}
+
+.reply-username{
+    text-align:left;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.reply-text{
+    text-align:left;
+    background-color: white;
+    border-radius: 15px;
+    padding:0.5rem 1rem;
+}
+
+ .reply-createdAt{
+    display: inline-block;
+    align-self: flex-end;
+    margin: 0 0.5rem;
+    font-size:0.6rem;
+}
+
+
+.reply-body-me{
+    display:flex;
+    flex-direction: row-reverse;
+    width:100%;
+
+}
+
 
 .post__reply-write{
     display:inline;

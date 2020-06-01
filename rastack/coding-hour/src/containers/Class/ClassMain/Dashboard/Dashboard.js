@@ -1,23 +1,71 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom';
 import { BsPencil} from 'react-icons/bs';
 import { BsXCircle } from 'react-icons/bs';
-import { CreatePost} from '../../../Post/CreatePost/CreatePost'
+import { CreatePost} from '../../../Post/CreatePost/'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as postActions from '../../../../redux/modules/post'
 import './Dashboard.css'
 
 export class Dashboard extends Component{
 
     constructor(props){
         super(props);
-
+        
+     
         this.state = {
-            isCreate: false
+            isCreate: false,
+            postList: []
         }
 
         this.openCreate = this.openCreate.bind(this);
     }
 
+    componentWillMount(){
+        this.getPosts();
+    }
+
+    getPosts = async() => {
+        
+        const { PostActions, post}= this.props;
+        const {result} = this.props.classes.toJS();
+   
+        try{
+            await PostActions.getPostByClassId(result.data.clazz._id).then(() => {
+            
+            const { posts } = this.props.post.toJS();
+            
+            let postList = posts.data.posts.map((post) =>
+            
+            <Link key={post.postId} to={{ pathname: `/home/post/view/${post.postId}` }}>
+                <div className="class__post">
+                        <div className="class__post-item">
+                            <div className="post-tag">#{post.type}</div>
+                            <div className="post-body">{post.body}</div>
+                            <div className="post-detail">
+                                <div className="post-detail-writer">{post.writer}</div>
+                                <div className="post-detail-time">{post.createdAt}</div>
+                                <div className="post-detail-comments">{post.commentCount}</div>
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            )
+
+            this.setState({
+                postList: postList
+            })
+        })
+
+        }catch(e){
+            console.log(e);
+        }
+
+    }
+
     openCreate(){
-        console.log("Start to Write")
+       
         if(this.state.isCreate){
             this.setState(()=> ({
                 isCreate: false
@@ -31,7 +79,7 @@ export class Dashboard extends Component{
     }
 
     createWindow = ()=> {
-        if(this.state.isCreate) return <CreatePost />
+        if(this.state.isCreate) return <CreatePost/>
         else return;
     }
 
@@ -41,47 +89,14 @@ export class Dashboard extends Component{
     }
 
     render(){
+       
         return (
             <div>
                 <div className="post__menu">
                     {this.postCancleToggle()}
                 </div>
                 {this.createWindow()}
-                <div className="class__post">
-                        <div className="class__post-item">
-                            <div className="post-tag">#Notice</div>
-                            <div className="post-body">Hello!</div>
-                            <div className="post-detail">
-                                <div className="post-detail-writer">SANGWON SEO</div>
-                                <div className="post-detail-time">a minutes ago</div>
-                                <div className="post-detail-comments">34</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="class__post">
-                        <div className="class__post-item">
-                            <div className="post-tag">#Notice</div>
-                            <div className="post-body">Hello!</div>
-                            <div className="post-detail">
-                                <div className="post-detail-writer">SANGWON SEO</div>
-                                <div className="post-detail-time">a minutes ago</div>
-                                <div className="post-detail-comments">34</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="class__post">
-                        <div className="class__post-item">
-                            <div className="post-tag">#Notice</div>
-                            <div className="post-body">Hello!</div>
-                            <div className="post-detail">
-                                <div className="post-detail-writer">SANGWON SEO</div>
-                                <div className="post-detail-time">a minutes ago</div>
-                                <div className="post-detail-comments">34</div>
-                            </div>
-                        </div>
-                    </div>
+                {this.state.postList==[] ? <div>Create Your First Post!</div> : this.state.postList}
             
                 </div>
             
@@ -90,4 +105,13 @@ export class Dashboard extends Component{
 
 }
 
-export default Dashboard
+export default connect(
+    (state) => ({
+        classes: state.classes,
+        post: state.post,
+        user: state.user
+    }),
+    (dispatch) => ({
+        PostActions: bindActionCreators(postActions, dispatch)
+    })
+)(Dashboard)

@@ -39,9 +39,9 @@ exports.findByPostId = async (ctx) => {
     const { postId } = ctx.params;
 
     const post = await Post.findByPostId(postId);
-
+    // console.log(post)
     const comments = await Comment.findByPostId(postId);
-    console.log(comments);
+    // console.log(comments);
     const commentDto = [];
 
     for(let i=0;i<comments.length;i++){
@@ -55,6 +55,8 @@ exports.findByPostId = async (ctx) => {
     }
 
     const ret = {
+        writer: post.user.profile.username,
+        createdAt: post.createdAt,
         title: post.title,
         type: post.type,
         body: post.body,

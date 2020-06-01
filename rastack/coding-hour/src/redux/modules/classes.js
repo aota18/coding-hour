@@ -10,6 +10,7 @@ const INITIALIZE_FORM = 'class/INITIALIZE_FORM'
 const JOIN_CLASS = 'class/JOIN_CLASS';
 const CLASS_BY_NAME='class/CLASS_BY_NAME';
 const CLASS_BY_USER='class/CLASS_BY_USER';
+const CLASS_BY_CLASSID='class/CLASS_BY_CLASSID';
 
 export const changeInput= createAction(CHANGE_INPUT); 
 export const initializeForm = createAction(INITIALIZE_FORM);
@@ -19,6 +20,7 @@ export const joinClass = createAction(JOIN_CLASS, ClassAPI.joinClass);
 
 export const classByName = createAction(CLASS_BY_NAME, ClassAPI.classByName);
 export const classByUser = createAction(CLASS_BY_USER, ClassAPI.classByUser);
+export const classByClassId = createAction(CLASS_BY_CLASSID, ClassAPI.classByClassId);
 
 const initialState = Map({
     register: Map({
@@ -75,6 +77,11 @@ export default handleActions({
     ...pender({
         type: CLASS_BY_USER,
         onSuccess: (state, action) => state.set('userClass', Map(action.payload.data))
+    }),
+
+    ...pender({
+        type: CLASS_BY_CLASSID,
+        onSuccess: (state, action) => state.set('result', Map(action.payload.data))
     })
    
 }, initialState)

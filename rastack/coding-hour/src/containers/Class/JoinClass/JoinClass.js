@@ -120,7 +120,7 @@ export class JoinClass extends Component {
                 <h3>Join Class</h3>
 
                 <div className="join__class__body">
-                    <input type="text=" autocomplete="name" placeholder="Enter Class Code" name="name" value={name} onChange={handleChange}></input>
+                    <input type="text=" autoComplete="name" placeholder="Enter Class Code" name="name" value={name} onChange={handleChange}></input>
                     
                     {this.state.isShow ? this.showClassList() : <div></div>}
                 </div>
