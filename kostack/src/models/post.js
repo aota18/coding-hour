@@ -38,7 +38,9 @@ Post.statics.findByClassId = function(classId){
     return this.find({
         class: classId,
         deleted: false
-    }).exec();
+    })
+    .populate('user')
+    .exec();
 }
 
 Post.methods.addComment = function(commentId){

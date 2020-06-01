@@ -269,11 +269,27 @@ exports.findPost = async (ctx) => {
     }
 
     const posts = await Post.findByClassId(classId);
+    const postsDto = [];
+
+    for(let i=0;i<posts.length;i++){
+        const rolename = posts[i].user.classes.find(e => {return e.classId == classId}).role.name;
+
+        postsDto.push({
+            postId: posts[i]._id,
+            type: posts[i].type,
+            title: posts[i].title,
+            body: posts[i].body,
+            writer: posts[i].user.profile.username,
+            createdAt: posts[i].createdAt,
+            commentCount: posts[i].comments.length,
+            role: rolename,
+        });
+    }
 
     ctx.body = {
         Success: true,
         data: {
-            posts: posts
+            posts: postsDto
         }
     }
 }
