@@ -23,6 +23,7 @@ export class HeaderContainer extends Component {
     }
 
     render() {
+  
         const { visible, user} = this.props;
         const userInfo = user.toJS();
         const profile = userInfo.loggedInfo.profile;

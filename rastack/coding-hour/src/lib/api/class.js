@@ -9,7 +9,8 @@ export const createClass = ({classname, userId, year, semester, role}) => axios.
 export const joinClass = ({classId, userId}) => axios.post(`${addr}:${port}/api/class/join`, {classId, userId});
 
 export const classByName = (name) => axios.get(`${addr}:${port}/api/class/name/` + name);
-export const classByUser = ({userId}) => axios.get(`${addr}:${port}/api/`)
+export const classByUser = (userId) => axios.get(`${addr}:${port}/api/account/${userId}/classes`);
+export const classByClassId = (classId) => axios.get(`${addr}:${port}/api/class/` + classId);
 
 // account.get('/:user/classes', accountCtrl.getClass);
 // account.get('/:user', accountCtrl.getUser)

@@ -1,14 +1,21 @@
 import React, {Component} from 'react'
 import './ClassMain.css';
 import { Route, Link} from 'react-router-dom';
-import { Dashboard } from './Dashboard/Dashboard'
+import { Dashboard } from './Dashboard'
 import { Settings} from './Settings/Settings'
 import { Sessions } from './Sessions/Sessions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as classActions from '../../../redux/modules/classes';
+
 
 export class ClassMain extends Component {
 
     constructor(props) {
-        super(props);
+        
+        super(props)
+  
+
         this.state = {
             menu: 0
         };
@@ -16,50 +23,85 @@ export class ClassMain extends Component {
         this.changeMenu = this.changeMenu.bind(this);
       }
 
+      componentWillReceiveProps(){
+        // this.getClass();
+
+      }
+
+      componentWillMount(){
+          
+         this.getClass();
+      }
+
     changeMenu(num){
-        console.log(num);
+
         this.setState(()=> ({
             menu:num
         }))
     }
 
     showMenu = () => {
-        if(this.state.menu==0) return <Dashboard/>
+        if(this.state.menu==0) return <Dashboard />
                 else if( this.state.menu==1 ) return <Sessions/>
                 else return <Settings/>
     }
 
+    getClass = async () => {
+        const { ClassActions} = this.props;
+        const classId = this.props.match.params.classId;
+        
+        try {
+          await ClassActions.classByClassId(classId);
+        }
+        catch (e) {
+            console.log('a');
+           
+        }
+    }
+
     render(){
-    return (
-        <div className="container">
-            <div className="class__header">
-                <div className="class__header__info">
-                    <div className="class__title">
-                        Software Engineering
-                    </div>
+      
+        const {data} = this.props.result.toJS();
 
-                    <div className="class__semester">
-                        20-1
-                    </div>
+        return (
+            <div className="container">
+                <div className="class__header">
+                    <div className="class__header__info">
+                        <div className="class__title">
+                            {data == undefined ? ' ' : data.clazz.name} 
+                        </div>
 
-                    <div className="class__members">
-                        16 members
+                        <div className="class__semester">
+                            {data == undefined ? ' ' : `${data.clazz.year} - ${data.clazz.semester}`}
+                        </div>
+
+                        <div className="class__members">
+                        {data == undefined ? ' ' : `${data.clazz.participants.length} members`} 
+                        </div>
                     </div>
+                    <div className="class__header__navbar">
+                        <ul className="class__nav__list">
+                            <li className="class__nav__item" onClick={() => this.changeMenu(0)}>Dashboard</li>
+                            <li className="class__nav__item" onClick={() => this.changeMenu(1)}>Sessions</li>
+                            <li className="class__nav__item" onClick={() => this.changeMenu(2)}>Settings</li>
+                        </ul>
+                    </div>  
                 </div>
-                <div className="class__header__navbar">
-                    <ul className="class__nav__list">
-                        <li className="class__nav__item" onClick={() => this.changeMenu(0)}>Dashboard</li>
-                        <li className="class__nav__item" onClick={() => this.changeMenu(1)}>Sessions</li>
-                        <li className="class__nav__item" onClick={() => this.changeMenu(2)}>Settings</li>
-                    </ul>
-                </div>  
+                <div className="class__body">
+                    {this.showMenu()}
+                </div>
             </div>
-            <div className="class__body">
-                {this.showMenu()}
-            </div>
-        </div>
-    )
+        )
     }
 }
 
-export default ClassMain
+export default connect(
+    (state) => ({
+        result: state.classes.get('result'),
+
+    }),
+    (dispatch) => ({
+        ClassActions: bindActionCreators(classActions, dispatch)
+    })
+)(ClassMain)
+

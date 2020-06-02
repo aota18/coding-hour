@@ -3,7 +3,8 @@ const Class = require('models/Class');
 
 exports.getClass = async (ctx) => {
     const { userId } = ctx.params;
-    const account = await Account.findByUserId(userId);
+    console.log(ctx.params)
+    const account = await Account.findOne({_id: userId});
 
     if(account == undefined){
         ctx.status = 404;

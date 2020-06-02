@@ -31,7 +31,9 @@ Post.statics.findByPostId = function(postId){
     return this.findOne({
         _id: postId,
         deleted: false
-    }).exec();
+    })
+    .populate('user')
+    .exec();
 }
 
 Post.statics.findByClassId = function(classId){

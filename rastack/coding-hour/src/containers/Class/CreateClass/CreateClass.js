@@ -7,6 +7,10 @@ import storage from '../../../lib/storage';
 
  class CreateClass extends Component {
     
+
+    constructor (props) {
+        super(props);
+    }
     componentWillUnmount() {
         const { ClassActions } = this.props;
         ClassActions.initializeForm('register')

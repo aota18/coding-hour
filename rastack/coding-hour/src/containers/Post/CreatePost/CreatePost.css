@@ -24,6 +24,10 @@ textarea{
     display:inline;
 }
 
+.header_title input{
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
 .create__post__body{
     height:70%;
     padding:1rem;
@@ -49,3 +53,5 @@ textarea{
     color: #ffffff;
     background-image: linear-gradient(to right, #ee8425 0%, #f9488b 100%), linear-gradient(to right, #ee8425 0%, #f9488b 100%);
 }
+
+
