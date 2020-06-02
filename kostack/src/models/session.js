@@ -13,7 +13,8 @@ const Session = new Schema({
 
 Session.statics.register = function({classId, date}){
     const session = new this({
-        
+        class: classId,
+        date: date
     });
 
     return session.save();
@@ -27,27 +28,35 @@ Session.statics.findBySessionId = function(sessionId){
 }
 
 Session.statics.findByClassId = function(classId){
+    return this.find({
+        class: classId,
+        deleted: false
+    }).exec();
+}
 
+Session.statics.findBySessionIdWithAttended = function(sessionId){
+    return this.findOne({
+        _id: sessionId,
+        deleted: false
+    })
+    .populate('attended')
+    .exec();
 }
 
 Session.methods.toggleWillJoin = function(userId){
-    
-}
+    const idx = this.willJoin.findIndex(e => e==userId);
+    if(idx == -1)
+        this.willJoin.push(userId);
+    else
+        this.willJoin.splice(idx,1);
 
-Session.methods.checkWillJoin = function(userId){
-
-}
-
-Session.methods.numberOfWillJoin = function(){
-
+    return this.save();
 }
 
 Session.methods.addAttendUsers = function(userList){
+    this.attended = userList;
 
-}
-
-Session.methods.getAttendUsers = function(){
-
+    return this.save();
 }
 
 module.exports = mongoose.model('Session', Session);

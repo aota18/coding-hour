@@ -6,12 +6,11 @@ session.post('/', sessionCtrl.register);
 session.get('/:sessionId', sessionCtrl.findBySessionId);
 
 // will join
-session.put('/:sessionId/willJoin', sessionCtrl.toggleWillJoin);
-session.get('/:sessionId/willJoin/:userId', sessionCtrl.checkWillJoin);
-session.get('/:sessionId/willJoin', sessionCtrl.numberOfWillJoin);
+session.put('/:sessionId/willjoin/:userId', sessionCtrl.toggleWillJoin);
+session.get('/:sessionId/willjoin/:userId', sessionCtrl.checkWillJoin);
+session.get('/:sessionId/willjoin', sessionCtrl.numberOfWillJoin);
 
 // attendance
 session.post('/:sessionId/attend', sessionCtrl.addAttendUsers);
-session.get('/:sessionId/attend', sessionCtrl.getAttendUsers);
 
 module.exports = session;

@@ -324,6 +324,34 @@ exports.getParticipants = async (ctx) => {
     };
 }
 
-exports.getSessions = (ctx) => {
-    throw "Need to Implement!";
+exports.getSessions = async (ctx) => {
+    const { classId } = ctx.params;
+    const clazz = await Class.getParticipants(classId);
+
+    if(clazz == undefined){
+        ctx.status = 404;
+        ctx.body = {
+            Success: false,
+            message: "Class Undefined"
+        }
+        return;
+    }
+
+    const sessions = await Session.findByClassId(classId);
+    const sessionsDto = [];
+    sessions.forEach(s =>{
+        sessionsDto.push({
+            sessionId: s._id,
+            willJoinNum: s.willJoin.length,
+            attendedNum: s.attended.length,
+            date: s.date
+        });
+    });
+
+    ctx.body = {
+        Success: true,
+        data: {
+            sessions: sessionsDto
+        }
+    }
 }
