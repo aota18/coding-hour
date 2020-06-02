@@ -95,10 +95,10 @@ export class JoinClass extends Component {
         const { form, ClassActions, history} = this.props;
         const { classId } = form.toJS();
         const { loggedInfo } =this.props.user.toJS();
-        const { _id } = loggedInfo
+        const { userId } = loggedInfo
 
         try {
-            await ClassActions.joinClass({classId, _id});
+            await ClassActions.joinClass({classId, userId});
             alert('Joined to Class Successfully!')
         }
         catch(e){

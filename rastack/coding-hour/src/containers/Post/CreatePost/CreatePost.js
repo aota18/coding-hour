@@ -33,7 +33,10 @@ export class CreatePost extends Component {
                 type: 'Notice'
             }
           
-            await PostActions.createPost(completeForm);
+            await PostActions.createPost(completeForm).then(() => {
+                console.log(this.props)
+                this.props.handler();
+            });
 
         }catch(e) {
             console.log(e)

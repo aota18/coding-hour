@@ -15,15 +15,32 @@ export class Dashboard extends Component{
         
      
         this.state = {
+            isRendered: false,
             isCreate: false,
             postList: []
         }
 
         this.openCreate = this.openCreate.bind(this);
+        this.afterCreatePost = this.afterCreatePost(this);
     }
 
     componentWillMount(){
-        this.getPosts();
+        this.getPosts().then(() => {
+            this.setState({
+                isRendered:true
+            })
+        });
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.classId !== prevProps.classId){
+            this.getPosts().then(() => {
+                this.setState({
+                    isRendered: true
+                })
+            });
+        }
+        
     }
 
     getPosts = async() => {
@@ -78,8 +95,13 @@ export class Dashboard extends Component{
         
     }
 
+    afterCreatePost(){
+        this.openCreate();
+        this.getPosts();
+    }
+
     createWindow = ()=> {
-        if(this.state.isCreate) return <CreatePost/>
+        if(this.state.isCreate) return <CreatePost handler={this.afterCreatePost}/>
         else return;
     }
 
@@ -96,7 +118,11 @@ export class Dashboard extends Component{
                     {this.postCancleToggle()}
                 </div>
                 {this.createWindow()}
-                {this.state.postList==[] ? <div>Create Your First Post!</div> : this.state.postList}
+                {
+                    this.state.isRendered ? 
+                    this.state.postList==[] ? <div>Create Your First Post!</div> : this.state.postList
+                    : 'Loading...'
+                }
             
                 </div>
             

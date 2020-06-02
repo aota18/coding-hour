@@ -17,33 +17,49 @@ export class ClassMain extends Component {
   
 
         this.state = {
+            isRendered: false,
             menu: 0
         };
 
         this.changeMenu = this.changeMenu.bind(this);
       }
 
-      componentWillReceiveProps(){
-        // this.getClass();
-
-      }
-
       componentWillMount(){
-          
-         this.getClass();
+          this.getClass().then(() => {
+              this.setState({
+                  isRendered:true
+              })
+          });
       }
+      componentDidUpdate(prevProps){
+        if (this.props.match.params.classId !== prevProps.match.params.classId) {
+            this.getClass().then(() => {
+
+                this.setState({
+                    isRendered: false
+                })
+                this.changeMenu(0);
+
+        
+            });
+
+            
+        }
+
+      }
+
 
     changeMenu(num){
-
         this.setState(()=> ({
+            isRendered: true,
             menu:num
         }))
     }
 
     showMenu = () => {
-        if(this.state.menu==0) return <Dashboard />
-                else if( this.state.menu==1 ) return <Sessions/>
-                else return <Settings/>
+        if(this.state.menu==0) return <Dashboard classId={this.props.match.params.classId}/>
+        else if( this.state.menu==1 ) return <Sessions/>
+        else return <Settings/>
     }
 
     getClass = async () => {
@@ -88,7 +104,7 @@ export class ClassMain extends Component {
                     </div>  
                 </div>
                 <div className="class__body">
-                    {this.showMenu()}
+                    {this.state.isRendered ? this.showMenu() : 'Loading...'}
                 </div>
             </div>
         )

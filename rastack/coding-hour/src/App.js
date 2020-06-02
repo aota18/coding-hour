@@ -61,9 +61,11 @@ class App extends Component{
         <div className="App">
           <HeaderContainer/>
           <div className="container fluid">
+            <Route path="/" exact component ={Home}/>
             <Route path="/home" component ={Home} />
             <Route path="/auth" component = {Auth} />
-            {/* <Route path="/" component={Home} /> */}
+            
+           
           </div>
         </div>
 

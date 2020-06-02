@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-
 import { Map } from 'immutable';
 import * as AuthAPI from '../../lib/api/auth';
 

@@ -21,25 +21,14 @@ export class Sidebar extends Component {
         this.showClassList();
     }
 
-    componentDidUpdate(prevProps, prevState){
-        // const { classes } = this.props;
-        // const { userClass} = classes.toJS();
-        // const classList = userClass.data.class;
+    componentDidUpdate(){
 
-        // const classItems = classList.map((cl) => 
-        // <Link key={cl.classId} className="listItem" to={{ pathname: `/home/class/main/${cl.classId}`}} >{cl.name}</Link>
-        // )
-        
-        // this.setState({
-        //     classList: classItems
-        // })
     }
 
     showClassList (){
         
         const { ClassActions, user} = this.props;
         const userInfo = user.toJS();
-        console.log(userInfo)
         const userId = userInfo.loggedInfo.userId;
         let classItems='';
 
@@ -51,7 +40,7 @@ export class Sidebar extends Component {
             const classList = userClass.data.class;
     
             classItems = classList.map((cl) => 
-            <Link key={cl.classId} className="listItem" to={{ pathname: `/home/class/main/${cl.classId}`}} >{cl.name}</Link>
+            <Link key={cl.classId} className="listItem" to={`/home/class/main/${cl.classId}`} >{cl.name}</Link>
             )
             
             this.setState({
