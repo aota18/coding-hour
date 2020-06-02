@@ -20,6 +20,21 @@ export class Sidebar extends Component {
     componentWillMount(){
         this.showClassList();
     }
+
+    componentDidUpdate(prevProps, prevState){
+        // const { classes } = this.props;
+        // const { userClass} = classes.toJS();
+        // const classList = userClass.data.class;
+
+        // const classItems = classList.map((cl) => 
+        // <Link key={cl.classId} className="listItem" to={{ pathname: `/home/class/main/${cl.classId}`}} >{cl.name}</Link>
+        // )
+        
+        // this.setState({
+        //     classList: classItems
+        // })
+    }
+
     showClassList (){
         
         const { ClassActions, user} = this.props;

@@ -30,14 +30,17 @@ import storage from '../../../lib/storage';
 
 
     handleCreateClass = async() => {
-        const { form, ClassActions, history} = this.props;
+        const { form, ClassActions, history, user } = this.props;
         const { classname, year, semester, role} = form.toJS();
         const { loggedInfo } =this.props.user.toJS();
         const { _id } = loggedInfo
+        const userInfo = user.toJS();
+        
        
         try {
             await ClassActions.createClass({classname, _id, year, semester, role});
             alert('Created Class Successfully!')
+            await ClassActions.classByUser(userInfo.loggedInfo.userId);
         }
         catch(e){
             alert(e);
