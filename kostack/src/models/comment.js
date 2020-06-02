@@ -32,6 +32,7 @@ Comment.statics.findByPostId = function(postId){
         post: postId,
         deleted: false
     })
+    .sort({createdAt: 'asc'})
     .populate('user')
     .exec();
 }
