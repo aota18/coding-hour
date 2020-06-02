@@ -1,0 +1,30 @@
+.view__session__navbar{
+    display:flex;
+    flex-wrap: nowrap;
+    width:100%;
+    
+}
+
+
+.session__nav__list{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    text-align:center;
+}
+
+
+
+.session__nav__item{
+    text-decoration: none;
+    display: block;
+    float:left;
+    margin: 1rem 1rem;
+    cursor: pointer;
+    font-weight:500;
+}
+
+.session__nav__item:hover{
+    border-bottom: 2px solid #dc3545;
+}

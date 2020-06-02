@@ -19,7 +19,7 @@ export class ViewPost extends Component {
     }
 
     componentWillMount(){
-        console.log(this.props)
+
         this.getPost();
     }
 
