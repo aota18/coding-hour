@@ -31,7 +31,7 @@ export class Sessions extends Component {
         this.openCreate = this.openCreate.bind(this);
         this.openView = this.openView.bind(this);
         this.handleWllJoinSession = this.handleWillJoinSession.bind(this);
-
+        this.closeHandler = this.closeHandler.bind(this);
     }
 
 
@@ -171,8 +171,13 @@ export class Sessions extends Component {
         }
     }
 
+    closeHandler() {
+        this.openCreate();
+        this.getSessions();
+    }
+
     createWindow = ()=> {
-        if(this.state.isCreate) return <CreateSession />
+        if(this.state.isCreate) return <CreateSession closeHandler={this.closeHandler}/>
         else return;
     }
 
