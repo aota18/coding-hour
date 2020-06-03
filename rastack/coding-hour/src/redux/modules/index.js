@@ -5,6 +5,7 @@ import user from './user';
 import post from './post';
 import comment from './comment';
 import classes from './classes';
+import session from './session';
 import { penderReducer } from 'redux-pender';
 
 export default combineReducers({
@@ -14,6 +15,7 @@ export default combineReducers({
     classes,
     comment,
     post,
+    session,
     pender: penderReducer
 });
 

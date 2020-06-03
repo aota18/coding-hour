@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import profImg from '../../../../../assets/img/faces/marc.jpg'
 import './ViewSession.css';
-import { WantJoin } from './WantJoin/WantJoin';
-import { Attendance } from './Attendance/Attendance';
-
+ 
+import * as sessionActions from '../../../../../redux/modules/session';
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
 
@@ -14,44 +14,78 @@ export class ViewSession extends Component {
 
         this.state = {
             isRendered: false,
-            menu: 0
         };
 
-        this.changeMenu = this.changeMenu.bind(this);
     }
 
-    showMenu = () => {
-        if(this.state.menu==0) return <WantJoin/>
-        else  return <Attendance/>;
 
-    }
-    
-
-    changeMenu = (num) => {
-        this.setState(()=> ({
-            isRendered: true,
-            menu:num
-        }))
-    }
+   
 
     render() {
         return (
             <div className="class__session-item">
-                ViewSession
-
-                <div className="view__session__navbar">
-                        <ul className="session__nav__list">
-                            <li className="session__nav__item" onClick={() => this.changeMenu(0)}>Pre-Attend</li>
-                            <li className="session__nav__item" onClick={() => this.changeMenu(1)}>Attendance</li>
-                        </ul>
-                    </div>  
-
-                <div className="view__session__body">
-                    {this.showMenu()}
+                Attendance Check
+                <div className="attendance__header">
+                    Total : 16 people
                 </div>
+
+                <div className="attendance__body">
+                    <div className="stu__item">
+                         <div className="stu__thumbnail">
+                            <img src={profImg} alt="IMG"/>
+                        </div>
+
+                       
+                        <div className="stu__username">Daniel</div>
+                        <div className="button-area">
+                            <button className="btn-attend">Attend</button>
+                            <button className="btn-absent">Absent</button>
+                        </div>
+                        
+                    </div>
+
+                    <div className="stu__item">
+                         <div className="stu__thumbnail">
+                            <img src={profImg} alt="IMG"/>
+                        </div>
+                        <div className="stu__username">Daniel</div>
+                        
+                        <div className="button-area">
+                            <button className="btn-attend">Attend</button>
+                            <button className="btn-absent">Absent</button>
+                        </div>
+                        
+                    </div>
+
+                    <div className="stu__item">
+                         <div className="stu__thumbnail">
+                            <img src={profImg} alt="IMG"/>
+                        </div>
+                        <div className="stu__username">Daniel</div>
+                        
+                        <div className="button-area">
+                            <button className="btn-attend">Attend</button>
+                            <button className="btn-absent">Absent</button>
+                        </div>
+                    </div>
+                 
+                </div>
+
+                <div className="attendance__footer">
+                    <button className="btn-confirm">Done</button>
+                </div>
+      
+
             </div>
         )
     }
 }
 
-export default ViewSession
+export default connect(
+    (state) => ({
+        session: state.session
+    }),
+    (dispatch) => ({
+        SessionActions: bindActionCreators(sessionActions, dispatch)
+    })
+)(ViewSession)

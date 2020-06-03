@@ -51,6 +51,22 @@ export default handleActions({
         onSuccess: (state, action) => state.set('result', Map(action.payload.data))
     }),
 
+    ...pender({
+        type: SESSION_BY_CLASS,
+        onSuccess: (state, action) => state.set('sessions', Map(action.payload.data))
+    }),
+
+
+    ...pender({
+        type: SESSION_BY_SESSIONID,
+        onSuccess: (state, action) => state.set('singleSession', Map(action.payload.data))
+    }),
+
+    ...pender({
+        type: WILLJOIN_SESSION,
+        onSuccess: (state, action) => state.set('result', Map(action.payload.data))
+    })
+
 }, initialState)
 
 // export const createSession = ({classId, userId, date}) => axios.post(`${addr}:${port}/api/session`, {classId, userId, date});

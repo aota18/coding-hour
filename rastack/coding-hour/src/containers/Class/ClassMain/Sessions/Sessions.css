@@ -103,8 +103,8 @@
 }
 
 .session-admin {
-    color: rgb(150, 150, 150);
-    font-size: 90%;
+    color: green;
+    cursor:pointer;
 }
 
 .session-join{
@@ -120,3 +120,13 @@
     margin-right:3rem;
     cursor:pointer;
 }
+
+.btn-join{
+    color: rgba(86, 203, 249, 0.842);
+    cursor:pointer;
+}
+
+.btn-join:hover{
+    
+}
+

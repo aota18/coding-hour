@@ -3,7 +3,7 @@ import './ClassMain.css';
 import { Route, Link} from 'react-router-dom';
 import { Dashboard } from './Dashboard'
 import { Settings} from './Settings/Settings'
-import { Sessions } from './Sessions/Sessions'
+import { Sessions } from './Sessions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as classActions from '../../../redux/modules/classes';
@@ -58,7 +58,7 @@ export class ClassMain extends Component {
 
     showMenu = () => {
         if(this.state.menu==0) return <Dashboard classId={this.props.match.params.classId}/>
-        else if( this.state.menu==1 ) return <Sessions/>
+        else if( this.state.menu==1 ) return <Sessions classId={this.props.match.params.classId}/>
         else return <Settings/>
     }
 
