@@ -36,7 +36,12 @@ export class ViewPost extends Component {
     }
 
     handleChangeWriteComment = async() => {
+        const {classes} = this.props;
 
+        const {result} = classes.toJS();
+        const classId = result.data.clazz._id;
+
+        console.log(classId);
     }
 
     getPost = async() => {

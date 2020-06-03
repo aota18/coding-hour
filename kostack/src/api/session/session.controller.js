@@ -4,6 +4,7 @@ const Class = require('models/Class');
 
 
 exports.register = async (ctx) => {
+    console.log(ctx.request.body);
     const classId = ctx.request.body.classId;
     const userId = ctx.request.body.userId;
 

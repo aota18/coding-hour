@@ -18,7 +18,7 @@ export class Attendance extends Component {
                        
                         <div className="stu__username">Daniel</div>
                         <div className="button-area">
-                            <button className="btn-attend">Attended</button>
+                            <button className="btn-attend">Attend</button>
                             <button className="btn-absent">Absent</button>
                         </div>
                         
@@ -30,6 +30,10 @@ export class Attendance extends Component {
                         </div>
                         <div className="stu__username">Daniel</div>
                         
+                        <div className="button-area">
+                            <button className="btn-attend">Attend</button>
+                            <button className="btn-absent">Absent</button>
+                        </div>
                         
                     </div>
 
@@ -39,9 +43,16 @@ export class Attendance extends Component {
                         </div>
                         <div className="stu__username">Daniel</div>
                         
-                        
+                        <div className="button-area">
+                            <button className="btn-attend">Attend</button>
+                            <button className="btn-absent">Absent</button>
+                        </div>
                     </div>
                  
+                </div>
+
+                <div className="attendance__footer">
+                    <button className="btn-confirm">Done</button>
                 </div>
             </div>
         )

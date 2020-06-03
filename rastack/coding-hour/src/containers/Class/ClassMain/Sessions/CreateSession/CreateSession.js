@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as sessionActions from '../../../../../redux/modules/session';
+
 import DatePicker from "react-datepicker";
 import TimePicker from 'react-time-picker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +15,7 @@ export class CreateSession extends Component {
 
         this.state= {
             stepIdx: 0,
-            startDate: new Date(),
+            date: new Date(),
             time: '10:00'
         }
 
@@ -21,7 +25,7 @@ export class CreateSession extends Component {
 
     handleChangeDate = date => {
         this.setState({
-            startDate:date
+           date
         });
     }
 
@@ -32,19 +36,54 @@ export class CreateSession extends Component {
     }
 
 
+    handleCreateSession = async() => {
+
+        const {SessionActions, history, user, classes} = this.props;
+        const {loggedInfo} = user.toJS();
+        const {result} = classes.toJS();
+    
+        //Get Input Date
+        // let date = new Date(this.state.date, this.state.time);
+        const setYear = this.state.date.getFullYear();
+        const setMonth = this.state.date.getMonth()+1;
+        const setDay = this.state.date.getDay();
+
+        const setDate = new Date(`${setYear}/${setMonth}/${setDay}/${this.state.time}`);
+        const userId = loggedInfo.userId;
+        const classId  = result.data.clazz._id;
+
+        const sessionForm = {
+            date: setDate,
+            userId: userId,
+            classId: classId
+        }
+        
+        try{
+            await SessionActions.createSession(sessionForm).then(()=> {
+                alert('Session Created!');
+            });
+
+        }catch(e){
+            console.log(e);
+        }
+
+     
+    }
+
+
     render() {
+
+        const { handleCreateSession} = this;
+
         return (
             <div className="class__session-item">
                 <h3>Create session</h3>
                 <div className="create__session__body">
-                    <div className="create-name">
-                        <label htmlFor="">Session Name</label>
-                        <input type="text" placeholder="session name"/>
-                    </div>
+
 
                     <div className="create-date">
                       <label htmlFor="">Date</label>
-                      <DatePicker className="datepicker" selected={this.state.startDate} onChange={this.handleChangeDate} />
+                      <DatePicker className="datepicker" selected={this.state.date} onChange={this.handleChangeDate} />
                     </div>
 
                     <div className="create-time">
@@ -54,7 +93,7 @@ export class CreateSession extends Component {
                 </div>
                 
                 <div className="create__session__footer">
-                <button className="btn-done">Create session</button>
+                <button className="btn-done" onClick={handleCreateSession}>Create session</button>
                 </div>
                 
             </div>
@@ -62,4 +101,13 @@ export class CreateSession extends Component {
     }
 }
 
-export default CreateSession
+export default connect (
+    (state) => ({
+        user: state.user,
+        classes: state.classes,
+    }),
+    (dispatch) => ({
+        SessionActions: bindActionCreators(sessionActions, dispatch)
+
+    })
+)(CreateSession)

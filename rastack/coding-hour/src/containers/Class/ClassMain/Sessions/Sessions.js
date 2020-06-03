@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { BsPlusCircle} from 'react-icons/bs';
 import { BsXCircle} from 'react-icons/bs';
-import { CreateSession} from './CreateSession/CreateSession'
+import { CreateSession} from './CreateSession'
 import { ViewSession } from './ViewSession/ViewSession'
+import * as sessionActions from '../../../../redux/modules/session';
+
+import { connect } from 'react-redux';
+import { bindActionCreators} from 'redux';
+
 import './Sessions.css'
 export class Sessions extends Component {
 
@@ -115,4 +120,14 @@ export class Sessions extends Component {
     }
 }
 
-export default Sessions
+export default connect (
+    (state) => ({
+        form: state.session.getIn(['create', 'form']),
+        user: state.user,
+        classes: state.classes,
+    }),
+    (dispatch) => ({
+        SessionActions: bindActionCreators(sessionActions, dispatch)
+
+    })
+)(Sessions)
