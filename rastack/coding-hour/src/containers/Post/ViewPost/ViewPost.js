@@ -35,26 +35,53 @@ export class ViewPost extends Component {
         })
     }
 
-    handleChangeWriteComment = async() => {
-        const {classes} = this.props;
+    handleWriteComment = async() => {
+        const {CommentActions, form, user, post} = this.props;
+        const { text } = form.toJS();
+        const { loggedInfo } = user.toJS();
+        const { singlePost } = post.toJS();
 
-        const {result} = classes.toJS();
-        const classId = result.data.clazz._id;
+        try{
+            const completeForm = {
+                text, 
+                userId: loggedInfo.userId,
+                postId: singlePost.data.postId,
+            }
 
-        console.log(classId);
+            console.log(completeForm.classId)
+
+            await CommentActions.writeComment(completeForm)
+            .then(() => {
+                console.log(this.props)
+                this.getPost()
+            })
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+
+    componentWillUnmount(){
+        const { CommentActions } = this.props;
+        CommentActions.initializeForm('write')
     }
 
     getPost = async() => {
         const postId = this.props.match.params.postId;
-        const { PostActions } = this.props;
+        const { PostActions, ClassActions } = this.props;
+
+        //const classId = this.props.match.params.classId;
+        
 
 
         try {
+            
             await PostActions.getPostByPostId(postId).then(() => {
                 const { singlePost } = this.props.post.toJS();
                 
                 this.setState({
-                    singlePost: singlePost
+                    singlePost: singlePost,
+                    
                 })
             })    
         }catch(e) {
@@ -95,7 +122,7 @@ export class ViewPost extends Component {
 
     render(){
         const { text }  = this.props.form.toJS();
-        const { handleChange, handleChangeWriteComment} = this;
+        const { handleChange, handleWriteComment} = this;
         
         return (
             <div className="container">
@@ -143,7 +170,7 @@ export class ViewPost extends Component {
 
                         <div className="post__reply-write">
                             <input type="text" placeholder="Write a reply..." name="text" value={text} onChange={handleChange}/>
-                            <button className="btn-reply" onClick={handleChangeWriteComment}>write</button>
+                            <button className="btn-reply" onClick={handleWriteComment}>write</button>
                         </div>
                     </div>
 
