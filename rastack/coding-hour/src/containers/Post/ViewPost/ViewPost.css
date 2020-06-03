@@ -89,15 +89,22 @@
     border-radius:20px;
 }
 
-.post__reply-body{
+/* .post__reply-body{
     height:90%;
     padding:1rem;
+    overflow: scroll;
     
+} */
+
+#comment{
+    height: 90%;
+    padding: 1rem;
+    overflow: scroll;
 }
 
 .post__reply-area{
     display:flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     height:100%;
     padding:1rem;
 
