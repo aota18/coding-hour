@@ -24,17 +24,19 @@ export class CreatePost extends Component {
         const { title, body} = form.toJS();
         const {loggedInfo} = user.toJS();
         const {result} = classes.toJS();
+        const classId = result.data.clazz._id;
+
         try{
             const completeForm = {
                 title,
                 body,
                 userId: loggedInfo.userId,
-                classId: result.data.clazz._id,
+                classId: classId,
                 type: 'Notice'
             }
           
             await PostActions.createPost(completeForm).then(() => {
-                console.log(this.props)
+                // console.log(this.props)
                 this.props.handler();
             });
 

@@ -21,7 +21,7 @@ export class Dashboard extends Component{
         }
 
         this.openCreate = this.openCreate.bind(this);
-        this.afterCreatePost = this.afterCreatePost(this);
+        this.afterCreatePost = this.afterCreatePost.bind(this);
     }
 
     componentWillMount(){
@@ -45,39 +45,41 @@ export class Dashboard extends Component{
 
     getPosts = async() => {
         
-        const { PostActions, post}= this.props;
+        const { PostActions}= this.props;
         const {result} = this.props.classes.toJS();
+
+        await PostActions.getPostByClassId(result.data.clazz._id);
    
-        try{
-            await PostActions.getPostByClassId(result.data.clazz._id).then(() => {
+        // try{
+        //     await PostActions.getPostByClassId(result.data.clazz._id).then(() => {
             
-            const { posts } = this.props.post.toJS();
+        //     const { posts } = this.props.post.toJS();
             
-            let postList = posts.data.posts.map((post) =>
+        //     let postList = posts.data.posts.map((post) =>
             
-            <Link key={post.postId} to={{ pathname: `/home/post/view/${post.postId}` }}>
-                <div className="class__post">
-                        <div className="class__post-item">
-                            <div className="post-tag">#{post.type}</div>
-                            <div className="post-body">{post.body}</div>
-                            <div className="post-detail">
-                                <div className="post-detail-writer">{post.writer}</div>
-                                <div className="post-detail-time">{post.createdAt}</div>
-                                <div className="post-detail-comments">{post.commentCount}</div>
-                            </div>
-                        </div>
-                    </div>
-                </Link>
-            )
+        //     <Link key={post.postId} to={{ pathname: `/home/post/view/${post.postId}` }}>
+        //         <div className="class__post">
+        //                 <div className="class__post-item">
+        //                     <div className="post-tag">#{post.type}</div>
+        //                     <div className="post-body">{post.body}</div>
+        //                     <div className="post-detail">
+        //                         <div className="post-detail-writer">{post.writer}</div>
+        //                         <div className="post-detail-time">{post.createdAt}</div>
+        //                         <div className="post-detail-comments">{post.commentCount}</div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </Link>
+        //     )
 
-            this.setState({
-                postList: postList
-            })
-        })
+        //     this.setState({
+        //         postList: postList
+        //     })
+        // })
 
-        }catch(e){
-            console.log(e);
-        }
+        // }catch(e){
+        //     console.log(e);
+        // }
 
     }
 
@@ -111,6 +113,28 @@ export class Dashboard extends Component{
     }
 
     render(){
+
+        const { posts } = this.props.post.toJS();
+
+        if(posts.data == undefined)
+            return ' ';
+            
+        const postList = posts.data.posts.map((post) =>
+        
+        <Link key={post.postId} to={{ pathname: `/home/post/view/${post.postId}` }}>
+            <div className="class__post">
+                    <div className="class__post-item">
+                        <div className="post-tag">#{post.type}</div>
+                        <div className="post-body">{post.body}</div>
+                        <div className="post-detail">
+                            <div className="post-detail-writer">{post.writer}</div>
+                            <div className="post-detail-time">{post.createdAt}</div>
+                            <div className="post-detail-comments">{post.commentCount}</div>
+                        </div>
+                    </div>
+                </div>
+            </Link>
+        )
        
         return (
             <div>
@@ -120,7 +144,7 @@ export class Dashboard extends Component{
                 {this.createWindow()}
                 {
                     this.state.isRendered ? 
-                    this.state.postList==[] ? <div>Create Your First Post!</div> : this.state.postList
+                    postList==[] ? <div>Create Your First Post!</div> : postList
                     : 'Loading...'
                 }
             
