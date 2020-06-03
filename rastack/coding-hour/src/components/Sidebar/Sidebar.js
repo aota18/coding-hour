@@ -10,10 +10,6 @@ export class Sidebar extends Component {
 
     constructor(props){
         super(props);
-
-        this.state = {
-            classList: []
-        }
     }
 
 
@@ -21,40 +17,24 @@ export class Sidebar extends Component {
         this.showClassList();
     }
 
-    componentDidUpdate(){
-
-    }
-
-    showClassList (){
-        
+    showClassList = async () => {
         const { ClassActions, user} = this.props;
         const userInfo = user.toJS();
         const userId = userInfo.loggedInfo.userId;
-        let classItems='';
-
         
-        ClassActions.classByUser(userId).then(() => {
-
-            const { classes } = this.props;
-            const { userClass} = classes.toJS();
-            const classList = userClass.data.class;
-    
-            classItems = classList.map((cl) => 
-            <Link key={cl.classId} className="listItem" to={`/home/class/main/${cl.classId}`} >{cl.name}</Link>
-            )
-            
-            this.setState({
-                classList: classItems
-            })
-            
-            
-        });
-        
-
-
+        await ClassActions.classByUser(userId);
     }
 
     render(){
+        const { classes } = this.props;
+        const { userClass} = classes.toJS();
+        let classItems = [];
+        if(userClass.data != undefined){
+            const classList = userClass.data.class;
+            classItems = classList.map((cl) => 
+            <Link key={cl.classId} className="listItem" to={`/home/class/main/${cl.classId}`} >{cl.name}</Link>
+            )
+        }
 
         return (
             <div className="SideContainer">
@@ -66,7 +46,7 @@ export class Sidebar extends Component {
                         <Link key="join" className="listItem" to="/home/class/join">
                             <BsBoxArrowInRight /> &nbsp; Join Class
                         </Link>
-                        {this.state.classList == [] ? ' ' : this.state.classList}
+                        {classItems == [] ? ' ' : classItems}
 
                     </ul>
                 </div>

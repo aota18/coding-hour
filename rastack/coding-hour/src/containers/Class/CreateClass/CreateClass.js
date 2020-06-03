@@ -38,6 +38,7 @@ import storage from '../../../lib/storage';
         try {
             await ClassActions.createClass({classname, userId, year, semester, role});
             alert('Created Class Successfully!')
+            await ClassActions.classByUser(userId);
             history.push('/home')
         }
         catch(e){
