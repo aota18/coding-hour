@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { BsPlusCircle} from 'react-icons/bs';
 import { BsXCircle} from 'react-icons/bs';
+import { BsCardChecklist } from 'react-icons/bs';
+import { BsFillPersonPlusFill} from 'react-icons/bs';
 import { CreateSession} from './CreateSession'
-import { ViewSession } from './ViewSession/ViewSession'
+import { ViewSession } from './ViewSession'
 import * as sessionActions from '../../../../redux/modules/session';
 
 import { connect } from 'react-redux';
@@ -17,12 +19,130 @@ export class Sessions extends Component {
         super(props);
 
         this.state = {
+            willJoinCount: 0,
+            isWillJoined: false,
+            isRendered:false,
             isCreate: false,
-            isView: false
+            isView: false,
+            sessionId: '',
+            sessionList: []
         }
 
         this.openCreate = this.openCreate.bind(this);
         this.openView = this.openView.bind(this);
+        this.handleWllJoinSession = this.handleWillJoinSession.bind(this);
+        this.closeHandler = this.closeHandler.bind(this);
+    }
+
+
+    componentWillMount(){
+        this.getSessions().then(() => {
+            this.setState({
+                isRendered:true
+            })
+        });
+    }
+
+
+    componentDidUpdate(prevProps){
+        if(this.props.classId !== prevProps.classId){
+            this.getSessions().then(() => {
+                this.setState({
+                    isRendered: true
+                })
+            });
+        }
+        
+    }
+
+    handleWillJoinSession = async(sessionId) => {
+        const { SessionActions, user} = this.props;
+        const { loggedInfo } = user.toJS();
+
+
+        try{
+            await SessionActions.willjoinSession(sessionId, loggedInfo.userId).then(() => {
+                this.setState({
+                    isWillJoined: true
+                })
+            })
+        }catch(e){
+            console.log(e);
+        }
+
+
+    }
+
+    getSessions = async() => {
+    
+        const { SessionActions, session}= this.props;
+        
+        const {result} = this.props.classes.toJS();
+   
+        try{
+
+
+            await SessionActions.sessionByClass(result.data.clazz._id).then(() => {
+                const { sessions } = this.props.session.toJS();
+            
+            let sessionList = sessions.data.sessions.map((session, idx) =>{
+            
+            const sessionDate = new Date(session.date)
+            const sYear = sessionDate.getFullYear();
+            const sMonth = sessionDate.getMonth()+1;
+            const sDay = sessionDate.getDay();
+            const sTime = sessionDate.getHours();
+            const sMinutes = sessionDate.getMinutes();
+
+            const dateString = `${sYear}-${sMonth}-${sDay}  ${sTime}:${sMinutes}`;
+
+            if(idx==0){
+
+               return ( <div className="class__session">
+                        <div className="class__session-item">
+                            <div className="session-tag">{dateString}</div>
+                            <div className="session-body">{result.data.clazz.name}</div>
+                            <div className="session-detail">
+                                <div className="session-detail-writer">Attendance</div>
+                                <BsCardChecklist className="session-admin" onClick={() => this.openView(session.sessionId)}></BsCardChecklist>
+
+                                <div className="session-join">
+                                    <BsFillPersonPlusFill className="btn-join" onClick= {() => {
+                                        const sessionId = session.sessionId;
+                                        return this.handleWillJoinSession(sessionId)
+                                    }}/>&nbsp; {session.willJoinNum}
+                                </div>
+                                
+                            </div>
+                        </div>
+                </div> )
+            }else {
+                return (
+                    <div className="class__session-disable">
+                        <div className="class__session-item">
+                            <div className="session-tag">{session.date}</div>
+                            <div className="session-body">Software Engineering</div>
+                            <div className="session-detail">
+                                <div className="session-detail-writer">SANGWON SEO</div>
+                                {/* <button className="session-admin" onClick={this.openView}>Admin</button> */}
+                                {/* <button className="session-join">{session.willJoinNum}I will Join</button> */}
+                            </div>
+                        </div>
+                </div> 
+                )
+            }
+            
+            })
+
+            this.setState({
+                sessionList: sessionList
+            })
+        })
+
+        }catch(e){
+            console.log(e);
+        }
+
     }
 
     openCreate(){
@@ -37,25 +157,32 @@ export class Sessions extends Component {
         }
     }
 
-    openView(){
+    openView(sessionId){
         if(this.state.isView){
             this.setState(()=> ({
+                sessionId: '',
                 isView: false
             }))
         }else{
             this.setState(()=> ({
+                sessionId: sessionId,
                 isView: true
             }))
         }
     }
 
+    closeHandler() {
+        this.openCreate();
+        this.getSessions();
+    }
+
     createWindow = ()=> {
-        if(this.state.isCreate) return <CreateSession />
+        if(this.state.isCreate) return <CreateSession closeHandler={this.closeHandler}/>
         else return;
     }
 
     viewWindow = () => {
-        if(this.state.isView ) return <ViewSession />
+        if(this.state.isView ) return <ViewSession sessionId={this.state.sessionId}/>
         else return;
     }
 
@@ -75,43 +202,12 @@ export class Sessions extends Component {
                     </div>
                  
                 {this.createWindow()}
-                 <div className="class__session">
-                        <div className="class__session-item">
-                            <div className="session-tag">Friday, May 5</div>
-                            <div className="session-body">Software Engineering</div>
-                            <div className="session-detail">
-                                <div className="session-detail-writer">SANGWON SEO</div>
-                                <button className="session-admin" onClick={this.openView}>Admin</button>
-                                <button className="session-join">I will Join</button>
-                            </div>
-                        </div>
-                </div>
+                {
+                    this.state.isRendered ? 
+                    this.state.sessionList==[] ? <div>Create Your First Session!</div> : this.state.sessionList[0]
+                    : 'Loading...'
+                }
                 {this.viewWindow()}
-
-
-                    <div className="class__session-disable">
-                        <div className="class__session-item">
-                            <div className="session-tag">Friday, May 5</div>
-                            <div className="session-body">Software Engineering</div>
-                            <div className="session-detail">
-                                <div className="session-detail-writer">SANGWON SEO</div>
-                                <button className="session-admin">Admin</button>
-                                <button className="session-join">I will Join</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="class__session-disable">
-                        <div className="class__session-item">
-                            <div className="session-tag">Friday, May 5</div>
-                            <div className="session-body">Software Engineering</div>
-                            <div className="session-detail">
-                                <div className="session-detail-writer">SANGWON SEO</div>
-                                <button className="session-admin">Admin</button>
-                                <button className="session-join">I will Join</button>
-                            </div>
-                        </div>
-                    </div>
 
                   
             
@@ -122,9 +218,9 @@ export class Sessions extends Component {
 
 export default connect (
     (state) => ({
-        form: state.session.getIn(['create', 'form']),
         user: state.user,
         classes: state.classes,
+        session: state.session
     }),
     (dispatch) => ({
         SessionActions: bindActionCreators(sessionActions, dispatch)

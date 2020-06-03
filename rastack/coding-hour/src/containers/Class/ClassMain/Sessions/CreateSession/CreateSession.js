@@ -61,6 +61,7 @@ export class CreateSession extends Component {
         try{
             await SessionActions.createSession(sessionForm).then(()=> {
                 alert('Session Created!');
+                this.props.closeHandler();
             });
 
         }catch(e){

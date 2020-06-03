@@ -77,7 +77,7 @@ exports.join = async (ctx) => {
         ctx.body = {
             Success: false,
             data: {},
-            message: "Class Undefined"
+            message: "Class Undefin ed"
         }
         return;
     }
@@ -329,6 +329,7 @@ exports.getParticipants = async (ctx) => {
 }
 
 exports.getSessions = async (ctx) => {
+    console.log(ctx.params);
     const { classId } = ctx.params;
     const clazz = await Class.getParticipants(classId);
 

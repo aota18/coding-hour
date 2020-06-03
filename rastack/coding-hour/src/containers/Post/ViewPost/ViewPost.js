@@ -97,8 +97,7 @@ export class ViewPost extends Component {
         const { loggedInfo } = user.toJS();
 
         const commentList = this.state.singlePost.data.comments.map((comment) => {
-            const date = comment.createdAt
-            
+
             if(loggedInfo.userId == comment.userId){
                 return (
                     <div className="reply-body-me">
