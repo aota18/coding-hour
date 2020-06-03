@@ -67,22 +67,59 @@ exports.findBySessionId = async (ctx) => {
         return;
     }
 
-    console.log(session);
-
+    // get attended participants
     const attended = [];
     session.attended.forEach(e =>{
         attended.push({
-            userId: e._id,
+            userId: e._id.toString(),
             username: e.profile.username
         });
     });
+    attended.sort(function(a,b){
+        if(a.userId < b.userId)
+            return -1;
+        else if(a.userId == b.userId)
+            return 0;
+        else
+            return 1;
+    });
+
+    // get all participants
+    const clazz = await Class.getParticipants(session.class);
+    const participants = [];
+    clazz.participants.forEach(e => {
+        participants.push({
+            userId: e._id.toString(),
+            username: e.profile.username,
+            thumbnail: e.profile.thumbnail,
+            isAttended: false
+        });
+    });
+    participants.sort(function(a,b){
+        if(a.userId < b.userId)
+            return -1;
+        else if(a.userId == b.userId)
+            return 0;
+        else
+            return 1;
+    });
+
+    for(let i=0, j=0;i<attended.length && j<participants.length; j++){
+        if(attended[i].userId == participants[j].userId){
+            participants[j].isAttended = true;
+            i++;
+        }else if(attended[i].userId < participants[j].userId){
+            i++;
+            j--;
+        }
+    }
 
     ctx.body = {
         Success: true,
         data: {
             sessionId: session._id,
             date: session.date,
-            attended: attended
+            participants: participants
         }
     }
 }
