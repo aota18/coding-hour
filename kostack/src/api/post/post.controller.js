@@ -55,7 +55,7 @@ exports.findByPostId = async (ctx) => {
     }
 
     const ret = {
-        classId: post.class,
+        postId: post._id,
         writer: post.user.profile.username,
         createdAt: post.createdAt,
         title: post.title,
