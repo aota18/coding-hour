@@ -21,11 +21,15 @@ export class ViewSession extends Component {
         this.getSessionInfo = this.getSessionInfo.bind(this);
         this.getStuList = this.getStuList.bind(this);
         this.initiateAttendList = this.initiateAttendList.bind(this);
+        this.changeAttend = this.changeAttend.bind(this);
+        this.changeAbsent = this.changeAbsent.bind(this);
     }
 
     componentWillMount(){
-        this.getSessionInfo();
-        this.initiateAttendList();
+        this.getSessionInfo().then(() => {
+            this.initiateAttendList();
+        });
+        
     }
 
     getSessionInfo = async() => {
@@ -63,8 +67,8 @@ export class ViewSession extends Component {
                        
                         <div className="stu__username">{stu.username}</div>
                         <div className="button-area">
-                            <button className={stu.isAttended ? "btn-attend attended" : "btn-attend"} onClick={() => this.changeAttendance(idx)}>Attend</button>
-                            <button className={stu.isAttended ? "btn-absent" : "btn-absent absent"} onClick={() => this.changeAttendance(idx)}>Absent</button>
+                            <button className={stu.isAttended ? "btn-attend attended" : "btn-attend"} onClick={() => this.changeAttend(idx)}>Attend</button>
+                            <button className={stu.isAttended ? "btn-absent" : "btn-absent absent"} onClick={() => this.changeAbsent(idx)}>Absent</button>
                         </div>
                         
                     </div>
@@ -87,29 +91,80 @@ export class ViewSession extends Component {
     }
 
 
-    changeAttendance = (idx) => {
+    changeAttend  = (idx) => {
+        const attendedList = this.state.attended;
+        const stuId = this.state.participants[idx].userId;
+        const stuIdIdx = attendedList.indexOf(stuId);
+
+        if(stuIdIdx == -1) attendedList.push(stuId);
         
+        console.log(attendedList);
+
+        const participants = this.state.participants;
+
+        participants[idx].isAttended = true;
+
+        this.setState({
+            attended: attendedList,
+            participants: participants
+        })
+    } 
+
+    changeAbsent = (idx) => {
         const attendedList = this.state.attended;
         const stuId = this.state.participants[idx].userId;
         const stuIdIdx = attendedList.indexOf(stuId);
 
         if(stuIdIdx > -1) attendedList.splice(stuIdIdx, 1);
-        else attendedList.push(stuId)
-
-        console.log(attendedList);
         
+        console.log(attendedList);
+
         const participants = this.state.participants;
 
-        participants[idx].isAttended = !participants[idx].isAttended;
+        participants[idx].isAttended = false;
 
         this.setState({
             attended: attendedList,
             participants: participants
         })
     }
+    // changeAttendance = (idx) => {
+        
+    //     const attendedList = this.state.attended;
+    //     const stuId = this.state.participants[idx].userId;
+    //     const stuIdIdx = attendedList.indexOf(stuId);
+
+    //     if(stuIdIdx > -1) attendedList.splice(stuIdIdx, 1);
+    //     else attendedList.push(stuId)
+
+    //     console.log(attendedList);
+        
+    //     const participants = this.state.participants;
+
+    //     participants[idx].isAttended = !participants[idx].isAttended;
+
+    //     this.setState({
+    //         attended: attendedList,
+    //         participants: participants
+    //     })
+    // }
 
 
-    handleAttendanceCheck = {
+    handleAttendanceCheck = async () => {
+        const { SessionActions } = this.props;
+        const sessionId = this.props.sessionId;
+        const attended = {
+            attended: this.state.attended
+        }
+       
+
+        try{
+            SessionActions.sessionAttendance(attended, sessionId).then(() => {
+                alert('Attendance Check Complete!');
+            })
+        }catch(e){
+            console.log(e);
+        }
 
     }
 
@@ -117,6 +172,8 @@ export class ViewSession extends Component {
    
 
     render() {
+        const {handleAttendanceCheck} = this;
+
         return (
             <div className="class__session-item">
                 Attendance Check
@@ -129,7 +186,7 @@ export class ViewSession extends Component {
                 </div>
 
                 <div className="attendance__footer">
-                    <button className="btn-confirm">Done</button>
+                    <button className="btn-confirm" onClick={handleAttendanceCheck}>Done</button>
                 </div>
       
 

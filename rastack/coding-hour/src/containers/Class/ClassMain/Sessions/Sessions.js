@@ -101,9 +101,9 @@ export class Sessions extends Component {
                return ( <div className="class__session">
                         <div className="class__session-item">
                             <div className="session-tag">{dateString}</div>
-                            <div className="session-body">Software Engineering</div>
+                            <div className="session-body">{result.data.clazz.name}</div>
                             <div className="session-detail">
-                                <div className="session-detail-writer">SANGWON SEO</div>
+                                <div className="session-detail-writer">Attendance</div>
                                 <BsCardChecklist className="session-admin" onClick={() => this.openView(session.sessionId)}></BsCardChecklist>
 
                                 <div className="session-join">

@@ -225,7 +225,8 @@ exports.numberOfWillJoin = async (ctx) => {
 
 // attendance
 exports.addAttendUsers = async (ctx) => {
-    const userList = JSON.parse(ctx.request.body.attended);
+    
+    const userList = ctx.request.body.attended
     const { sessionId } = ctx.params;
 
     const session = await Session.findBySessionId(sessionId);

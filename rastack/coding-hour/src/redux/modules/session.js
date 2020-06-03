@@ -10,6 +10,8 @@ const CREATE_SESSION='session/CREATE_SESSION';
 const WILLJOIN_SESSION = 'session/WILLJOIN_SESSION';
 const SESSION_BY_CLASS = 'session/SESSION_BY_CLASS';
 const SESSION_BY_SESSIONID= 'session/SESSION_BY_CLASSID';
+const SESSION_ATTENDANCE = 'session/SESSION_ATTENDANCE';
+
 
 export const changeInput= createAction(CHANGE_INPUT); 
 export const initializeForm = createAction(INITIALIZE_FORM);
@@ -18,6 +20,8 @@ export const createSession = createAction(CREATE_SESSION, SessionAPI.createSessi
 export const willjoinSession = createAction(WILLJOIN_SESSION, SessionAPI.willjoinSession);
 export const sessionByClass = createAction(SESSION_BY_CLASS, SessionAPI.sessionByClass);
 export const sessionBySessionId = createAction(SESSION_BY_SESSIONID, SessionAPI.sessionBySessionId);
+export const sessionAttendance = createAction(SESSION_ATTENDANCE, SessionAPI.sessionAttendance);
+
 
 const initialState = Map({
     create: Map({
@@ -64,6 +68,11 @@ export default handleActions({
 
     ...pender({
         type: WILLJOIN_SESSION,
+        onSuccess: (state, action) => state.set('result', Map(action.payload.data))
+    }),
+
+    ...pender({
+        type: SESSION_ATTENDANCE,
         onSuccess: (state, action) => state.set('result', Map(action.payload.data))
     })
 
