@@ -81,12 +81,22 @@
     background-color: #56CBF977;
 }
 
+.attended {
+    background-color: rgb(0, 179, 250);
+    font-weight: bold;
+}
+
 .btn-absent{
     padding: 0 1rem;
     border:none;
     border-radius:15px;
     background-color: #FF729F;
     color: white;
+}
+
+.absent {
+    background-color: rgb(250, 31, 100);
+    font-weight: bold;
 }
 
 .btn-absent:hover{ 

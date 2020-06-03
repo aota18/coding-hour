@@ -24,6 +24,7 @@ export class Sessions extends Component {
             isRendered:false,
             isCreate: false,
             isView: false,
+            sessionId: '',
             sessionList: []
         }
 
@@ -103,7 +104,7 @@ export class Sessions extends Component {
                             <div className="session-body">Software Engineering</div>
                             <div className="session-detail">
                                 <div className="session-detail-writer">SANGWON SEO</div>
-                                <BsCardChecklist className="session-admin" onClick={this.openView}></BsCardChecklist>
+                                <BsCardChecklist className="session-admin" onClick={() => this.openView(session.sessionId)}></BsCardChecklist>
 
                                 <div className="session-join">
                                     <BsFillPersonPlusFill className="btn-join" onClick= {() => {
@@ -156,13 +157,15 @@ export class Sessions extends Component {
         }
     }
 
-    openView(){
+    openView(sessionId){
         if(this.state.isView){
             this.setState(()=> ({
+                sessionId: '',
                 isView: false
             }))
         }else{
             this.setState(()=> ({
+                sessionId: sessionId,
                 isView: true
             }))
         }
@@ -174,7 +177,7 @@ export class Sessions extends Component {
     }
 
     viewWindow = () => {
-        if(this.state.isView ) return <ViewSession />
+        if(this.state.isView ) return <ViewSession sessionId={this.state.sessionId}/>
         else return;
     }
 
