@@ -272,7 +272,11 @@ exports.findPost = async (ctx) => {
     const postsDto = [];
 
     for(let i=0;i<posts.length;i++){
-        const rolename = posts[i].user.classes.find(e => {return e.classId == classId}).role.name;
+        const matchedClass = posts[i].user.classes.find(e => {return e.classId == classId});
+        if(matchedClass == undefined)
+            continue;
+
+        const rolename = matchedClass.role.name;
 
         postsDto.push({
             postId: posts[i]._id,
