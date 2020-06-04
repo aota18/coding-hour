@@ -1,0 +1,63 @@
+.Docs__SideContainer{
+    letter-spacing: normal;
+ 
+    width:20%;
+
+    background-color: #fff;
+    border-right: 0.5px solid #eee;
+    
+}
+
+.Docs__listContainer {
+    width:100%;
+    position:fixed;
+    height:100%;
+    margin-top:1rem;
+}
+
+.Docs__MenuList {
+    display:block;
+    width:100%;
+    list-style-type: none;
+}
+
+.Docs__listHeader{
+    width:100%;
+    display:block;
+    text-align:left;
+    padding: 1rem 1rem;
+    margin-top:1rem;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+    
+    text-transform: uppercase;
+}
+
+.Docs__listHeader{
+    cursor: pointer;
+}
+
+.Docs__listItem{
+    width:100%;
+    display:block;
+    text-align:left;
+    padding: 0.3rem 1rem ;
+    color: #999;
+    font-weight: 300;
+}
+
+.Docs__listItem:hover{
+    cursor:pointer;
+}
+
+.Docs__listItem:active{
+    color: black;
+}
+
+.Docs__listItem:focus{
+   
+    color: black;
+}
+
+

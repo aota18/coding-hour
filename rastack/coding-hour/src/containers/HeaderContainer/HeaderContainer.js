@@ -36,24 +36,28 @@ export class HeaderContainer extends Component {
         return (
             <div className="header-section">
                 <div className="container">
-                <div className="logo">
-                    <Link to="/home">
-                        <img src={logo} alt=""></img>
-                    </Link>
-                </div>
-                <div className="nav-menu">
+          
+                        <div className="logo">
+                            <Link to="/home">
+                                <img src={logo} alt=""></img>
+                            </Link>
+                        </div>
+                        <div className="nav-menu">
 
-                    { user.get('logged')
-                            ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={profile.username}>
-                                <Dropdown.Item href="/home/profile">Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
-                            </DropdownButton>)
+                            { user.get('logged')
+                                    ? (<DropdownButton className="btn-login" variant="outline-secondary" id="dropdown-user-button" title={profile.username}>
+                                        <Dropdown.Item href="/home/profile">Profile</Dropdown.Item>
+                                        <Dropdown.Item onClick={this.handleLogout}>Logout</Dropdown.Item>
+                                    </DropdownButton>)
 
-                            : <Link to="/auth/login" className="primary-btn top-btn">SIGN IN</Link>
-                    }
-                            
-                </div>
-                <div id="mobile-menu-wrap"></div>
+                                    : <Link to="/auth/login" className="primary-btn top-btn">SIGN IN</Link>
+                            }
+                                    
+                        </div>
+                 
+                    <div id="mobile-menu-wrap">
+
+                    </div>
             </div>
         </div>
         )

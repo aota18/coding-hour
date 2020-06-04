@@ -1,0 +1,84 @@
+.doc__body{
+    padding:2rem;
+    width:80%;
+    font-family: sans-serif;
+}
+
+
+.doc__header{
+    font-weight: bolder;
+    margin:2rem 1rem;
+    padding: 0 1rem;
+    font-size:2rem;
+    border-left: 5px solid #999;
+    
+}
+
+.doc__h2{
+    margin:2rem 1rem;
+    padding: 0 1rem;
+    font-size:1.5rem;
+}
+
+.doc__h3{
+    margin:2rem 1rem;
+    padding: 0 1rem;
+    font-size:1.5rem;
+}
+
+.doc__code{
+    margin: 1rem;
+    padding: 1rem 2rem;
+    background-color: antiquewhite;
+    border-radius: 10px;
+  
+    color: rgb(253, 122, 0);
+   
+}
+
+
+p{
+    margin:1rem;
+    padding: 0 1rem;
+    
+}
+
+.docs-link{
+    color:black;
+}
+
+.docks-link:visited{
+    color: black;
+}
+
+.docs-link:hover{
+    color: #999;
+}
+
+hr {
+    margin: 2rem 1rem;
+}
+
+.doc__about{
+    display:flex;
+}
+
+.profile{
+    margin: 1rem;
+}
+
+.profile img{
+    width: 120px;
+    border-radius: 100px;
+}
+
+.profile__name,
+.profile__role{
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.profile__name{
+    font-weight: bold;
+}
+

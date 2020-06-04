@@ -12,3 +12,8 @@
     position: relative;
     display: inline-block;
 }
+
+.nav-fixed{
+    display: flex;
+    position:fixed;
+}

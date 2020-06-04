@@ -13,9 +13,11 @@ import './theme/css/font.css'
 import './theme/css/style.css'
 
 import HeaderContainer from './containers/HeaderContainer/HeaderContainer'
+import FooterContainer from './containers/FooterContainer/FooterContainer';
 
 import Home from './pages/Home'
 import Auth from './pages/Auth'
+import Docs from './pages/Docs';
 import storage from './lib/storage';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -60,11 +62,11 @@ class App extends Component{
    
         <div className="App">
           <HeaderContainer/>
-          <div className="container fluid">
+          <div className="container">
             <Route path="/" exact component ={Home}/>
             <Route path="/home" component ={Home} />
             <Route path="/auth" component = {Auth} />
-            
+            <Route path="/docs" component = {Docs}/>
            
           </div>
         </div>
