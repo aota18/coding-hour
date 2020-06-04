@@ -7,6 +7,10 @@ import htmlParser from'react-markdown/plugins/html-parser';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import profImg from '../assets/img/faces/marc.jpg'; 
 
+import skj from '../assets/img/creators/skj.jpg';
+import ywj from '../assets/img/creators/ywj.jpg'; 
+import sws from '../assets/img/creators/sws.jpg';
+import hck from '../assets/img/creators/hck.jpg';
 
 export class Docs extends Component {
 
@@ -122,7 +126,7 @@ export class Docs extends Component {
                         Congratulations! Now You've deployed your application to AWS Server! Isn't it amazing?!
                     </p>
                     
-                    <ScrollableAnchor id={'about-is'}>
+                    <ScrollableAnchor id={'about-us'}>
                         <div className="doc__header">
                             About Us
                         </div>
@@ -130,7 +134,7 @@ export class Docs extends Component {
 
                     <div className="doc__about">
                         <div className="profile">
-                            <img src = {profImg}/>
+                            <img src = {sws}/>
                             <div className="profile__name">
                                 Sangwon Seo
                             </div>
@@ -150,7 +154,7 @@ export class Docs extends Component {
                         </div>
 
                         <div className="profile">
-                            <img src = {profImg}/>
+                            <img src = {skj}/>
                             <div className="profile__name">
                                 Sangkyu Jeon
                             </div>
@@ -160,7 +164,7 @@ export class Docs extends Component {
                         </div>
 
                         <div className="profile">
-                            <img src = {profImg}/>
+                            <img src = {hck}/>
                             <div className="profile__name">
                                 Heechan Kim
                             </div>
@@ -170,7 +174,7 @@ export class Docs extends Component {
                         </div>
 
                         <div className="profile">
-                            <img src = {profImg}/>
+                            <img src = {ywj}/>
                             <div className="profile__name">
                                 Youngwon Jeon
                             </div>
