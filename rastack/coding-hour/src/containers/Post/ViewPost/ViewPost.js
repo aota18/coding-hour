@@ -8,6 +8,10 @@ import { bindActionCreators } from 'redux';
 import './ViewPost.css';
 import profImg from '../../../assets/img/faces/marc.jpg';
 
+// import $ from "jquery";
+// import jQuery from "jquery";
+// window.$ = window.jQuery = jQuery;
+
 export class ViewPost extends Component {
 
     constructor(props){
@@ -47,8 +51,6 @@ export class ViewPost extends Component {
                 userId: loggedInfo.userId,
                 postId: singlePost.data.postId,
             }
-
-            console.log(completeForm.classId)
 
             await CommentActions.writeComment(completeForm)
             .then(() => {
@@ -96,7 +98,6 @@ export class ViewPost extends Component {
 
         const commentList = this.state.singlePost.data.comments.map((comment) => {
 
-
             if(loggedInfo.userId == comment.userId){
                 return (
                     <div className="reply-body-me">
@@ -122,10 +123,12 @@ export class ViewPost extends Component {
 
     }
 
+
     render(){
         const { text }  = this.props.form.toJS();
         const { handleChange, handleWriteComment} = this;
-        
+
+
         return (
             <div className="container">
                 <div className="view__post__container flexwrap">
@@ -164,7 +167,7 @@ export class ViewPost extends Component {
                     </div>
 
                     <div className="post__reply">
-                        <div className="post__reply-body">
+                        <div id="comment" className="post__reply-body">
                             <div className="post__reply-area">
                                 {this.state.singlePost == '' ? '' : this.getComments()}
                             </div>
@@ -179,8 +182,13 @@ export class ViewPost extends Component {
                 </div>
                 
             </div>
+            
+
         )
+        var objDiv = document.getElementById("comment"); 
+        objDiv.scrollTop = objDiv.scrollHeight;
     }
+
 }
 
 export default connect(

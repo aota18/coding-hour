@@ -1,13 +1,5 @@
 {
-  "devDependencies": {
-    "jest": "^26.0.1"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "./rastack/coding-hour/src/App.test.js"
-    ]
-  }
+    "dependencies": {
+        "jquery": "^3.5.1"
+    }
 }
