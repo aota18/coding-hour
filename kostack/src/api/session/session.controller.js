@@ -1,6 +1,6 @@
-const Session = require('models/Session');
-const Account = require('models/Account');
-const Class = require('models/Class');
+const Session = require('../../models/session.js');
+const Account = require('../../models/account.js');
+const Class = require('../../models/class.js');
 
 
 exports.register = async (ctx) => {

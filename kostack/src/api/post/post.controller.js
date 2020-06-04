@@ -1,7 +1,7 @@
-const Post = require('models/Post');
-const Account = require('models/Account');
-const Class = require('models/Class');
-const Comment = require('models/Comment');
+const Post = require('../../models/post.js');
+const Account = require('../../models/account.js');
+const Class = require('../../models/class.js');
+const Comment = require('../../models/comment.js');
 
 exports.writePost = async (ctx) => {
     const clazz = await Class.findByClassId(ctx.request.body.classId);

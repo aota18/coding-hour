@@ -6,7 +6,7 @@ const clazz = require('./class');
 const account = require('./account');
 const post = require('./post');
 const comment = require('./comment');
-const session = require('./Session');
+const session = require('./session');
 
 api.use('/auth', auth.routes())
     .use('/class', clazz.routes())

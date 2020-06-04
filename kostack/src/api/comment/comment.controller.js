@@ -1,6 +1,6 @@
-const Post = require('models/Post');
-const Account = require('models/Account');
-const Comment = require('models/Comment');
+const Post = require('../../models/post.js');
+const Account = require('../../models/account.js');
+const Comment = require('../../models/comment.js');
 
 exports.writeComment = async (ctx) => {
     const post = await Post.findByPostId(ctx.request.body.postId);

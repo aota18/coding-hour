@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose ;
 const crypto = require('crypto');
-const { generateToken } = require('lib/token');
+const { generateToken } = require('../lib/token');
 
 
 // Function for Hashing Password

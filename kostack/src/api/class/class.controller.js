@@ -1,7 +1,7 @@
-const Account = require('models/Account');
-const Class = require('models/Class');
-const Post = require('models/Post');
-const Session = require('models/Session');
+const Account = require('../../models/account.js');
+const Class = require('../../models/class.js');
+const Post = require('../../models/post.js');
+const Session = require('../../models/session.js');
 
 // exception: user undefined
 exports.register = async (ctx) => {

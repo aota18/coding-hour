@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom';
 import { BsPencil} from 'react-icons/bs';
 import { BsXCircle } from 'react-icons/bs';
+import { BsFillChatSquareDotsFill } from 'react-icons/bs';
 import { CreatePost} from '../../../Post/CreatePost/'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -129,7 +130,7 @@ export class Dashboard extends Component{
                         <div className="post-detail">
                             <div className="post-detail-writer">{post.writer}</div>
                             <div className="post-detail-time">{post.createdAt}</div>
-                            <div className="post-detail-comments">{post.commentCount}</div>
+                            <div className="post-detail-comments"><BsFillChatSquareDotsFill/>&nbsp;{post.commentCount}</div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const Account = require('models/Account');
+const Account = require('../../models/account.js');
 
 // Local Sign up
 exports.localRegister = async (ctx) => {

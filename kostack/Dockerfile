@@ -1,25 +1,25 @@
-FROM node:carbon as builder
+FROM node:12 as builder
  
+RUN mkdir -p /app
 # Create app directory
 WORKDIR /app
- 
+
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+ADD ./ /app
  
 # Install any needed packages
 RUN npm install
  
-# Bundle app source
-COPY . /app
  
 # Stage 2 build for creating smaller image
-FROM node:carbon-alpine
-WORKDIR /app
+# FROM node:carbon-alpine
+# WORKDIR /usr/src/app
  
-COPY --from=builder /app .
+# COPY --from=builder /usr/src/app .
  
 EXPOSE 3001
  
-CMD [ "yarn", "start:dev" ]
+CMD [ "yarn", "start" ]

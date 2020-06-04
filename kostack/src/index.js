@@ -13,10 +13,9 @@ const port = process.env.PORT || 3001;
 const mongoose = require('mongoose');
 const bodyParser = require('koa-bodyparser');
 
-;
 
 
-const { jwtMiddleware } = require('lib/token');
+const { jwtMiddleware } = require('./lib/token');
 
 // Use Node's native Promise
 mongoose.Promise = global.Promise;

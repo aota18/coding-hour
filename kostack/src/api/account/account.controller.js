@@ -1,5 +1,5 @@
-const Account = require('models/Account');
-const Class = require('models/Class');
+const Account = require('../../models/account.js');
+const Class = require('../../models/class.js');
 
 exports.getClass = async (ctx) => {
     const { userId } = ctx.params;
