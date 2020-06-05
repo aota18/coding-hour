@@ -18,6 +18,6 @@ clazz.get('/:classId/participants', classCtrl.getParticipants);
 clazz.get('/:classId/post', classCtrl.findPost);
 
 // session
-clazz.get('/:classId/sessions', classCtrl.getSessions);
+clazz.get('/:classId/:userId/sessions', classCtrl.getSessions);
 
 module.exports = clazz;

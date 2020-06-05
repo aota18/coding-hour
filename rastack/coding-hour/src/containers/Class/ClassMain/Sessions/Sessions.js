@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { BsPlusCircle} from 'react-icons/bs';
 import { BsXCircle} from 'react-icons/bs';
 import { BsCardChecklist } from 'react-icons/bs';
-import { BsFillPersonPlusFill} from 'react-icons/bs';
+import { BsFillPersonPlusFill, BsFillPersonDashFill} from 'react-icons/bs';
 import { CreateSession} from './CreateSession'
 import { ViewSession } from './ViewSession'
 import * as sessionActions from '../../../../redux/modules/session';
 
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
+
+import moment from 'moment';
 
 import './Sessions.css'
 export class Sessions extends Component {
@@ -65,6 +67,8 @@ export class Sessions extends Component {
                 this.setState({
                     isWillJoined: true
                 })
+
+                this.getSessions();
             })
         }catch(e){
             console.log(e);
@@ -75,61 +79,70 @@ export class Sessions extends Component {
 ¸
     getSessions = async() => {
     
-        const { SessionActions, session}= this.props;
+        const { SessionActions }= this.props;
         
         const {result} = this.props.classes.toJS();
+        const { loggedInfo } =this.props.user.toJS();
+        const { userId } = loggedInfo
    
         try{
+            const req = {
+                classId: result.data.clazz._id,
+                userId: userId
+            }
 
-
-            await SessionActions.sessionByClass(result.data.clazz._id).then(() => {
+            await SessionActions.sessionByClass(req).then(() => {
                 const { sessions } = this.props.session.toJS();
             
-            let sessionList = sessions.data.sessions.map((session, idx) =>{
-            
-            const sessionDate = new Date(session.date)
-            const sYear = sessionDate.getFullYear();
-            const sMonth = sessionDate.getMonth()+1;
-            const sDay = sessionDate.getDay();
-            const sTime = sessionDate.getHours();
-            const sMinutes = sessionDate.getMinutes();
+                let sessionList = sessions.data.sessions.map((session, idx) =>{
+                
+                const startMoment = moment(session.date);
 
-            const dateString = `${sYear}-${sMonth}-${sDay}  ${sTime}:${sMinutes}`;
+                const endMoment = moment(session.date).add(2, "hours");
 
-            if(idx==0){
+                if(idx==0){
+                    return ( 
+                        <div className="class__session">
+                            <div className="class__session-item">
+                                <div className="session-tag">{startMoment.format('YYYY-MM-DD HH:mm')} - {endMoment.format('HH:mm')}</div>
+                                <div className="session-body">{result.data.clazz.name}</div>
+                                <div className="session-detail">
+                                    <div className="session-detail-writer">Attendance</div>
+                                    
+                                    <BsCardChecklist className="session-admin" onClick={() => this.openView(session.sessionId)}></BsCardChecklist>
 
-               return ( <div className="class__session">
-                        <div className="class__session-item">
-                            <div className="session-tag">{dateString}</div>
-                            <div className="session-body">{result.data.clazz.name}</div>
-                            <div className="session-detail">
-                                <div className="session-detail-writer">Attendance</div>
-                                <BsCardChecklist className="session-admin" onClick={() => this.openView(session.sessionId)}></BsCardChecklist>
-
-                                <div className="session-join">
-                                    <BsFillPersonPlusFill className="btn-join" onClick= {() => {
-                                        const sessionId = session.sessionId;
-                                        return this.handleWillJoinSession(sessionId)
-                                    }}/>&nbsp; {session.willJoinNum}
+                                    <div className="session-join">
+                                        {session.willJoin 
+                                            ? <BsFillPersonDashFill className="btn-not-join" onClick= {() => {
+                                                const sessionId = session.sessionId;
+                                                return this.handleWillJoinSession(sessionId)
+                                                }}/>
+                                            : <BsFillPersonPlusFill className="btn-join" onClick= {() => {
+                                                const sessionId = session.sessionId;
+                                                return this.handleWillJoinSession(sessionId)
+                                                }}/>
+                                        }
+                                        &nbsp; {session.willJoinNum}
+                                    </div>
+                                    
                                 </div>
-                                
                             </div>
-                        </div>
-                </div> )
-            }else {
-                return (
-                    <div className="class__session-disable">
-                        <div className="class__session-item">
-                            <div className="session-tag">{session.date}</div>
-                            <div className="session-body">Software Engineering</div>
-                            <div className="session-detail">
-                                <div className="session-detail-writer">SANGWON SEO</div>
+                        </div> 
+                    );
+                }else {
+                    return (
+                        <div className="class__session-disable">
+                            <div className="class__session-item">
+                                <div className="session-tag">{session.date}</div>
+                                <div className="session-body">Software Engineering</div>
+                                <div className="session-detail">
+                                    <div className="session-detail-writer">SANGWON SEO</div>
+                                </div>
                             </div>
-                        </div>
-                </div> 
-                )
-            }
-            
+                        </div> 
+                    )
+                }
+                
             })
 
             this.setState({

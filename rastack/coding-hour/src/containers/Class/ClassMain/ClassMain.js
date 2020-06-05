@@ -78,6 +78,28 @@ export class ClassMain extends Component {
     render(){
       
         const {data} = this.props.result.toJS();
+
+        let semester;
+        if(this.state.isRendered){
+            semester = data.clazz.semester;
+
+            switch(semester){
+                case 1:
+                    semester = "Spring";
+                    break;
+                case 2:
+                    semester = "Summer";
+                    break;
+                case 3:
+                    semester = "Fall";
+                    break;
+                case 4:
+                    semester = "Winter";
+                    break;
+                default:
+                    throw "sememster not matched";
+            }
+        }
       
         return (
             <div className="container">
@@ -88,7 +110,7 @@ export class ClassMain extends Component {
                         </div>
 
                         <div className="class__semester">
-                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${data.clazz.semester}`}
+                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${semester}`}
                         </div>
 
                         <div className="class__members">

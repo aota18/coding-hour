@@ -135,6 +135,11 @@
     cursor:pointer;
 }
 
+.btn-not-join{
+    color: rgb(255,0,0);
+    cursor:pointer;
+}
+
 .btn-join:hover{
     
 }

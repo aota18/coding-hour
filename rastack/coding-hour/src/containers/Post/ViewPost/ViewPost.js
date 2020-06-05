@@ -5,6 +5,8 @@ import * as commentActions from '../../../redux/modules/comment';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import moment from 'moment';
+
 import './ViewPost.css';
 import profImg from '../../../assets/img/faces/marc.jpg';
 import { animateScroll } from 'react-scroll';
@@ -102,19 +104,22 @@ export class ViewPost extends Component {
     getComments(){
         const { user} = this.props;
         const { loggedInfo } = user.toJS();
+        let kIdx = 0;
 
         const commentList = this.state.singlePost.data.comments.map((comment, idx) => {
 
             if(loggedInfo.userId == comment.userId){
                 return (
-                    <div className="reply-body-me" id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
+                    <div className="reply-body-me" key={kIdx++} 
+                            id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
                         <div className="reply-text">{comment.text}</div>
                         <div className="reply-createdAt">{comment.createdAt}</div>
                     </div>
                 )
             } else {
                 return (
-                    <div className="reply-body-other" id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
+                    <div className="reply-body-other" key={kIdx++}
+                            id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
                         <div className="reply-thumbnail"><img src={profImg} alt="IMG"/></div>
                         <div className="reply-usernameText">
                             <div className="reply-username">{comment.username}</div>
@@ -160,7 +165,7 @@ export class ViewPost extends Component {
                                        </div>&nbsp;
                                        
                                     </div>
-                                    <div className="writer-time">{this.state.singlePost == '' ? '' : this.state.singlePost.data.createdAt}</div>
+                                    <div className="writer-time">{this.state.singlePost == '' ? '' : moment(this.state.singlePost.data.createdAt).format('YYYY-MM-DD HH:mm')}</div>
                                 </div>
                                 
                             </div>

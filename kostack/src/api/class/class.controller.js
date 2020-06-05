@@ -330,7 +330,8 @@ exports.getParticipants = async (ctx) => {
 
 exports.getSessions = async (ctx) => {
     console.log(ctx.params);
-    const { classId } = ctx.params;
+    const { classId, userId } = ctx.params;
+
     const clazz = await Class.getParticipants(classId);
 
     if(clazz == undefined){
@@ -345,11 +346,14 @@ exports.getSessions = async (ctx) => {
     const sessions = await Session.findByClassId(classId);
     const sessionsDto = [];
     sessions.forEach(s =>{
+        const willJoin = s.willJoin.findIndex(e => e == userId)!=-1 ? true: false;
+
         sessionsDto.push({
             sessionId: s._id,
             willJoinNum: s.willJoin.length,
             attendedNum: s.attended.length,
-            date: s.date
+            date: s.date,
+            willJoin: willJoin
         });
     });
 
