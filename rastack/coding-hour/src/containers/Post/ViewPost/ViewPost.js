@@ -69,6 +69,8 @@ export class ViewPost extends Component {
             .then(() => {
                 // console.log(this.props)
                 this.getPost()
+                CommentActions.initializeForm('write')
+
             })
         }
         catch(e){

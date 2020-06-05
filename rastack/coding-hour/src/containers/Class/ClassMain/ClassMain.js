@@ -18,7 +18,8 @@ export class ClassMain extends Component {
 
         this.state = {
             isRendered: false,
-            menu: 0
+            menu: 0,
+            semesterList: ["Spring", "Summer", "Fall", "Winter"]
         };
 
         this.changeMenu = this.changeMenu.bind(this);
@@ -50,10 +51,10 @@ export class ClassMain extends Component {
 
 
     changeMenu(num){
-        this.setState(()=> ({
-            isRendered: true,
-            menu:num
-        }))
+         this.setState(()=> ({
+             isRendered: true,
+             menu:num
+         }))
     }
 
     showMenu = () => {
@@ -79,27 +80,29 @@ export class ClassMain extends Component {
       
         const {data} = this.props.result.toJS();
 
-        let semester;
-        if(this.state.isRendered){
-            semester = data.clazz.semester;
+        // let semester;
+        // if(this.state.isRendered){
+        //     const {data} = this.props.result.toJS();
 
-            switch(semester){
-                case 1:
-                    semester = "Spring";
-                    break;
-                case 2:
-                    semester = "Summer";
-                    break;
-                case 3:
-                    semester = "Fall";
-                    break;
-                case 4:
-                    semester = "Winter";
-                    break;
-                default:
-                    throw "sememster not matched";
-            }
-        }
+        //     semester = data.clazz.semester;
+
+        //     switch(semester){
+        //         case 1:
+        //             semester = "Spring";
+        //             break;
+        //         case 2:
+        //             semester = "Summer";
+        //             break;
+        //         case 3:
+        //             semester = "Fall";
+        //             break;
+        //         case 4:
+        //             semester = "Winter";
+        //             break;
+        //         default:
+        //             throw "sememster not matched";
+        //     }
+        // }
       
         return (
             <div className="container">
@@ -110,7 +113,7 @@ export class ClassMain extends Component {
                         </div>
 
                         <div className="class__semester">
-                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${semester}`}
+                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${this.state.semesterList[(data.clazz.semester-1)]}`}
                         </div>
 
                         <div className="class__members">
