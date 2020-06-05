@@ -100,8 +100,10 @@ export class JoinClass extends Component {
         try {
             await ClassActions.joinClass({classId, userId});
             alert('Joined to Class Successfully!')
-            await ClassActions.classByUser(userId);
-            history.push('/home')
+            await ClassActions.classByUser(userId).then(() => {
+                history.push('/home')
+            });
+            
         }
         catch(e){
             alert(e);

@@ -79,20 +79,42 @@ export class ClassMain extends Component {
       
         const {data} = this.props.result.toJS();
 
+        let semester;
+        if(this.state.isRendered){
+            semester = data.clazz.semester;
+
+            switch(semester){
+                case 1:
+                    semester = "Spring";
+                    break;
+                case 2:
+                    semester = "Summer";
+                    break;
+                case 3:
+                    semester = "Fall";
+                    break;
+                case 4:
+                    semester = "Winter";
+                    break;
+                default:
+                    throw "sememster not matched";
+            }
+        }
+      
         return (
             <div className="container">
                 <div className="class__header">
                     <div className="class__header__info">
                         <div className="class__title">
-                            {data == undefined ? ' ' : data.clazz.name} 
+                            { !this.state.isRendered ? ' ' : data.clazz.name} 
                         </div>
 
                         <div className="class__semester">
-                            {data == undefined ? ' ' : `${data.clazz.year} - ${data.clazz.semester}`}
+                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${semester}`}
                         </div>
 
                         <div className="class__members">
-                        {data == undefined ? ' ' : `${data.clazz.participants.length} members`} 
+                         {!this.state.isRendered ? ' ' : `${data.clazz.participants.length} members`} 
                         </div>
                     </div>
                     <div className="class__header__navbar">
@@ -104,7 +126,7 @@ export class ClassMain extends Component {
                     </div>  
                 </div>
                 <div className="class__body">
-                    {this.state.isRendered ? this.showMenu() : 'Loading...'}
+                    {!this.state.isRendered ? 'Loading...' : this.showMenu()}
                 </div>
             </div>
         )

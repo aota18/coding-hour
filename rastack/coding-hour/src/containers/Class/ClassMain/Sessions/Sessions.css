@@ -116,6 +116,15 @@
     text-align:right;
 }
 
+.session-empty{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    font-size:1.5rem;
+    color: #999;
+}
+
 .btn-add{
     margin-right:3rem;
     cursor:pointer;

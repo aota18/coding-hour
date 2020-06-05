@@ -67,7 +67,10 @@ class App extends Component{
             <Route path="/home" component ={Home} />
             <Route path="/auth" component = {Auth} />
             <Route path="/docs" component = {Docs}/>
-           
+          </div>
+
+          <div className="container-mobile">
+              Mobile version will be updated soon!
           </div>
         </div>
 
