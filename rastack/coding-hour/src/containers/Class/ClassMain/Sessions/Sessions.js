@@ -11,6 +11,8 @@ import * as sessionActions from '../../../../redux/modules/session';
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
 
+import moment from 'moment';
+
 import './Sessions.css'
 export class Sessions extends Component {
 
@@ -94,20 +96,15 @@ export class Sessions extends Component {
             
                 let sessionList = sessions.data.sessions.map((session, idx) =>{
                 
-                const sessionDate = new Date(session.date)
-                const sYear = sessionDate.getFullYear();
-                const sMonth = sessionDate.getMonth()+1;
-                const sDay = sessionDate.getDay();
-                const sTime = sessionDate.getHours();
-                const sMinutes = sessionDate.getMinutes();
+                const startMoment = moment(session.date);
 
-                const dateString = `${sYear}-${sMonth}-${sDay}  ${sTime}:${sMinutes}`;
+                const endMoment = moment(session.date).add(2, "hours");
 
                 if(idx==0){
 
                 return ( <div className="class__session">
                             <div className="class__session-item">
-                                <div className="session-tag">{dateString}</div>
+                                <div className="session-tag">{startMoment.format('YYYY-MM-DD HH:mm')} - {endMoment.format('HH:mm')}</div>
                                 <div className="session-body">{result.data.clazz.name}</div>
                                 <div className="session-detail">
                                     <div className="session-detail-writer">Attendance</div>

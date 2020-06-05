@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux';
 import * as postActions from '../../../../redux/modules/post'
 import './Dashboard.css'
 
+import moment from 'moment';
+
 export class Dashboard extends Component{
 
     constructor(props){
@@ -129,7 +131,7 @@ export class Dashboard extends Component{
                         <div className="post-body">{post.body}</div>
                         <div className="post-detail">
                             <div className="post-detail-writer">{post.writer}</div>
-                            <div className="post-detail-time">{post.createdAt}</div>
+                            <div className="post-detail-time">{moment(post.createdAt).format('YYYY-MM-DD HH:mm')}</div>
                             <div className="post-detail-comments"><BsFillChatSquareDotsFill/>&nbsp;{post.commentCount}</div>
                         </div>
                     </div>
