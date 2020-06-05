@@ -78,21 +78,21 @@ export class ClassMain extends Component {
     render(){
       
         const {data} = this.props.result.toJS();
-
+      
         return (
             <div className="container">
                 <div className="class__header">
                     <div className="class__header__info">
                         <div className="class__title">
-                            {data == undefined ? ' ' : data.clazz.name} 
+                            { !this.state.isRendered ? ' ' : data.clazz.name} 
                         </div>
 
                         <div className="class__semester">
-                            {data == undefined ? ' ' : `${data.clazz.year} - ${data.clazz.semester}`}
+                            { !this.state.isRendered ? ' ' : `${data.clazz.year} - ${data.clazz.semester}`}
                         </div>
 
                         <div className="class__members">
-                        {data == undefined ? ' ' : `${data.clazz.participants.length} members`} 
+                         {!this.state.isRendered ? ' ' : `${data.clazz.participants.length} members`} 
                         </div>
                     </div>
                     <div className="class__header__navbar">
@@ -104,7 +104,7 @@ export class ClassMain extends Component {
                     </div>  
                 </div>
                 <div className="class__body">
-                    {this.state.isRendered ? this.showMenu() : 'Loading...'}
+                    {!this.state.isRendered ? 'Loading...' : this.showMenu()}
                 </div>
             </div>
         )

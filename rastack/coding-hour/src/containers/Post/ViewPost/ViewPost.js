@@ -7,10 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import './ViewPost.css';
 import profImg from '../../../assets/img/faces/marc.jpg';
-
-// import $ from "jquery";
-// import jQuery from "jquery";
-// window.$ = window.jQuery = jQuery;
+import { animateScroll } from 'react-scroll';
 
 export class ViewPost extends Component {
 
@@ -20,11 +17,25 @@ export class ViewPost extends Component {
         this.state = {
             singlePost: ''
         }
+
+        this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
     componentWillMount(){
+        
+        this.getPost().then(() => {
+            this.scrollToBottom();
+        })
+    }
 
-        this.getPost();
+    componentDidUpdate(){
+        this.scrollToBottom();
+    }
+
+    scrollToBottom() {
+        animateScroll.scrollToBottom({
+            containerId: 'comment'
+        })
     }
 
 
@@ -54,7 +65,7 @@ export class ViewPost extends Component {
 
             await CommentActions.writeComment(completeForm)
             .then(() => {
-                console.log(this.props)
+                // console.log(this.props)
                 this.getPost()
             })
         }
@@ -71,10 +82,7 @@ export class ViewPost extends Component {
     getPost = async() => {
         const postId = this.props.match.params.postId;
         const { PostActions, ClassActions } = this.props;
-
         //const classId = this.props.match.params.classId;
-        
-
 
         try {
             
@@ -83,7 +91,6 @@ export class ViewPost extends Component {
                 
                 this.setState({
                     singlePost: singlePost,
-                    
                 })
             })    
         }catch(e) {
@@ -96,18 +103,18 @@ export class ViewPost extends Component {
         const { user} = this.props;
         const { loggedInfo } = user.toJS();
 
-        const commentList = this.state.singlePost.data.comments.map((comment) => {
+        const commentList = this.state.singlePost.data.comments.map((comment, idx) => {
 
             if(loggedInfo.userId == comment.userId){
                 return (
-                    <div className="reply-body-me">
-                                    <div className="reply-text">{comment.text}</div>
-                                    <div className="reply-createdAt">{comment.createdAt}</div>
-                                </div>
+                    <div className="reply-body-me" id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
+                        <div className="reply-text">{comment.text}</div>
+                        <div className="reply-createdAt">{comment.createdAt}</div>
+                    </div>
                 )
-            }else{
+            } else {
                 return (
-                    <div className="reply-body-other">
+                    <div className="reply-body-other" id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
                         <div className="reply-thumbnail"><img src={profImg} alt="IMG"/></div>
                         <div className="reply-usernameText">
                             <div className="reply-username">{comment.username}</div>
@@ -168,7 +175,7 @@ export class ViewPost extends Component {
 
                     <div className="post__reply">
                         <div id="comment" className="post__reply-body">
-                            <div className="post__reply-area">
+                            <div className="post__reply-area" id="replyArea">
                                 {this.state.singlePost == '' ? '' : this.getComments()}
                             </div>
                         </div>

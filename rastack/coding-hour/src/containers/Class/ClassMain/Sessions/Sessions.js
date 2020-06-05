@@ -124,8 +124,6 @@ export class Sessions extends Component {
                             <div className="session-body">Software Engineering</div>
                             <div className="session-detail">
                                 <div className="session-detail-writer">SANGWON SEO</div>
-                                {/* <button className="session-admin" onClick={this.openView}>Admin</button> */}
-                                {/* <button className="session-join">{session.willJoinNum}I will Join</button> */}
                             </div>
                         </div>
                 </div> 
@@ -195,7 +193,7 @@ export class Sessions extends Component {
     render() {
         return (
             <div>
-                     <p>Upcoming Sessions</p>
+                  
                 <div className="session__menu">
            
                       {this.postCancleToggle()}
@@ -204,7 +202,7 @@ export class Sessions extends Component {
                 {this.createWindow()}
                 {
                     this.state.isRendered ? 
-                    this.state.sessionList==[] ? <div>Create Your First Session!</div> : this.state.sessionList[0]
+                    this.state.sessionList.length==0 ? <div className="session-empty">No Upcoming Session.</div> : this.state.sessionList[0]
                     : 'Loading...'
                 }
                 {this.viewWindow()}

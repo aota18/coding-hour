@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import './Docs.css'
 import DocsSidebar from '../components/DocsSidebar/DocsSidebar';
-import ReactMarkDown from 'react-markdown/with-html';
-import htmlParser from'react-markdown/plugins/html-parser';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import profImg from '../assets/img/faces/marc.jpg'; 
 
@@ -11,15 +9,12 @@ import skj from '../assets/img/creators/skj.jpg';
 import ywj from '../assets/img/creators/ywj.jpg'; 
 import sws from '../assets/img/creators/sws.jpg';
 import hck from '../assets/img/creators/hck.jpg';
+import wsj from '../assets/img/creators/wsj.jpg';
 
 export class Docs extends Component {
 
 
     render() {
-        const parseHtml = htmlParser({
-            isValidNode: node => node.type !== 'script',
-            processingInstructions: []
-        })
         
         return (
             <div className="DocsContainer">
@@ -144,7 +139,7 @@ export class Docs extends Component {
                         </div>
 
                         <div className="profile">
-                            <img src = {profImg}/>
+                            <img src = {wsj}/>
                             <div className="profile__name">
                                 Wonsik Jung
                             </div>

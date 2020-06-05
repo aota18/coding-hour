@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-        "jquery": "^3.5.1",
-        "react-markdown": "^4.3.1"
-    }
-}

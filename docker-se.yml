@@ -1,0 +1,24 @@
+version: '3'
+services:
+        web-server:
+                image: aota18/chweb:latest
+                ports:
+                        - "80:80"
+        api-server:
+                image: aota18/chapi:latest
+                ports:
+                        - "3001:3001"
+
+
+
+
+                        version: '3'
+services:
+        web-server:
+                image: aota18/aotaclient:latest
+                ports:
+                        - "80:80"
+        api-server:
+                image: aota18/aotaserver:latest
+                ports:
+                        - "8080:8080"

@@ -145,7 +145,7 @@ export class Dashboard extends Component{
                 {this.createWindow()}
                 {
                     this.state.isRendered ? 
-                    postList==[] ? <div>Create Your First Post!</div> : postList
+                    postList.length==0 ? <div className="post-empty">Become a Pioneer!</div> : postList
                     : 'Loading...'
                 }
             

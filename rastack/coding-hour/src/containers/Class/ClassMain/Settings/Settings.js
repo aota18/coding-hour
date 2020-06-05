@@ -34,10 +34,10 @@ export class Settings extends Component {
                         </div>
                     </div>
                     
-                    <div className="setting__admin">
+                    {/* <div className="setting__admin">
                         <button className="admin-edit">Edit</button>
                         <button className="admin-delete">Delete</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )
