@@ -8,7 +8,7 @@ let port='3001';
 export const createSession = ({classId, userId, date}) => axios.post(`${addr}:${port}/api/session`, {classId, userId, date});
 export const willjoinSession = (sessionId, userId) => axios.put(`${addr}:${port}/api/session/${sessionId}/willjoin/${userId}`);
 
-export const sessionByClass = (classId) => axios.get(`${addr}:${port}/api/class/${classId}/sessions`);
+export const sessionByClass = (userId, classId) => axios.get(`${addr}:${port}/api/class/${classId}/${userId}/sessions`);
 export const sessionBySessionId = (sessionId) => axios.get(`${addr}:${port}/api/session/` + sessionId);
 
 export const sessionAttendance = ({attended}, sessionId) => axios.post(`${addr}:${port}/api/session/${sessionId}/attend`, {attended});

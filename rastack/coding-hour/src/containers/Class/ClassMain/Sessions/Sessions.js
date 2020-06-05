@@ -72,7 +72,7 @@ export class Sessions extends Component {
 
 
     }
-
+¸
     getSessions = async() => {
     
         const { SessionActions, session}= this.props;
