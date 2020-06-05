@@ -101,8 +101,8 @@
    >   * Github Docs 참고
 
    * Introdution (:star: 100 초)
-     * [Requriement Engineering](https://docs.google.com/document/d/18Mnrm_BdKw_mVMUl_6Fo1YQnxuqnojCdc9yJtH3RIhU/edit) Docs의 Problem Solution 참고.
      * 팀 소개
+     * [Requriement Engineering](https://docs.google.com/document/d/18Mnrm_BdKw_mVMUl_6Fo1YQnxuqnojCdc9yJtH3RIhU/edit) Docs의 Problem Solution 참고.
    * Agile (:star: 100 초)
      * 어떤 형식으로 agile process를 가져 갔는지.....
      * [Agile Process Doc](https://github.com/aota18/coding-hour/blob/master/Docs/Agile%20Process.md) 참고
