@@ -27,6 +27,7 @@
 2. Copy and past ``pre-commit`` and ``pre-push`` script to ``.git/hooks``
 
    * ``pre-commit`` and ``pre-push`` scripts are shown below.
+   * Make sure that ``pre-commit`` and ``pre-push`` files are executable. (In case it's not excutable, use ``chmod`` command to change authority.)
 
 3. Install Jest
 
