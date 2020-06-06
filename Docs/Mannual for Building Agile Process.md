@@ -190,6 +190,8 @@ curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$PUSH $NEW_LINE $NEWLINE $GIT_
   * If any failure has occurred, the failed massege will be shown in telegram.
 * ``EXE_DOCKER``: this is variable contains result message for push.
 
+
+
 ## Result
 
 * If we write the files of ``pre-commit`` and ``pre-push`` in '.git/hooks' and connect the channels in the telegram, we can then see the test and build information about commits and push.
