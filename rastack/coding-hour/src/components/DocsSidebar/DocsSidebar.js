@@ -26,6 +26,9 @@ export class DocsSidebar extends Component {
                         <li key="how-to-deploy" className="Docs__listItem" >
                             <a className="docs-link" href='#how-to-deploy'>How to Deploy</a>
                         </li>
+                        <li key="setup-agile-process-env" className="Docs__listItem" >
+                            <a className="docs-link" href='#setup-agile-process-env'>Setup Agile Process Env</a>
+                        </li>
 
                         <li key="join" className="Docs__listHeader" >
                             <a className="docs-link" href='#about-us'> About Us</a>

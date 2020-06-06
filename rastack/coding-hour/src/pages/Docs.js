@@ -121,6 +121,64 @@ export class Docs extends Component {
                         Congratulations! Now You've deployed your application to AWS Server! Isn't it amazing?!
                     </p>
                     
+                    <ScrollableAnchor id={'setup-agile-process-env'}>
+                    <div className="doc__h2">
+                        Setup Agile Process Env
+                    </div>
+                    </ScrollableAnchor>
+
+                    <h2>Overview</h2>
+                    <p><img src="image-20200520132854862.png" alt="image-20200520132854862" style="zoom:50%;" /></p>
+                    <ul>
+                    <li>For the automation system, we used <code>hooks</code> to create an environment where test and build are automatically executed at the point of commit and push. </li>
+                    <li>In order to speed up development process and problems of Multi-platform development environment, the results of test and build were notified to all personnel through the Telegram. </li>
+                    <li>As shown in the figure above, Jest was used for unit test when commits are done and when pushing, the docker transmitts image to the server through the docker.</li>
+
+                    </ul>
+                    <h2>Setup</h2>
+                    <ul>
+                    <li>In order to build our agile process environment, you need to follow following step.</li>
+
+                    </ul>
+                    <ol start='' >
+                    <li><p>Create <code>.git/hooks</code> folder in your repository.</p>
+                    <ul>
+                    <li><code>.git</code> folder is hidden at top directory of your repository</li>
+
+                    </ul>
+                    </li>
+                    <li><p>Copy and past <code>pre-commit</code> and <code>pre-push</code> script to <code>.git/hooks</code></p>
+                    <ul>
+                    <li><code>pre-commit</code> and <code>pre-push</code> scripts are shown below.</li>
+                    <li>Make sure that <code>pre-commit</code> and <code>pre-push</code> files are executable. (In case it&#39;s not excutable, use <code>chmod</code> command to change authority.)</li>
+
+                    </ul>
+                    </li>
+                    <li><p>Install Jest</p>
+                    <pre><code>npm install --save-dev jest
+                    </code></pre>
+                    </li>
+                    <li><p>Now let&#39;s commit or push to see our enviroment is working!</p>
+                    </li>
+
+                    </ol>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <ul>
+                    <li><p>If you want to build our project through push, consider following guideline. Other wise, there might be failure while pushing.</p>
+                    <ul>
+                    <li>Before build, please connect to our server with <code>ssh</code> first. </li>
+                    <li>Your last commit message must include a word &quot;#777&quot;</li>
+                    <li>You need to have docker account which is granted by our docker system.</li>
+
+                    </ul>
+                    </li>
+
+                    </ul>
+
+
+
+
                     <ScrollableAnchor id={'about-us'}>
                         <div className="doc__header">
                             About Us

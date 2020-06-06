@@ -51,10 +51,10 @@ export class ClassMain extends Component {
 
 
     changeMenu(num){
-        this.setState(()=> ({
-            isRendered: true,
-            menu:num
-        }))
+         this.setState(()=> ({
+             isRendered: true,
+             menu:num
+         }))
     }
 
     showMenu = () => {

@@ -69,6 +69,8 @@ export class ViewPost extends Component {
             .then(() => {
                 // console.log(this.props)
                 this.getPost()
+                CommentActions.initializeForm('write')
+
             })
         }
         catch(e){
@@ -113,7 +115,7 @@ export class ViewPost extends Component {
                     <div className="reply-body-me" key={kIdx++} 
                             id={idx == this.state.singlePost.data.comments.length-1 ? 'lastComment' : ' '}>
                         <div className="reply-text">{comment.text}</div>
-                        <div className="reply-createdAt">{comment.createdAt}</div>
+                        <div className="reply-createdAt">{moment(comment.createdAt).format('YYYY-MM-DD HH:mm')}</div>
                     </div>
                 )
             } else {
@@ -125,7 +127,7 @@ export class ViewPost extends Component {
                             <div className="reply-username">{comment.username}</div>
                             <div className="reply-text">{comment.text}</div>
                         </div>
-                        <div className="reply-createdAt">{comment.createdAt}</div>
+                        <div className="reply-createdAt">{moment(comment.createdAt).format('YYYY-MM-DD HH:mm')}</div>
                     </div>
                 )
             }

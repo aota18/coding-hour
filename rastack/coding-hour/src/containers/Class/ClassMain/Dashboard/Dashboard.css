@@ -70,6 +70,11 @@
     border: 0.5px solid rgb(214, 214, 214);
     padding:1rem 3rem;
     box-shadow: 3px 3px 10px #999;
+    color: black;
+}
+
+.class__post-item:hover{
+    color: #5eb5d1;
 }
 
 .post-tag{
@@ -79,6 +84,7 @@
     margin-bottom: 1rem;
     text-align:left;
 }
+
 
 .post-body{
     display: block;
