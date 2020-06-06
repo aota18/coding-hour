@@ -184,11 +184,15 @@ curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$PUSH $NEW_LINE $NEWLINE $GIT_
 ```
 
 * ``LAST_COMMIT``: the last commit message from git log command
+
 * ``GIT_LOG``: this variable catches "#777" from git log, if the last commit message contains a word "#777". 
   * Thus, if user did not type "#777" , only push to the remote repository will be done.
   * If ``GIT_LOG`` is "#777", the script will run "docker-push.sh" to build and send the docker image to the server.
   * If any failure has occurred, the failed massege will be shown in telegram.
+  
 * ``EXE_DOCKER``: this is variable contains result message for push.
+
+  
 
 ## Result
 
