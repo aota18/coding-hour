@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './ClassMain.css';
 import { Route, Link} from 'react-router-dom';
 import { Dashboard } from './Dashboard'
-import { Settings} from './Settings/Settings'
+import { Settings} from './Settings'
 import { Sessions } from './Sessions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -79,30 +79,6 @@ export class ClassMain extends Component {
     render(){
       
         const {data} = this.props.result.toJS();
-
-        // let semester;
-        // if(this.state.isRendered){
-        //     const {data} = this.props.result.toJS();
-
-        //     semester = data.clazz.semester;
-
-        //     switch(semester){
-        //         case 1:
-        //             semester = "Spring";
-        //             break;
-        //         case 2:
-        //             semester = "Summer";
-        //             break;
-        //         case 3:
-        //             semester = "Fall";
-        //             break;
-        //         case 4:
-        //             semester = "Winter";
-        //             break;
-        //         default:
-        //             throw "sememster not matched";
-        //     }
-        // }
       
         return (
             <div className="container">

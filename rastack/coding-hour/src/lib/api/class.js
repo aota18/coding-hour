@@ -7,6 +7,7 @@ let port='3001';
 
 export const createClass = ({classname, userId, year, semester, role}) => axios.post(`${addr}:${port}/api/class/register`, {classname, userId, year, semester, role});
 export const joinClass = ({classId, userId}) => axios.post(`${addr}:${port}/api/class/join`, {classId, userId});
+export const settingClass = ({classname, year, semester}) => axios.post(`${addr}:${port}/api/class/settings`, {classname, year, semester});
 
 export const classByName = (name) => axios.get(`${addr}:${port}/api/class/name/` + name);
 export const classByUser = (userId) => axios.get(`${addr}:${port}/api/account/${userId}/classes`);
