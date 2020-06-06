@@ -95,4 +95,4 @@
 * docker-hub pull
   * docker에 push 된 image를 pull 한다
 * docker-compose up
-  * pull 받은 image를 활성화 한다.
+  * pull 받은 image를 활성화 한다. 
