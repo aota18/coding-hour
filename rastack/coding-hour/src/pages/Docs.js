@@ -186,7 +186,6 @@ export class Docs extends Component {
 
 
 
-
                     <ScrollableAnchor id={'about-us'}>
                         <div className="doc__header">
                             About Us
