@@ -45,6 +45,7 @@
   * Before build, please connect to our server with ``ssh`` first. 
   * Your last commit message must include a word "#777"
   * You need to have docker account which is granted by our docker system.
+  * 
 
 
 
