@@ -4,6 +4,7 @@ import './Docs.css'
 import DocsSidebar from '../components/DocsSidebar/DocsSidebar';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import profImg from '../assets/img/faces/marc.jpg'; 
+import agile from '../assets/img/agile.png';
 
 import skj from '../assets/img/creators/skj.jpg';
 import ywj from '../assets/img/creators/ywj.jpg'; 
@@ -127,54 +128,61 @@ export class Docs extends Component {
                     </div>
                     </ScrollableAnchor>
 
-                    <h2>Overview</h2>
-                    <p><img src="image-20200520132854862.png" alt="image-20200520132854862" style="zoom:50%;" /></p>
-                    <ul>
-                    <li>For the automation system, we used <code>hooks</code> to create an environment where test and build are automatically executed at the point of commit and push. </li>
-                    <li>In order to speed up development process and problems of Multi-platform development environment, the results of test and build were notified to all personnel through the Telegram. </li>
-                    <li>As shown in the figure above, Jest was used for unit test when commits are done and when pushing, the docker transmitts image to the server through the docker.</li>
+                    
+                    <p><img src={agile} alt="image-20200520132854862" /></p>
+                  
+                    <p>For the automation system, we used <code>hooks</code> to create an environment where test and build are automatically executed at the point of commit and push. </p>
+                    <p>In order to speed up development process and problems of Multi-platform development environment, the results of test and build were notified to all personnel through the Telegram. </p>
+                    <p>As shown in the figure above, Jest was used for unit test when commits are done and when pushing, the docker transmitts image to the server through the docker.</p>
 
-                    </ul>
-                    <h2>Setup</h2>
-                    <ul>
-                    <li>In order to build our agile process environment, you need to follow following step.</li>
+                  
+                    
+                    <p>In order to build our agile process environment, you need to follow following step.</p>
 
-                    </ul>
-                    <ol start='' >
-                    <li><p>Create <code>.git/hooks</code> folder in your repository.</p>
-                    <ul>
-                    <li><code>.git</code> folder is hidden at top directory of your repository</li>
+                    
+                    <p>
+                    <p><b>1. Create <code>.git/hooks</code> folder in your repository. </b></p>
+                    
+                   <p><code>.git</code> folder is hidden at top directory of your repository</p>
 
-                    </ul>
-                    </li>
-                    <li><p>Copy and past <code>pre-commit</code> and <code>pre-push</code> script to <code>.git/hooks</code></p>
-                    <ul>
-                    <li><code>pre-commit</code> and <code>pre-push</code> scripts are shown below.</li>
-                    <li>Make sure that <code>pre-commit</code> and <code>pre-push</code> files are executable. (In case it&#39;s not excutable, use <code>chmod</code> command to change authority.)</li>
+    
+                    <p><b>2. Copy and past <code>pre-commit</code> and <code>pre-push</code> script to <code>.git/hooks</code></b></p>
+                    
+                    <p>
+                        - <code>pre-commit</code> and <code>pre-push</code> scripts are shown below.
+                    </p>
+                    <p>
+                       -  Make sure that <code>pre-commit</code> and <code>pre-push</code> files are executable. (In case it&#39;s not excutable, use <code>chmod</code> command to change authority.)
+                    </p>
 
-                    </ul>
-                    </li>
-                    <li><p>Install Jest</p>
-                    <pre><code>npm install --save-dev jest
-                    </code></pre>
-                    </li>
-                    <li><p>Now let&#39;s commit or push to see our enviroment is working!</p>
-                    </li>
+                
+                    <p><b>3. Install Jest</b></p>
+                    
+                    <div className="doc__code">
+                        <code>$ npm install --save-dev jest </code>
+                        
+                    </div>
+                    
+                  <p><b>4. Now let&#39;s commit or push to see our enviroment is working !</b></p>
+                    
+                    <br></br>
+                    <p> 
+                        -  If you want to build our project through push, consider following guideline. Other wise, there might be failure while pushing.
+                    </p>
+                    
+                    <p>
+                       -  Before build, please connect to our server with <code>ssh</code> first.
+                    </p>
+                    <p>
+                       -  Your last commit message must include a word &quot;#777&quot;
+                   </p>
+                   <p>
+                    - You need to have docker account which is granted by our docker system.
+                    </p>
 
-                    </ol>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <ul>
-                    <li><p>If you want to build our project through push, consider following guideline. Other wise, there might be failure while pushing.</p>
-                    <ul>
-                    <li>Before build, please connect to our server with <code>ssh</code> first. </li>
-                    <li>Your last commit message must include a word &quot;#777&quot;</li>
-                    <li>You need to have docker account which is granted by our docker system.</li>
-
-                    </ul>
-                    </li>
-
-                    </ul>
+  
+                  </p>
+                  
 
 
 
